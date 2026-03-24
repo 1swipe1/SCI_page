@@ -1,52 +1,83 @@
 import React from 'react';
 
 const Main = () => {
-  // 사업 영역 데이터 (시안 참고)
-  const businessAreas = [
-    { title: "비즈니스 연결", desc: "과학기술 기반의 비즈니스 매칭 및 사업화 지원", color: "bg-[#1a4a9c] text-white" },
-    { title: "인적 연결", desc: "분야별 전문가 네트워크 구축 및 인재 매칭", color: "bg-white border border-gray-200" },
-    { title: "지역 연결", desc: "지역 사회 문제 해결을 위한 기술 공헌 프로젝트", color: "bg-[#1a4a9c] text-white" },
-    { title: "공공 연결", desc: "정부 및 지자체 공공 과제 수행 및 정책 제안", color: "bg-white border border-gray-200" }
+  // News & Update 데이터 예시 (도안의 날짜, 사진 요소 반영)
+  const newsItems = [
+    {
+      id: 1,
+      title: "2024년 과학기술인 협력 네트워크 발대식",
+      date: "2024.03.20", // 
+      image: "https://images.unsplash.com/photo-1591115765373-520b7a217217?auto=format&fit=crop&q=80&w=400", // 
+      summary: "국내 최고의 과학기술 전문가들이 모여 새로운 비즈니스 모델을 논의했습니다."
+    },
+    {
+      id: 2,
+      title: "신규 AI 모듈 개발 프로젝트 착수",
+      date: "2024.03.15", // 
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=400", // 
+      summary: "CCTV 이상행동 감지 AI 모듈 고도화를 위한 연구가 시작되었습니다."
+    }
   ];
 
   return (
-    <div className="w-full">
-      {/* 1. 히어로 섹션 (Hero Section) */}
-      <section className="bg-[#1a4a9c] text-white py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-            기술창업, 기술사업화, 투자유치 등 <br className="hidden md:block" />
-            국내 최고의 전문가들이 함께합니다.
+    <div className="bg-white min-h-screen">
+      {/* 1. 상단 지난 소개 섹션  */}
+      <section className="bg-[#1a4a9c] text-white py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-sm font-semibold tracking-widest uppercase mb-4 opacity-80">
+            Introduction
+          </h2>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+            과학기술의 가치를 연결하는 <br />
+            ㄱㅅㄷ 과학기술인협동조합의 지난 발자취
           </h1>
-          <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
-            ㄱㅅㄷ 과학기술인협동조합은 과학기술을 통해 <br />
-            더 나은 미래와 지속 가능한 가치를 창출합니다.
+          <p className="text-lg opacity-90 max-w-2xl leading-relaxed">
+            우리는 지난 시간 동안 지역 사회와 공공 기관을 잇는 
+            수많은 기술 공헌 프로젝트를 수행해 왔습니다. 
           </p>
-          <button className="bg-white text-[#1a4a9c] px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
-            조합 소개 자세히 보기
-          </button>
         </div>
       </section>
 
-      {/* 2. 사업 영역 섹션 (Business Areas) */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4 italic">Business Areas</h2>
-            <div className="w-16 h-1 bg-[#1a4a9c] mx-auto"></div>
+      {/* 2. News & Update 섹션  */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-end mb-10">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900">News & Update</h2> 
+              <div className="w-12 h-1 bg-[#1a4a9c] mt-4"></div>
+            </div>
+            {/* 페이지 이동 버튼  */}
+            <button className="text-[#1a4a9c] font-semibold hover:underline">
+              전체보기 +
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {businessAreas.map((area, index) => (
-              <div 
-                key={index} 
-                className={`p-10 rounded-3xl shadow-sm transition-transform hover:-translate-y-2 duration-300 ${area.color}`}
-              >
-                <h3 className="text-xl font-bold mb-4">{area.title}</h3>
-                <p className="text-sm opacity-80 leading-relaxed">
-                  {area.desc}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {newsItems.map((item) => (
+              <div key={item.id} className="group cursor-pointer">
+                {/* 사진 영역  */}
+                <div className="overflow-hidden rounded-2xl mb-6 aspect-video">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                {/* 날짜 영역  */}
+                <span className="text-sm text-gray-500 font-medium">{item.date}</span> 
+                <h3 className="text-xl font-bold mt-2 mb-3 group-hover:text-[#1a4a9c] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {item.summary}
                 </p>
-                <div className="mt-8 text-xs font-semibold uppercase tracking-widest">Read More +</div>
+                {/* 페이지로 이동  */}
+                <div className="inline-flex items-center text-sm font-bold text-[#1a4a9c]">
+                  자세히 보기
+                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
               </div>
             ))}
           </div>
