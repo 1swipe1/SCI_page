@@ -1,5 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Gallery = () => {
 
@@ -39,15 +37,6 @@ const Gallery = () => {
     },
   ];
 
-  /* --- 기획안 §8 연혁 --- */
-  const timeline = [
-    { year: '2024.02', desc: '과학기술인협동조합 기술사업화지원단 설립 (용인시 223호)' },
-    { year: '2024.05', desc: '과학기술인협동조합 확인 (과기협동조합지원센터-66)' },
-    { year: '2024', desc: '여성기업 확인 (제 0118-2024-33450 호)' },
-    { year: '2024~', desc: '캠퍼스타운 BM분석(60개 기업), OO대학교 Startup-Booster Academy 운영' },
-    { year: '2025', desc: '공공연수 적정 비용 기준 연구 수행 (완료)' },
-    { year: '2025', desc: 'OO대학교 창업중심대학 창업기업 70개사 성과점검 및 컨설팅 수행' },
-  ];
 
   return (
     <div className="bg-white min-h-screen">
@@ -73,7 +62,7 @@ const Gallery = () => {
 
           <div className="space-y-8">
             {projects.map((project) => (
-              <div key={project.id} className="rounded-2xl border border-gray-200 overflow-hidden p-8 md:p-10 hover:border-gray-400 transition-all">
+              <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden p-6 md:p-8 hover:border-gray-400 transition-all ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 {/* 태그 */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, i) => (
@@ -90,27 +79,6 @@ const Gallery = () => {
                 )}
                 {/* 요약 */}
                 <p className="text-sm text-gray-500 font-light leading-relaxed break-keep">{project.summary}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 연혁 타임라인 */}
-      <section className="py-20 px-10 md:px-20 bg-gray-50">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">연혁</h2>
-            <p className="text-gray-400 text-sm font-light">기사단의 주요 이정표를 소개합니다.</p>
-          </div>
-          <div className="space-y-6">
-            {timeline.map((item, i) => (
-              <div key={i} className="flex gap-8 items-start">
-                <span className="text-sm font-bold text-gray-900 w-24 shrink-0 text-right">{item.year}</span>
-                <div className="flex items-start gap-4">
-                  <div className="w-2.5 h-2.5 rounded-full bg-gray-950 mt-1.5 shrink-0"></div>
-                  <span className="text-sm text-gray-600 font-light break-keep">{item.desc}</span>
-                </div>
               </div>
             ))}
           </div>

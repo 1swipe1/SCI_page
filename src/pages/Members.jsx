@@ -154,7 +154,7 @@ const Members = () => {
               </div>
 
               {/* 경력 */}
-              <ul className="mt-5 space-y-1.5">
+              <ul className="mt-5 space-y-0.5">
                 {member.career.map((line, i) => (
                   <li key={i} className="text-[13px] text-gray-600 font-light flex items-start gap-1.5">
                     <span className="mt-0.75 shrink-0">·</span>
@@ -166,7 +166,7 @@ const Members = () => {
               {/* 전문분야 */}
               <div className="mt-6">
                 <p className="text-[13px] font-bold text-gray-800 mb-2">[전문분야]</p>
-                <ul className="space-y-1.5">
+                <ul className="space-y-0.5">
                   {member.specialty.map((s, i) => (
                     <li key={i} className="text-[13px] text-gray-600 font-light flex items-start gap-1.5">
                       <span className="mt-0.75 shrink-0">·</span>
