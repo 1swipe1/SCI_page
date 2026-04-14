@@ -8,8 +8,20 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session) {
+        const rememberMe = localStorage.getItem('rememberMe');
+        const activeSession = sessionStorage.getItem('activeSession');
+        if (rememberMe === 'false' && !activeSession) {
+          await supabase.auth.signOut();
+          localStorage.removeItem('rememberMe');
+          setUser(null);
+        } else {
+          setUser(session.user);
+        }
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 

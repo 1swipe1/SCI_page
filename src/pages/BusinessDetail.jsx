@@ -118,24 +118,26 @@ const BusinessDetail = () => {
       </section>
 
       {/* 본문 */}
-      <section className="pt-11 pb-36 px-10 md:px-20">
+      <section className="pt-11 pb-36 px-6 md:px-20">
         <div className="max-w-5xl mx-auto">
 
           {/* 서브 탭바 */}
-          <div className="flex flex-wrap mb-14">
-            {businessAreas.map((item, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveSubTab(idx)}
-                className={`flex-1 min-w-fit px-4 pt-1 pb-4 text-[12px] md:text-[13px] font-medium transition-all whitespace-nowrap bg-white border-t-2 group ${
-                  activeSubTab === idx
-                    ? 'border-gray-950 text-gray-950'
-                    : 'border-gray-300 text-gray-400 hover:border-gray-950 hover:text-gray-950'
-                }`}
-              >
-                {item.tab}
-              </button>
-            ))}
+          <div className="overflow-x-auto mb-14 -mx-6 md:mx-0 scrollbar-hide">
+            <div className="flex min-w-max md:min-w-0 px-6 md:px-0">
+              {businessAreas.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSubTab(idx)}
+                  className={`shrink-0 md:flex-1 px-4 pt-1 pb-4 text-[12px] md:text-[13px] font-medium transition-all whitespace-nowrap bg-white border-t-2 ${
+                    activeSubTab === idx
+                      ? 'border-gray-950 text-gray-950'
+                      : 'border-gray-300 text-gray-400 hover:border-gray-950 hover:text-gray-950'
+                  }`}
+                >
+                  {item.tab}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* 소제목 */}

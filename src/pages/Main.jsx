@@ -119,10 +119,10 @@ const Main = () => {
             <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-15">
               <div className="max-w-300 mx-auto w-full">
               <div className="max-w-2xl">
-                  <h1 className="text-4xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg whitespace-nowrap">
+                  <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep">
                     {slide.title}
                   </h1>
-                  <p className="text-base md:text-lg text-white/75 leading-relaxed font-light whitespace-nowrap">
+                  <p className="text-sm md:text-lg text-white/75 leading-relaxed font-light break-keep">
                     {slide.desc}
                   </p>
                   <div className="mt-24">
@@ -145,10 +145,10 @@ const Main = () => {
             <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2.5 h-2.5 rounded-full transition-all ${currentSlide === i ? 'bg-white' : 'bg-white/40'}`}></button>
           ))}
         </div>
-        <button onClick={prevSlide} className="absolute left-10 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-all z-20">
+        <button onClick={prevSlide} className="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-all z-20">
           <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M15 19l-7-7 7-7" /></svg>
         </button>
-        <button onClick={nextSlide} className="absolute right-10 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-all z-20">
+        <button onClick={nextSlide} className="hidden md:block absolute right-10 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-all z-20">
           <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5l7 7-7 7" /></svg>
         </button>
       </section>

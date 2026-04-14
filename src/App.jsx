@@ -12,6 +12,7 @@ import Inquiry from './pages/Inquiry';
 import NoticeDetail from './pages/NoticeDetail';
 import BusinessDetail from './pages/BusinessDetail';
 import Admin from './pages/Admin';
+import ForgotPassword from './pages/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="notice/:id" element={<NoticeDetail />} />
             <Route path="signup" element={<Signup />} />
             <Route path="business" element={<BusinessDetail />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
           </Route>
         </Routes>

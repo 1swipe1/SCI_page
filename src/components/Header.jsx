@@ -16,7 +16,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMainPage = location.pathname === '/';
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/forgot-password';
 
   const menuConfig = [
     {
@@ -65,6 +65,8 @@ const Header = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    localStorage.removeItem('rememberMe');
+    sessionStorage.removeItem('activeSession');
     setIsMobileMenuOpen(false);
     navigate('/');
   };
@@ -159,89 +161,89 @@ const Header = () => {
           </button>
         </div>
 
-        {/* 모바일 사이드 드로어 오버레이 */}
-        {isMobileMenuOpen && (
-          <div
-            className="lg:hidden fixed inset-0 bg-black/40 z-90"
-            onClick={closeAllMenus}
-          />
-        )}
-
-        {/* 모바일 사이드 드로어 */}
-        <div className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white/95 backdrop-blur-md z-110 flex flex-col transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}>
-          {/* 드로어 헤더 */}
-          <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
-            <span className="font-black text-sm tracking-tight">MENU</span>
-            <button onClick={closeAllMenus} className="p-1">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* 메뉴 목록 */}
-          <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-1">
-            {menuConfig.map((item, idx) => (
-              <div key={idx}>
-                <div className="flex items-center justify-between">
-                  <Link
-                    to={item.path}
-                    onClick={handleNavClick}
-                    className="py-3 text-[15px] font-black text-gray-900 tracking-tight"
-                  >
-                    {item.title}
-                  </Link>
-                  {item.subItems.some(s => s.name) && (
-                    <button
-                      onClick={() => setActiveMobileSub(activeMobileSub === idx ? null : idx)}
-                      className="p-1 text-gray-400"
-                    >
-                      <svg className={`w-4 h-4 transition-transform ${activeMobileSub === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  )}
-                </div>
-                {activeMobileSub === idx && (
-                  <div className="pl-3 pb-2 space-y-2 border-l border-gray-200 ml-1">
-                    {item.subItems.filter(s => s.name).map((sub, sIdx) => (
-                      <Link
-                        key={sIdx}
-                        to={sub.path}
-                        onClick={closeAllMenus}
-                        className="block py-1.5 text-[13px] text-gray-400 hover:text-gray-900 transition-colors"
-                      >
-                        {sub.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-                <div className="border-b border-gray-100" />
-              </div>
-            ))}
-          </nav>
-
-          {/* 하단 로그인 */}
-          <div className="px-6 py-6 border-t border-gray-100 flex gap-4 text-[13px] font-bold text-gray-400">
-            {isAdmin ? (
-              <>
-                <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
-                <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
-              </>
-            ) : (
-              <Link to="/login" onClick={handleNavClick} className="hover:text-gray-900">LOGIN</Link>
-            )}
-          </div>
-        </div>
-
         {/* 전체 너비 드롭다운 배경 패널 */}
         <div className={`hidden lg:block absolute top-15 left-0 w-full bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300 pointer-events-none ${
           isHovered ? 'opacity-100 h-36' : 'opacity-0 h-0'
         }`} />
 
       </header>
+
+      {/* 모바일 사이드 드로어 오버레이 */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/40 z-105"
+          onClick={closeAllMenus}
+        />
+      )}
+
+      {/* 모바일 사이드 드로어 */}
+      <div className={`lg:hidden fixed top-0 right-0 h-full w-72 bg-white/95 backdrop-blur-md z-110 flex flex-col transition-transform duration-300 ease-in-out ${
+        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        {/* 드로어 헤더 */}
+        <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
+          <span className="font-black text-sm tracking-tight">MENU</span>
+          <button onClick={closeAllMenus} className="p-1">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* 메뉴 목록 */}
+        <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-1">
+          {menuConfig.map((item, idx) => (
+            <div key={idx}>
+              <div className="flex items-center justify-between">
+                <Link
+                  to={item.path}
+                  onClick={handleNavClick}
+                  className="py-3 text-[15px] font-black text-gray-900 tracking-tight"
+                >
+                  {item.title}
+                </Link>
+                {item.subItems.some(s => s.name) && (
+                  <button
+                    onClick={() => setActiveMobileSub(activeMobileSub === idx ? null : idx)}
+                    className="p-1 text-gray-400"
+                  >
+                    <svg className={`w-4 h-4 transition-transform ${activeMobileSub === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              {activeMobileSub === idx && (
+                <div className="pl-3 pb-2 space-y-2 border-l border-gray-200 ml-1">
+                  {item.subItems.filter(s => s.name).map((sub, sIdx) => (
+                    <Link
+                      key={sIdx}
+                      to={sub.path}
+                      onClick={closeAllMenus}
+                      className="block py-1.5 text-[13px] text-gray-400 hover:text-gray-900 transition-colors"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              <div className="border-b border-gray-100" />
+            </div>
+          ))}
+        </nav>
+
+        {/* 하단 로그인 */}
+        <div className="px-6 py-6 border-t border-gray-100 flex gap-4 text-[13px] font-bold text-gray-400">
+          {isAdmin ? (
+            <>
+              <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
+              <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+            </>
+          ) : (
+            <Link to="/login" onClick={handleNavClick} className="hover:text-gray-900">LOGIN</Link>
+          )}
+        </div>
+      </div>
     </>
   );
 };
