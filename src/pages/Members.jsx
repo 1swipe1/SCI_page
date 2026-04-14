@@ -124,10 +124,8 @@ const Members = () => {
 
       {/* 2. 섹션 타이틀 */}
       <section className="pt-24 pb-10 text-center px-10 md:px-20">
-        <h2 className="text-[32px] font-bold text-gray-950 mb-4 tracking-tighter">함께하는 분</h2>
-        <p className="text-gray-400 font-light text-lg">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>
-        <p className="text-[14px] text-gray-500 font-light tracking-wide mt-2 max-w-3xl mx-auto">기사단은 박사학위 또는 공인 국가전문자격을 보유한 전문가들로 구성되어 있습니다. 창업지원 공공기관 경력과 스타트업/중소기업 컨설팅 10년 이상의 경험을 바탕으로, 고객의 과제에 최적의 솔루션을 제공합니다.</p>
-      </section>
+        <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">함께하는 분</h2>
+        <p className="text-gray-400 font-light text-lg">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>      </section>
 
       {/* 3. 멤버 카드 그리드 */}
       <section className="pb-32 px-10 md:px-20 max-w-300 mx-auto">

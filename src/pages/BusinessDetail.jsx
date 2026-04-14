@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /* --- 기획안 §11 사업분야 6개 --- */
 const businessAreas = [
@@ -120,6 +121,14 @@ const BusinessDetail = () => {
       {/* 본문 */}
       <section className="pt-11 pb-36 px-6 md:px-20">
         <div className="max-w-5xl mx-auto">
+
+          {/* 뒤로가기 */}
+          <div className="mb-8">
+            <Link to="/gallery" className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-950 text-[13px] font-medium transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
+              사업 분야 소개로 돌아가기
+            </Link>
+          </div>
 
           {/* 서브 탭바 */}
           <div className="overflow-x-auto mb-14 -mx-6 md:mx-0 scrollbar-hide">

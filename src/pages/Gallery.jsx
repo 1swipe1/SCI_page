@@ -1,7 +1,19 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
 const Gallery = () => {
+  const { hash } = useLocation();
+  const [activeTab, setActiveTab] = useState('business');
 
-  /* --- 기획안 §7 활동내역 프로젝트 5건 --- */
+  useEffect(() => {
+    if (hash === '#lecture') {
+      setActiveTab('lecture');
+    } else {
+      setActiveTab('business');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [hash]);
+
   const projects = [
     {
       id: 1,
@@ -37,11 +49,49 @@ const Gallery = () => {
     },
   ];
 
+  const lectureItems = [
+    {
+      id: 1,
+      category: '기술창업 및 사업화',
+      title: '기술창업, 기술사업화와\n기술가치 평가',
+      desc: '기술 기반 창업의 전 과정을 지원합니다. 사업타당성 분석부터 기술가치평가, 기술사업화 전략 수립까지 전문가가 함께합니다.',
+    },
+    {
+      id: 2,
+      category: '신규사업 아이템 발굴',
+      title: '신규 아이템 발굴 및\n사업성 분석',
+      desc: '기업의 기술역량과 시장 환경을 종합 분석하여 실현 가능한 신규 아이템을 발굴하고 브랜드 확장 전략을 수립합니다.',
+    },
+    {
+      id: 3,
+      category: '사업타당성 분석',
+      title: '창업기업의\n사업타당성 분석',
+      desc: '객관적인 데이터 기반의 사업타당성 분석으로 창업기업이 확실한 근거 위에서 전략적 의사결정을 내릴 수 있도록 지원합니다.',
+    },
+    {
+      id: 4,
+      category: 'R&D 전략 수립',
+      title: '연구개발\n중장기 전략 수립',
+      desc: '업종별 맞춤형 R&D 중장기 전략 수립과 기술 로드맵, 특허 포트폴리오 구성을 통해 기업의 미래 기술력을 체계적으로 설계합니다.',
+    },
+    {
+      id: 5,
+      category: '기업가정신 및 리더십',
+      title: '기업가정신·리더십\n교육 프로그램',
+      desc: '기업가정신, 디자인씽킹, 해커톤, 리더십 등 실무 중심의 맞춤형 교육을 대학·공공기관·기업 대상으로 설계하고 운영합니다.',
+    },
+    {
+      id: 6,
+      category: '정책자금 및 인증지원',
+      title: '정책자금 및\n각종 인증 지원',
+      desc: '국가전문자격 경영지도사가 정책자금 정보 제공, 신청 지원, 벤처·이노비즈 등 각종 인증 획득까지 체계적으로 지원합니다.',
+    },
+  ];
 
   return (
     <div className="bg-white min-h-screen">
 
-      {/* 히어로 섹션 */}
+      {/* 히어로 섹션 — Members와 동일 */}
       <section className="relative h-[35vh] min-h-72 overflow-hidden flex items-center justify-center">
         <img
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
@@ -49,42 +99,99 @@ const Gallery = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">컨설팅 & 강의 분야</h1>
+        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">조합 활동</h1>
       </section>
 
-      {/* 프로젝트 목록 */}
-      <section className="py-20 px-10 md:px-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">주요 수행 실적</h2>
-            <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
-          </div>
+      {/* 탭 네비게이션 */}
+      <nav className="bg-black text-white border-b border-white/10 h-10">
+        <div className="max-w-360 mx-auto flex h-full items-stretch">
+          <button
+            onClick={() => setActiveTab('business')}
+            className={`flex-1 h-full flex items-center justify-center text-[13px] md:text-[14px] font-black transition-all bg-black ${
+              activeTab === 'business' ? 'text-white border-b-2 border-white' : 'text-white/30 hover:text-white/60'
+            }`}
+          >
+            사업 분야 소개
+          </button>
+          <button
+            onClick={() => setActiveTab('lecture')}
+            className={`flex-1 h-full flex items-center justify-center text-[13px] md:text-[14px] font-black transition-all bg-black ${
+              activeTab === 'lecture' ? 'text-white border-b-2 border-white' : 'text-white/30 hover:text-white/60'
+            }`}
+          >
+            주요 수행 실적
+          </button>
+        </div>
+      </nav>
 
-          <div className="space-y-4">
-            {projects.map((project) => (
-              <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden px-6 py-4 hover:border-gray-400 transition-all flex flex-col justify-center min-h-40 ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-                {/* 태그 */}
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase border border-gray-200 rounded-full px-3 py-0.5">{tag}</span>
-                  ))}
-                </div>
-                {/* 제목 */}
-                <h3 className="text-xl font-bold text-gray-950 mb-1 leading-snug">{project.title}</h3>
-                {/* 기간 */}
-                {project.period && (
-                  <div className="text-xs text-gray-400 font-light mb-2">
-                    <span>기간: {project.period}</span>
+      {/* 콘텐츠 */}
+      <section className="py-20 px-10 md:px-20">
+        <div className="max-w-5xl mx-auto">
+
+        {/* === 탭 1: 사업 분야 소개 === */}
+        {activeTab === 'lecture' && (
+          <div>
+            {/* 주요 수행 실적 */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">주요 수행 실적</h2>
+              <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
+            </div>
+
+            <div className="space-y-4">
+              {projects.map((project) => (
+                <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden px-6 py-4 hover:border-gray-400 transition-all flex flex-col justify-center min-h-40 ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase border border-gray-200 rounded-full px-3 py-0.5">{tag}</span>
+                    ))}
                   </div>
-                )}
-                {/* 요약 */}
-                <p className="text-sm text-gray-500 font-light leading-snug break-keep">{project.summary}</p>
-              </div>
-            ))}
+                  <h3 className="text-xl font-bold text-gray-950 mb-1 leading-snug">{project.title}</h3>
+                  {project.period && (
+                    <div className="text-xs text-gray-400 font-light mb-2">기간: {project.period}</div>
+                  )}
+                  <p className="text-sm text-gray-500 font-light leading-snug break-keep">{project.summary}</p>
+                </div>
+              ))}
+            </div>
           </div>
+        )}
+
+        {/* === 탭 2: 조합 활동 === */}
+        {activeTab === 'business' && (
+          <div>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">사업 분야 소개</h2>
+              <p className="text-gray-400 text-sm font-light">어떤 일을 하는지, 간략하게 요약하는 페이지</p>
+            </div>
+
+            <div className="space-y-8">
+              {lectureItems.map((item, index) => (
+                <div key={item.id} style={index % 2 !== 0 ? { backgroundColor: '#F3F4F6' } : {}} className="rounded-2xl border border-gray-200 overflow-hidden p-10 md:p-12">
+                  {/* 상단: 카테고리 + 구분선 */}
+                  <div className="flex items-center gap-6 mb-8">
+                    <p className="text-xs text-gray-400 font-light tracking-widest shrink-0">{item.category}</p>
+                    <hr className="border-gray-300 flex-1" />
+                  </div>
+                  {/* 하단: 제목 + 본문 */}
+                  <div className="flex flex-col md:flex-row gap-10 md:gap-16">
+                    <div className="md:w-2/5 shrink-0">
+                      <h3 className="text-xl md:text-2xl font-black text-gray-950 leading-snug whitespace-pre-line">{item.title}</h3>
+                    </div>
+                    <div className="md:w-3/5 flex flex-col justify-center">
+                      <p className="text-[14px] text-gray-500 font-light leading-6 mb-10 break-keep">{item.desc}</p>
+                      <Link to="/business" className="inline-block self-start px-4 py-2.5 text-gray-950 text-xs font-bold tracking-widest uppercase rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
+                        VIEW MORE
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         </div>
       </section>
-
     </div>
   );
 };

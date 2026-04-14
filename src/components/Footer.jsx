@@ -27,11 +27,11 @@ const Footer = () => {
           </Link>
 
           {/* 연락처 */}
-          <div className="text-[11px] md:text-[13px] font-light text-white/30 leading-relaxed md:leading-loose tracking-wide md:tracking-widest text-left break-keep">
+          <div className="text-[11px] md:text-[13px] font-light text-white/30 leading-snug tracking-wide md:tracking-widest text-left break-keep space-y-1">
             <p>경기도 용인시 기흥구 강남로 12, 805호 (구갈동, 스카이프라자)</p>
             <p>Tel. 031-322-2357 &nbsp; Fax. 050-4031-9057</p>
             <p>Email. kisadan01@naver.com &nbsp; Web. www.kisdan.org</p>
-            <p className="text-white/15 text-[10px] md:text-[11px] font-light tracking-wide mt-2 break-all">
+            <p className="text-[10px] md:text-[11px] break-all">
               사업자등록번호 459-86-03431 &nbsp;|&nbsp; 대표자 이자현 &nbsp;|&nbsp; 과학기술인협동조합 기술사업화지원단
             </p>
           </div>

@@ -1,23 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
-  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [notices, setNotices] = useState([]);
-
-  useEffect(() => {
-    const fetchLatestNotices = async () => {
-      const { data, error } = await supabase
-        .from('notices')
-        .select('*')
-        .order('date', { ascending: false })
-        .limit(4);
-      if (!error) setNotices(data);
-    };
-    fetchLatestNotices();
-  }, []);
 
   /* --- 기획안 §1 슬로건 반영 --- */
   const slides = [
@@ -213,42 +198,6 @@ const Main = () => {
             <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-block px-8 py-3.5 text-gray-950 font-bold text-sm uppercase tracking-widest rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
               전체 활동 보기
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* === 5. News & Update === */}
-      <section className="pt-14 pb-20 px-10 md:px-20 bg-gray-100">
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="text-center mb-12">
-            <h2 className="text-[32px] font-bold text-gray-950 mb-3 tracking-tighter">News & Update</h2>
-            <p className="text-gray-400 font-normal text-[18px]">뉴스 및 새로운 소식을 전달합니다.</p>
-          </div>
-
-          <div className="divide-y divide-gray-300 border-t border-gray-300">
-            {notices.length > 0 ? (
-              notices.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => navigate(`/notice/${item.id}`)}
-                  className="flex items-center justify-between py-5 cursor-pointer hover:bg-gray-200 px-2 transition-colors group"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs font-bold text-gray-400 tracking-widest uppercase shrink-0">Notice</span>
-                    <span className="text-sm font-medium text-gray-900 group-hover:text-black transition-colors">{item.title}</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex items-center justify-between py-5 px-2">
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs font-bold text-gray-400 tracking-widest uppercase shrink-0">Notice</span>
-                    <span className="text-sm font-medium text-gray-400">주요사업 소개 및 최신 내용을 전달합니다.</span>
-                  </div>
-                </div>
-              ))
-            )}
           </div>
         </div>
       </section>
