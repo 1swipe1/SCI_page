@@ -60,25 +60,25 @@ const Gallery = () => {
             <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-4">
             {projects.map((project) => (
-              <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden p-6 md:p-8 hover:border-gray-400 transition-all ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+              <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden px-6 py-4 hover:border-gray-400 transition-all flex flex-col justify-center min-h-40 ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 {/* 태그 */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase border border-gray-200 rounded-full px-3 py-1">{tag}</span>
+                    <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase border border-gray-200 rounded-full px-3 py-0.5">{tag}</span>
                   ))}
                 </div>
                 {/* 제목 */}
-                <h3 className="text-xl font-bold text-gray-950 mb-2 leading-snug">{project.title}</h3>
-                {/* 고객/기간 */}
+                <h3 className="text-xl font-bold text-gray-950 mb-1 leading-snug">{project.title}</h3>
+                {/* 기간 */}
                 {project.period && (
-                  <div className="text-xs text-gray-400 font-light mb-4">
+                  <div className="text-xs text-gray-400 font-light mb-2">
                     <span>기간: {project.period}</span>
                   </div>
                 )}
                 {/* 요약 */}
-                <p className="text-sm text-gray-500 font-light leading-relaxed break-keep">{project.summary}</p>
+                <p className="text-sm text-gray-500 font-light leading-snug break-keep">{project.summary}</p>
               </div>
             ))}
           </div>

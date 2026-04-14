@@ -3,8 +3,8 @@ import logoF from '../assets/logo_F.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111] text-white px-32 md:px-64">
-      <div className="w-full">
+    <footer className="bg-[#111] text-white">
+      <div className="max-w-300 mx-auto px-10 md:px-20 xl:px-[10%]">
 
         {/* 상단 네비게이션 */}
         <div className="flex flex-wrap gap-8 pt-8 pb-0 border-b border-white/10 text-[10px] font-light text-white/50 uppercase tracking-widest">
@@ -16,11 +16,11 @@ const Footer = () => {
         </div>
 
         {/* 하단 로고 + 연락처 */}
-        <div className="flex flex-col md:flex-row justify-center items-start md:items-center py-6 gap-20">
+        <div className="flex flex-col md:flex-row items-start justify-between py-6">
 
           {/* 로고 */}
           <Link to="/">
-            <img src={logoF} alt="과학기술인협동조합" className="h-10 w-auto object-contain" />
+            <img src={logoF} alt="과학기술인협동조합" className="h-8 w-auto object-contain" />
           </Link>
 
           {/* 연락처 */}

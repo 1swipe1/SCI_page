@@ -22,24 +22,29 @@ const Main = () => {
   /* --- 기획안 §1 슬로건 반영 --- */
   const slides = [
     {
-      title: "기술에 전략을,\n창업에 성장을",
+      title: "기술에 전략을, 창업에 성장을",
       desc: "기술사업화지원단(기사단)은 기술창업부터 사업화, 스케일업까지 각 단계별 최고의 전문가들이 함께하는 과학기술인협동조합입니다.",
-      img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
+      img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2070"
     },
     {
-      title: "전문가가 함께하는\n원스톱 컨설팅",
+      title: "전문가가 함께하는 원스톱 컨설팅",
       desc: "조합원 전원이 박사학위 또는 국가전문자격 보유자. 10년 이상의 현장 경험을 바탕으로 최적의 솔루션을 제공합니다.",
-      img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070"
+      img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070"
     },
     {
-      title: "130개+ 기업과\n함께 성장한 파트너",
+      title: "130개+ 기업과 함께 성장한 파트너",
       desc: "캠퍼스타운, 창업중심대학 등 다양한 프로젝트를 통해 실질적인 성과를 만들어 왔습니다.",
-      img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
+      img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070"
     }
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   /* --- 기획안 §3 핵심 서비스 카드 --- */
   const serviceCards = [
@@ -78,7 +83,7 @@ const Main = () => {
     { number: '11명+', label: '전문가 조합원', desc: '박사학위 또는 국가전문자격 보유' },
     { number: '10년+', label: '평균 컨설팅 경력', desc: '스타트업/중소기업 컨설팅 분야' },
     { number: '130개+', label: '기업 BM 진단/컨설팅', desc: '캠퍼스타운·창업중심대학 등' },
-    { number: '3개+', label: '연구용역 수행', desc: '중진공, 대학교 등' },
+    { number: '3개+', label: '연구용역 수행', desc: '공공기관, 대학교 등' },
   ];
 
   /* --- 기획안 §5 최근 활동 프리뷰 --- */
@@ -108,19 +113,29 @@ const Main = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-linear-to-br from-red-950/70 via-black/60 to-black/80 flex items-center px-10 md:px-20">
-              <div className="max-w-5xl mx-auto w-full">
-                <div className="max-w-3xl">
-                  <h1 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tighter drop-shadow-lg whitespace-pre-line">
+            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-15">
+              <div className="max-w-300 mx-auto w-full">
+              <div className="max-w-2xl">
+                  <h1 className="text-4xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg whitespace-nowrap">
                     {slide.title}
                   </h1>
-                  <p className="text-base md:text-lg text-white/75 leading-relaxed font-light">
+                  <p className="text-base md:text-lg text-white/75 leading-relaxed font-light whitespace-nowrap">
                     {slide.desc}
                   </p>
-                </div>
+                  <div className="mt-24">
+                    <Link
+                      to="/inquiry"
+                      onClick={() => window.scrollTo(0, 0)}
+                      className="inline-flex items-center gap-2 text-white font-bold text-sm hover:text-white/70 transition-colors"
+                    >
+                      상담 문의하기
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                    </Link>
+                  </div>
+              </div>
               </div>
             </div>
           </div>
@@ -139,20 +154,20 @@ const Main = () => {
       </section>
 
       {/* === 2. 핵심 서비스 카드 (기획안 §3) === */}
-      <section className="py-24 px-10 md:px-20 bg-gray-100">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-24 px-10 md:px-20 xl:px-[10%] bg-gray-100">
+        <div className="max-w-300 mx-auto w-full">
           <div className="text-center mb-16">
-            <h2 className="text-[28px] font-bold text-gray-950 tracking-tighter mb-3">핵심 서비스</h2>
-            <p className="text-gray-400 font-light text-base">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+            <h2 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">핵심 서비스</h2>
+            <p className="text-gray-400 font-light text-lg">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all group">
+              <Link to="/business" key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all group flex flex-col lg:h-80">
                 <div className="text-gray-400 group-hover:text-gray-900 transition-colors mb-6">
                   {card.icon}
                 </div>
-                <h3 className="text-lg font-bold text-gray-950 mb-3">{card.title}</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed break-keep">{card.desc}</p>
+                <h3 className="text-[18px] font-bold text-gray-950 mb-3 tracking-wide">{card.title}</h3>
+                <p className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide">{card.desc}</p>
               </Link>
             ))}
           </div>
@@ -160,8 +175,8 @@ const Main = () => {
       </section>
 
       {/* === 3. 실적 숫자 (기획안 §4) === */}
-      <section className="py-20 px-10 md:px-20 bg-gray-950">
-        <div className="max-w-5xl mx-auto">
+      <section className="px-10 md:px-20 xl:px-[10%] bg-gray-950 h-62.5 flex items-center">
+        <div className="max-w-4xl mx-auto w-full">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {stats.map((stat, i) => (
               <div key={i}>
@@ -175,23 +190,25 @@ const Main = () => {
       </section>
 
       {/* === 4. 최근 활동 프리뷰 (기획안 §5) === */}
-      <section className="py-24 px-10 md:px-20 bg-white">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-10 md:px-20 xl:px-[10%] bg-gray-100">
+        <div className="max-w-300 mx-auto w-full">
           <div className="text-center mb-16">
-            <h2 className="text-[28px] font-bold text-gray-950 tracking-tighter mb-3">최근 활동</h2>
-            <p className="text-gray-400 font-light text-base">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+            <h2 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">최근 활동</h2>
+            <p className="text-gray-400 font-light text-lg">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-5">
             {recentActivities.map((item, i) => (
-              <div key={i} className="border border-gray-200 rounded-2xl p-8 hover:border-gray-400 transition-all">
-                <span className="inline-block text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">{item.tag}</span>
-                <h3 className="text-base font-bold text-gray-950 mb-4 leading-snug">{item.title}</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed break-keep">{item.desc}</p>
+              <div key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all flex flex-col w-75 h-80">
+                <span className="inline-block text-xs font-bold text-gray-400 tracking-widest uppercase">{item.tag}</span>
+                <div className="flex-1 flex flex-col justify-center">
+                  <h3 className="text-[18px] font-bold text-gray-950 mb-3 tracking-wide leading-snug">{item.title}</h3>
+                  <p className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/gallery" className="inline-block px-8 py-3.5 text-gray-950 font-bold text-xs uppercase tracking-widest rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
+            <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-block px-8 py-3.5 text-gray-950 font-bold text-sm uppercase tracking-widest rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
               전체 활동 보기
             </Link>
           </div>
@@ -206,41 +223,26 @@ const Main = () => {
             <p className="text-gray-400 font-normal text-[18px]">뉴스 및 새로운 소식을 전달합니다.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.75">
+          <div className="divide-y divide-gray-300 border-t border-gray-300">
             {notices.length > 0 ? (
               notices.map((item) => (
                 <div
                   key={item.id}
                   onClick={() => navigate(`/notice/${item.id}`)}
-                  className="group relative aspect-3/4 overflow-hidden bg-gray-100 cursor-pointer"
+                  className="flex items-center justify-between py-5 cursor-pointer hover:bg-gray-200 px-2 transition-colors group"
                 >
-                  <img
-                    src={item.image_url || "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070"}
-                    alt="news"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-8 left-8 text-white">
-                    <h3 className="text-[28px] font-bold mb-2 uppercase tracking-tighter">Notice</h3>
-                    <p className="text-[14px] font-normal leading-6 opacity-70">
-                      {item.title.substring(0, 30)}...
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs font-bold text-gray-400 tracking-widest uppercase shrink-0">Notice</span>
+                    <span className="text-sm font-medium text-gray-900 group-hover:text-black transition-colors">{item.title}</span>
                   </div>
                 </div>
               ))
             ) : (
-              [
-                "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800",
-                "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800",
-                "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800",
-                "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800"
-              ].map((img, i) => (
-                <div key={i} className="group relative aspect-3/4 overflow-hidden bg-gray-200 cursor-pointer">
-                  <img src={img} alt="news" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-8 left-8 text-white">
-                    <h3 className="text-[28px] font-bold mb-2 uppercase tracking-tighter">Notice</h3>
-                    <p className="text-[14px] font-normal leading-6 opacity-70">주요사업 소개 및 최신 내용을 전달합니다.</p>
+              Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="flex items-center justify-between py-5 px-2">
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs font-bold text-gray-400 tracking-widest uppercase shrink-0">Notice</span>
+                    <span className="text-sm font-medium text-gray-400">주요사업 소개 및 최신 내용을 전달합니다.</span>
                   </div>
                 </div>
               ))

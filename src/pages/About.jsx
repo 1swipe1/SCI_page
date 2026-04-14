@@ -3,12 +3,12 @@ import { useLocation } from 'react-router-dom';
 
 const DeptCard = ({ label }) => (
   <div className="flex flex-col items-center gap-2">
-    <div className="w-20 h-20 bg-gray-200 rounded-xl flex items-center justify-center">
-      <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="w-20 h-20 bg-gray-300 rounded-xl flex items-center justify-center">
+      <svg className="w-10 h-10 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-16 0H3m2-9h.01M12 12h.01M17 12h.01M7 8h.01M12 8h.01M17 8h.01M7 16h.01M12 16h.01M17 16h.01" />
       </svg>
     </div>
-    <span className="text-sm text-gray-700 font-medium">{label}</span>
+    <span className="text-sm text-gray-900 font-medium">{label}</span>
   </div>
 );
 
@@ -113,11 +113,11 @@ const About = () => {
       <section
         id="greetings"
         ref={greetingsRef}
-        className="py-16 px-10 md:px-20 bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="py-16 px-10 md:px-20 xl:px-[8%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
-        <div className="max-w-2xl mx-auto w-full bg-gray-50 rounded-2xl p-10 md:p-14">
-          <h2 className="text-2xl font-black text-gray-950 text-center mb-8 tracking-tight">인사말</h2>
-          <div className="text-gray-600 leading-6 md:leading-relaxed text-sm md:text-base font-light break-keep space-y-4">
+        <div className="max-w-4xl mx-auto w-full bg-gray-50 rounded-2xl p-10 md:p-14">
+          <h2 className="text-[32px] font-bold text-gray-950 text-center mb-8 tracking-tighter">인사말</h2>
+          <div className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide space-y-4">
             <p><strong className="font-bold text-gray-900">과학기술인협동조합 기술사업화지원단(기사단)</strong>은 관련 분야 박사학위 또는 공인 국가전문자격을 보유한 전문가들이 함께하는 과학기술인협동조합입니다. 창업지원 공공기관 경력자, 스타트업 및 중소기업 컨설팅 10년 이상의 경험과 노하우, 그리고 산·학·관에 걸친 폭넓은 네트워크를 바탕으로 고객의 과제에 최적의 솔루션을 제공합니다.</p>
             <p>기술사업화지원단은 이러한 축적된 전문성과 현장 실무 경험, 실행력 있는 네트워크를 바탕으로 창업기업 및 중소기업의 실질적인 경영성과 도출을 지원하기 위해 다양한 분야의 컨설팅과 교육 서비스를 제공합니다.</p>
             <p>첫째, 기술창업 및 기술사업화를 위한 비즈니스 모델 검토 및 수립, 사업타당성 분석, 정부 국책사업 연계를 위한 기술사업계획서 작성 지원, 타겟 시장 조사·분석과 매출 증진을 위한 마케팅 전략수립 서비스를 제공합니다.</p>
@@ -128,7 +128,7 @@ const About = () => {
             <p>기술사업화지원단은 틀에 박힌 형식적인 컨설팅보다는 기업 현장에서 즉시 활용 가능한 구체적인 전략 수립과 이행계획을 제시하여, 컨설팅 이후 뚜렷한 가시적 성과를 도출하는 데 주력하고 있습니다.</p>
             <p className="text-gray-900 font-bold mt-6">기술에 전략을, 창업에 성장을.</p>
             <p>창업기업과 중소기업의 진정한 성장 파트너가 되기 위하여, 기술사업화지원단은 최선의 노력을 다하겠습니다.</p>
-            <p className="text-gray-900 font-medium text-right mt-4">과학기술인협동조합 기술사업화지원단 임직원 일동</p>
+            <p className="text-gray-900 font-medium text-right mt-4 tracking-wide">과학기술인협동조합 기술사업화지원단 임직원 일동</p>
           </div>
         </div>
       </section>
@@ -137,16 +137,16 @@ const About = () => {
       <section
         id="intro"
         ref={introRef}
-        className="py-16 px-10 md:px-20 bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="py-16 px-14 md:px-24 xl:px-[10%] bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
-        <div className="max-w-2xl mx-auto w-full">
-          <h2 className="text-2xl font-black text-gray-950 text-center mb-10 tracking-tight">소개</h2>
+        <div className="max-w-4xl mx-auto w-full">
+          <h2 className="text-[32px] font-bold text-gray-950 text-center mb-10 tracking-tighter">소개</h2>
           <img
             src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070"
             alt="Intro"
-            className="w-full aspect-video object-cover rounded-lg mb-10"
+            className="w-full h-40 object-cover mb-10"
           />
-          <div className="text-gray-600 leading-6 md:leading-relaxed text-sm md:text-base font-light break-keep space-y-4">
+          <div className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide space-y-4">
             <p><strong className="font-bold text-gray-900">기술사업화지원단(기사단)</strong>은 기술창업, 기술사업화, 기업가정신 교육, 스케일업, 투자유치 분야의 국내 최고 전문가들이 모여 설립한 과학기술인협동조합입니다.</p>
             <p>조합원 전원이 관련 분야 박사학위 또는 공인 국가전문자격 보유자이며, 창업지원 공공기관 경력자, 스타트업 및 중소기업 컨설팅 10년 이상의 경험을 바탕으로 고객의 과제에 최적의 솔루션을 제공합니다.</p>
             <p>기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
@@ -154,7 +154,7 @@ const About = () => {
 
           {/* 연혁 타임라인 */}
           <div className="mt-14">
-            <h3 className="text-lg font-bold text-gray-950 mb-6 tracking-tight">연혁</h3>
+            <h3 className="text-[18px] font-bold text-gray-950 mb-6 tracking-wide">연혁</h3>
             <div className="space-y-4">
               {[
                 { year: '2024.02', desc: '과학기술인협동조합 기술사업화지원단 설립 (용인시 223호)' },
@@ -165,8 +165,8 @@ const About = () => {
                 { year: '2025', desc: 'OO대학교 창업중심대학 창업기업 70개사 성과점검 및 컨설팅 수행' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-6 items-start">
-                  <span className="text-sm font-bold text-gray-900 w-20 shrink-0">{item.year}</span>
-                  <span className="text-sm text-gray-600 font-light">{item.desc}</span>
+                  <span className="text-xs font-bold text-gray-400 tracking-widest uppercase w-20 shrink-0">{item.year}</span>
+                  <span className="text-[14px] text-gray-500 font-light tracking-wide">{item.desc}</span>
                 </div>
               ))}
             </div>
@@ -178,16 +178,12 @@ const About = () => {
       <section
         id="organization"
         ref={organizationRef}
-        className="pt-16 pb-20 px-10 md:px-20 bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="pt-16 pb-20 px-14 md:px-24 xl:px-[10%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-black text-gray-950 mb-14 tracking-tight">조직도</h2>
-          {/* 이사장 */}
-          <div className="flex justify-center mb-10">
+        <div className="max-w-5xl mx-auto w-full text-center">
+          <h2 className="text-[32px] font-bold text-gray-950 mb-14 tracking-tighter">조직도</h2>
+          <div className="flex justify-center gap-6">
             <DeptCard label="조합이사장" />
-          </div>
-          {/* 지원단 5개 */}
-          <div className="flex justify-center gap-6 flex-wrap">
             <DeptCard label="컨설팅단" />
             <DeptCard label="교육지원단" />
             <DeptCard label="기업혁신지원단" />
@@ -201,11 +197,11 @@ const About = () => {
       <section
         id="cert"
         ref={certRef}
-        className="pt-16 pb-24 px-10 md:px-20 bg-gray-50 scroll-mt-32 md:scroll-mt-26"
+        className="pt-16 pb-24 px-14 md:px-24 xl:px-[10%] bg-gray-50 scroll-mt-32 md:scroll-mt-26"
       >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-black text-gray-950 mb-4 tracking-tight">인증 현황</h2>
-          <p className="text-gray-400 text-sm font-light mb-12">기술사업화지원단이 보유한 공인 인증 현황입니다.</p>
+        <div className="max-w-5xl mx-auto w-full text-center">
+          <h2 className="text-[32px] font-bold text-gray-950 mb-4 tracking-tighter">인증 현황</h2>
+          <p className="text-gray-400 font-light text-lg mb-12">기술사업화지원단이 보유한 공인 인증 현황입니다.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -238,9 +234,9 @@ const About = () => {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <h3 className="text-base font-bold text-gray-950 mb-1">{cert.title}</h3>
-                <p className="text-sm text-gray-500 font-light mb-3">{cert.subtitle}</p>
-                <p className="text-xs text-gray-400 font-light">{cert.detail}</p>
+                <h3 className="text-[18px] font-bold text-gray-950 mb-1 tracking-wide">{cert.title}</h3>
+                <p className="text-[14px] text-gray-500 font-light mb-3 tracking-wide">{cert.subtitle}</p>
+                <p className="text-xs text-gray-400 font-light tracking-wide">{cert.detail}</p>
                 <p className="text-xs text-gray-400 font-light mt-1">{cert.year}</p>
               </div>
             ))}

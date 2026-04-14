@@ -124,9 +124,9 @@ const Members = () => {
 
       {/* 2. 섹션 타이틀 */}
       <section className="pt-24 pb-10 text-center px-10 md:px-20">
-        <h2 className="text-3xl md:text-4xl font-black text-gray-950 mb-4 tracking-tight">함께하는 분</h2>
-        <p className="text-gray-400 text-sm font-light tracking-widest">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>
-        <p className="text-gray-400 text-xs font-light mt-2 max-w-xl mx-auto">기사단은 박사학위 또는 공인 국가전문자격을 보유한 전문가들로 구성되어 있습니다. 창업지원 공공기관 경력과 스타트업/중소기업 컨설팅 10년 이상의 경험을 바탕으로, 고객의 과제에 최적의 솔루션을 제공합니다.</p>
+        <h2 className="text-[32px] font-bold text-gray-950 mb-4 tracking-tighter">함께하는 분</h2>
+        <p className="text-gray-400 font-light text-lg">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>
+        <p className="text-[14px] text-gray-500 font-light tracking-wide mt-2 max-w-3xl mx-auto">기사단은 박사학위 또는 공인 국가전문자격을 보유한 전문가들로 구성되어 있습니다. 창업지원 공공기관 경력과 스타트업/중소기업 컨설팅 10년 이상의 경험을 바탕으로, 고객의 과제에 최적의 솔루션을 제공합니다.</p>
       </section>
 
       {/* 3. 멤버 카드 그리드 */}
@@ -148,7 +148,7 @@ const Members = () => {
 
               {/* 이름 | 직책 + 구분선 */}
               <div className="mt-6 pb-4 border-b border-gray-300">
-                <h3 className="text-lg font-black text-gray-950 tracking-tight">
+                <h3 className="text-[18px] font-bold text-gray-950 tracking-wide">
                   {member.name} &nbsp;｜&nbsp; {member.role}
                 </h3>
               </div>
@@ -156,7 +156,7 @@ const Members = () => {
               {/* 경력 */}
               <ul className="mt-5 space-y-0.5">
                 {member.career.map((line, i) => (
-                  <li key={i} className="text-[13px] text-gray-600 font-light flex items-start gap-1.5">
+                  <li key={i} className="text-[14px] text-gray-500 font-light tracking-wide flex items-start gap-1.5">
                     <span className="mt-0.75 shrink-0">·</span>
                     <span>{line}</span>
                   </li>
@@ -165,10 +165,10 @@ const Members = () => {
 
               {/* 전문분야 */}
               <div className="mt-6">
-                <p className="text-[13px] font-bold text-gray-800 mb-2">[전문분야]</p>
+                <p className="text-[14px] font-bold text-gray-950 tracking-wide mb-2">[전문분야]</p>
                 <ul className="space-y-0.5">
                   {member.specialty.map((s, i) => (
-                    <li key={i} className="text-[13px] text-gray-600 font-light flex items-start gap-1.5">
+                    <li key={i} className="text-[14px] text-gray-500 font-light tracking-wide flex items-start gap-1.5">
                       <span className="mt-0.75 shrink-0">·</span>
                       <span>{s}</span>
                     </li>

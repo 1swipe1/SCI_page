@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
 import logo from '../assets/logo3.png';
 import logoW from '../assets/logo_W.png';
 
 const Header = () => {
+  const { isAdmin } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileSub, setActiveMobileSub] = useState(null);
 
@@ -58,11 +59,6 @@ const Header = () => {
       setIsAtBottom(window.scrollY === 0);
     };
     handleScroll();
-    const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setIsAdmin(!!user);
-    };
-    checkUser();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location]);
@@ -106,13 +102,13 @@ const Header = () => {
           </div>
 
           {/* 2. 메인 네비게이션 */}
-          <nav className="hidden lg:flex grow h-full justify-center items-center gap-10 pl-36">
+          <nav className="hidden lg:flex grow h-full justify-center items-center gap-14">
             {menuConfig.map((item, idx) => (
               <div key={idx} className="relative h-full flex items-center">
                 <Link
                   to={item.path}
                   onClick={handleNavClick}
-                  className={`h-full flex items-center text-[14px] font-bold transition-all relative whitespace-nowrap ${
+                  className={`h-full flex items-center text-[13px] font-bold transition-all relative whitespace-nowrap ${
                     shouldShowWhite ? 'text-gray-900' : 'text-white'
                   } hover:text-black group`}
                 >
@@ -128,7 +124,7 @@ const Header = () => {
                         key={sIdx}
                         to={sub.path}
                         onClick={closeAllMenus}
-                        className="text-gray-500 hover:text-black text-[13px] font-medium transition-colors whitespace-nowrap"
+                        className="text-gray-500 hover:text-black text-[12px] font-medium transition-colors whitespace-nowrap"
                       >
                         {sub.name}
                       </Link>
@@ -140,11 +136,14 @@ const Header = () => {
           </nav>
 
           {/* 3. 우측 유틸리티 (너비 250px 고정) */}
-          <div className={`hidden lg:flex w-[250px] justify-end items-center text-[13px] font-bold tracking-tighter ${
+          <div className={`hidden lg:flex w-[250px] justify-center items-center gap-5 text-[13px] font-bold tracking-tighter ${
             shouldShowWhite ? 'text-gray-400' : 'text-white/70'
           }`}>
             {isAdmin ? (
-              <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+              <>
+                <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
+                <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+              </>
             ) : (
               <Link to="/login" onClick={handleNavClick} className="hover:text-black">LOGIN</Link>
             )}
@@ -227,7 +226,10 @@ const Header = () => {
           {/* 하단 로그인 */}
           <div className="px-6 py-6 border-t border-gray-100 flex gap-4 text-[13px] font-bold text-gray-400">
             {isAdmin ? (
-              <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+              <>
+                <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
+                <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+              </>
             ) : (
               <Link to="/login" onClick={handleNavClick} className="hover:text-gray-900">LOGIN</Link>
             )}
