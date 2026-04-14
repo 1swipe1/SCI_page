@@ -127,7 +127,7 @@ const BusinessDetail = () => {
               <button
                 key={idx}
                 onClick={() => setActiveSubTab(idx)}
-                className={`flex-1 min-w-fit px-4 pt-3 pb-4 text-[12px] md:text-[13px] font-medium transition-all whitespace-nowrap bg-white border-t-2 group ${
+                className={`flex-1 min-w-fit px-4 pt-1 pb-4 text-[12px] md:text-[13px] font-medium transition-all whitespace-nowrap bg-white border-t-2 group ${
                   activeSubTab === idx
                     ? 'border-gray-950 text-gray-950'
                     : 'border-gray-300 text-gray-400 hover:border-gray-950 hover:text-gray-950'

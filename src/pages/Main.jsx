@@ -53,7 +53,7 @@ const Main = () => {
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
       ),
       title: '기술창업 컨설팅',
-      desc: '예비창업부터 초기창업까지, 기술 기반 창업의 전 과정을 지원합니다. 사업계획서 작성, BM 설계, 정부지원사업 선정 컨설팅을 제공합니다.',
+      desc: '예비창업부터 초기창업까지, 기술 기반 창업의 전 과정을 지원합니다.사업계획서 작성, BM 설계,정부지원사업 선정 컨설팅을 제공합니다.',
     },
     {
       icon: (
@@ -162,12 +162,12 @@ const Main = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all group flex flex-col lg:h-80">
+              <Link to="/business" key={i} className="bg-white rounded-2xl p-10 hover:shadow-lg transition-all group flex flex-col items-start text-left lg:h-80">
                 <div className="text-gray-400 group-hover:text-gray-900 transition-colors mb-6">
                   {card.icon}
                 </div>
                 <h3 className="text-[18px] font-bold text-gray-950 mb-3 tracking-wide">{card.title}</h3>
-                <p className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide">{card.desc}</p>
+                <p className="text-[14px] text-gray-500 font-light leading-relaxed tracking-wide whitespace-pre-line text-justify">{card.desc}</p>
               </Link>
             ))}
           </div>
@@ -200,8 +200,10 @@ const Main = () => {
             {recentActivities.map((item, i) => (
               <div key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all flex flex-col w-75 h-80">
                 <span className="inline-block text-xs font-bold text-gray-400 tracking-widest uppercase">{item.tag}</span>
-                <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-[18px] font-bold text-gray-950 mb-3 tracking-wide leading-snug">{item.title}</h3>
+                <div className="h-1/2 flex items-end pb-4">
+                  <h3 className="text-[18px] font-bold text-gray-950 tracking-wide leading-snug">{item.title}</h3>
+                </div>
+                <div className="h-1/2 flex flex-col justify-start">
                   <p className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide">{item.desc}</p>
                 </div>
               </div>
