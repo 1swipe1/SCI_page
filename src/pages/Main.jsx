@@ -103,23 +103,13 @@ const Main = () => {
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-15">
               <div className="max-w-300 mx-auto w-full">
-              <div className="max-w-2xl">
-                  <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep">
+              <div className="max-w-2xl md:max-w-none">
+                  <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
                     {slide.title}
                   </h1>
-                  <p className="text-sm md:text-lg text-white/75 leading-relaxed font-light break-keep">
+                  <p className="text-sm md:text-lg text-white/75 leading-relaxed font-light break-keep md:whitespace-nowrap">
                     {slide.desc}
                   </p>
-                  <div className="mt-24">
-                    <Link
-                      to="/inquiry"
-                      onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center gap-2 text-white font-bold text-sm hover:text-white/70 transition-colors"
-                    >
-                      상담 문의하기
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
-                    </Link>
-                  </div>
               </div>
               </div>
             </div>
