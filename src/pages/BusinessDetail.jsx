@@ -113,9 +113,12 @@ const BusinessDetail = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">
-          사업 분야 소개
-        </h1>
+        <div className="relative text-center">
+          <p className="text-white/60 text-sm font-light tracking-[0.2em] mb-2">사업 분야 소개</p>
+          <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+            {area.subtitle}
+          </h1>
+        </div>
       </section>
 
       {/* 본문 */}
@@ -148,9 +151,6 @@ const BusinessDetail = () => {
               ))}
             </div>
           </div>
-
-          {/* 소제목 */}
-          <h2 className="text-2xl font-black text-gray-950 mb-4 tracking-tight">{area.subtitle}</h2>
 
           {/* 인용문 */}
           <div className="bg-gray-100 rounded-xl px-10 py-8 mb-10 text-center">

@@ -224,7 +224,7 @@ const NoticeDetail = () => {
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4">
           <button
             onClick={() => navigate('/notice')}
-            className="px-10 py-4 border-2 border-black text-black font-bold rounded-full hover:bg-gray-100 transition-all shadow-lg"
+            className="px-6 py-2.5 border border-gray-950 text-gray-950 text-sm font-bold rounded-full hover:bg-gray-950 hover:text-white transition-all"
           >
             목록으로 돌아가기
           </button>

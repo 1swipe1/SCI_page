@@ -40,7 +40,7 @@ const Header = () => {
       path: '/gallery',
       subItems: [
         { name: '사업 분야 소개', path: '/gallery' },
-        { name: '주요 수행 실적', path: '/gallery#lecture' }
+        { name: '조합의 지난 활동', path: '/gallery#lecture' }
       ]
     },
     {

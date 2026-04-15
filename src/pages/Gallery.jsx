@@ -37,14 +37,12 @@ const Gallery = () => {
       id: 4,
       title: '중소벤처기업 대상 공공연수의 적정 비용 기준 연구',
       tags: ['연구용역', '정책연구', '원가분석'],
-      period: '2025년',
       summary: '중소벤처기업 재직자 대상 공공연수 사업의 적정 비용 기준을 수립하기 위한 연구용역을 수행하였습니다. 연수사업 현황 분석, 유관기관 사례 비교, 원가모형 구축 및 단가 산정, 정책 활용 전략 도출까지 전 과정을 수행하였습니다.',
     },
     {
       id: 5,
       title: 'OO대학교 창업중심대학 창업기업 성과점검 및 컨설팅 용역',
       tags: ['컨설팅', '창업기업진단', '대학'],
-      period: '2025년',
       summary: 'OO대학교 창업중심대학 선정 창업기업 70개사를 대상으로 전문가 1:1 심층 진단 및 컨설팅을 총괄 운영하였습니다. 기업별 성과 달성도 점검, 비즈니스모델 변화 진단, 차년도 성장전략 수립을 지원하고 종합 결과보고서를 작성하였습니다.',
     },
   ];
@@ -119,7 +117,7 @@ const Gallery = () => {
               activeTab === 'lecture' ? 'text-white border-b-2 border-white' : 'text-white/30 hover:text-white/60'
             }`}
           >
-            주요 수행 실적
+            조합의 지난 활동
           </button>
         </div>
       </nav>
@@ -128,28 +126,35 @@ const Gallery = () => {
       <section className="py-20 px-10 md:px-20">
         <div className="max-w-5xl mx-auto">
 
-        {/* === 탭 1: 사업 분야 소개 === */}
+        {/* === 탭 1: 주요 수행 실적 === */}
         {activeTab === 'lecture' && (
           <div>
-            {/* 주요 수행 실적 */}
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">주요 수행 실적</h2>
+              <h2 className="text-3xl font-black text-gray-950 mb-3 tracking-tight">조합의 지난 활동</h2>
               <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
             </div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
               {projects.map((project) => (
-                <div key={project.id} className={`rounded-2xl border border-gray-200 overflow-hidden px-6 py-4 hover:border-gray-400 transition-all flex flex-col justify-center min-h-40 ${project.id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-                  <div className="flex flex-wrap gap-2 mb-2">
+                <div key={project.id} className="flex flex-col">
+                  {/* 이미지 플레이스홀더 */}
+                  <div className="w-full aspect-4/3 bg-gray-200 mb-2" />
+                  {/* 태그 */}
+                  <div className="flex flex-wrap gap-1.5 mb-1.5">
                     {project.tags.map((tag, i) => (
-                      <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase border border-gray-200 rounded-full px-3 py-0.5">{tag}</span>
+                      <span key={i} className="text-[11px] text-gray-400 font-light tracking-widest uppercase">{tag}{i < project.tags.length - 1 && ' ·'}</span>
                     ))}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-950 mb-1 leading-snug">{project.title}</h3>
-                  {project.period && (
-                    <div className="text-xs text-gray-400 font-light mb-2">기간: {project.period}</div>
-                  )}
-                  <p className="text-sm text-gray-500 font-light leading-snug break-keep">{project.summary}</p>
+                  {/* 제목 + 구분선 */}
+                  <div className="h-12 flex items-center pb-3 border-b border-gray-300 mb-4">
+                    <h3 className="text-[16px] font-bold text-gray-950 leading-snug">{project.title}</h3>
+                  </div>
+                  {/* 요약 */}
+                  <p className="text-[13px] text-gray-500 font-light leading-relaxed break-keep flex-1 text-justify">{project.summary}</p>
+                  {/* VIEW MORE */}
+                  <div className="mt-6">
+                    <span className="inline-block px-4 py-2 text-gray-950 text-xs font-bold tracking-widest uppercase rounded-full border border-gray-950">VIEW MORE</span>
+                  </div>
                 </div>
               ))}
             </div>
