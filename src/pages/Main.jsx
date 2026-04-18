@@ -101,7 +101,7 @@ const Main = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-15">
+            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-10">
               <div className="max-w-300 mx-auto w-full">
               <div className="max-w-2xl md:max-w-none">
                   <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
@@ -129,7 +129,7 @@ const Main = () => {
       </section>
 
       {/* === 2. 핵심 서비스 카드 (기획안 §3) === */}
-      <section className="py-24 px-10 md:px-20 xl:px-[10%] bg-gray-100">
+      <section className="py-36 px-10 md:px-20 xl:px-[10%] bg-gray-100">
         <div className="max-w-300 mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">핵심 서비스</h2>

@@ -24,13 +24,25 @@ alter table notices add column if not exists attachment_url  text;
 alter table notices add column if not exists attachment_name text;
 
 create table if not exists inquiries (
-  id         bigint generated always as identity primary key,
-  name       text,
-  email      text,
-  subject    text,
-  message    text,
-  created_at timestamptz default now()
+  id           bigint generated always as identity primary key,
+  name         text,
+  organization text,
+  phone        text,
+  email        text,
+  subject      text,
+  message      text,
+  reply        text,
+  replied_at   timestamptz,
+  created_at   timestamptz default now()
 );
+
+-- 기존 테이블에 컬럼이 없는 경우 추가
+alter table inquiries add column if not exists organization     text;
+alter table inquiries add column if not exists phone            text;
+alter table inquiries add column if not exists reply            text;
+alter table inquiries add column if not exists replied_at       timestamptz;
+alter table inquiries add column if not exists attachment_url   text;
+alter table inquiries add column if not exists attachment_name  text;
 
 -- ----------------------------------------------------------------
 -- 2. RLS (Row Level Security) 활성화
@@ -50,12 +62,21 @@ create policy "notices_delete" on notices for delete using (auth.role() = 'authe
 -- 문의는 누구나 등록 가능
 create policy "inquiries_insert" on inquiries for insert with check (true);
 
+-- 로그인한 유저(어드민)만 문의 조회/수정/삭제 허용
+create policy "inquiries_select" on inquiries for select using (auth.role() = 'authenticated');
+create policy "inquiries_update" on inquiries for update using (auth.role() = 'authenticated');
+create policy "inquiries_delete" on inquiries for delete using (auth.role() = 'authenticated');
+
 -- ----------------------------------------------------------------
 -- Storage 버킷 (첨부파일)
 -- ----------------------------------------------------------------
 
 insert into storage.buckets (id, name, public)
 values ('notice-attachments', 'notice-attachments', true)
+on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('inquiry-attachments', 'inquiry-attachments', true)
 on conflict (id) do nothing;
 
 -- 누구나 파일 읽기 허용
@@ -68,6 +89,16 @@ create policy "notice_attach_upload" on storage.objects
 
 create policy "notice_attach_delete" on storage.objects
   for delete using (bucket_id = 'notice-attachments' and auth.role() = 'authenticated');
+
+-- 문의 첨부파일: 누구나 업로드/읽기, 어드민만 삭제
+create policy "inquiry_attach_read" on storage.objects
+  for select using (bucket_id = 'inquiry-attachments');
+
+create policy "inquiry_attach_upload" on storage.objects
+  for insert with check (bucket_id = 'inquiry-attachments');
+
+create policy "inquiry_attach_delete" on storage.objects
+  for delete using (bucket_id = 'inquiry-attachments' and auth.role() = 'authenticated');
 
 -- ----------------------------------------------------------------
 -- 3. 공지사항 더미 데이터

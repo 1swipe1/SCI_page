@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from "../lib/supabase";
 
 const Admin = () => {
@@ -38,8 +39,14 @@ const Admin = () => {
     <div className="bg-white min-h-screen">
 
       {/* 히어로 섹션 */}
-      <section className="h-[35vh] min-h-72 bg-black flex items-center justify-center">
+      <section className="h-[35vh] min-h-72 bg-black flex flex-col items-center justify-center gap-6">
         <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">공지사항 작성</h1>
+        <Link
+          to="/admin/inquiries"
+          className="px-6 py-2.5 border border-white/30 text-white/70 text-[13px] font-bold tracking-widest uppercase hover:border-white hover:text-white transition-all rounded-full"
+        >
+          상담 문의 관리
+        </Link>
       </section>
 
       {/* 작성 폼 */}

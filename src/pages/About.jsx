@@ -132,8 +132,8 @@ const About = () => {
               <p>다섯째, 정책자금 확보를 위한 정보 제공과 신청 지원, 벤처기업인증·이노비즈 인증 등 각종 인증 획득을 국가전문자격 경영지도사가 합법적으로 대행해 드립니다.</p>
               <p>기술사업화지원단은 틀에 박힌 형식적인 컨설팅보다는 기업 현장에서 즉시 활용 가능한 구체적인 전략 수립과 이행계획을 제시하여, 컨설팅 이후 뚜렷한 가시적 성과를 도출하는 데 주력하고 있습니다.</p>
               <p className="text-gray-900 font-bold mt-6">기술에 전략을, 창업에 성장을.</p>
-              <p>창업기업과 중소기업의 진정한 성장 파트너가 되기 위하여, 기술사업화지원단은 최선의 노력을 다하겠습니다.</p>
-              <p className="text-gray-900 font-medium text-right mt-4 tracking-wide">과학기술인협동조합 기술사업화지원단 임직원 일동</p>
+              <p className="leading-snug">창업기업과 중소기업의 진정한 성장 파트너가 되기 위하여, 기술사업화지원단은 최선의 노력을 다하겠습니다.</p>
+              <p className="text-gray-400 font-medium text-right leading-snug tracking-wide">과학기술인협동조합 기술사업화지원단 임직원 일동</p>
             </div>
 
             {/* 더보기 버튼 (모바일만) */}
@@ -163,7 +163,7 @@ const About = () => {
             alt="Intro"
             className="w-full h-40 object-cover mb-10"
           />
-          <div className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide space-y-4">
+          <div className="text-[14px] text-gray-500 font-light leading-snug break-keep tracking-wide space-y-4">
             <p><strong className="font-bold text-gray-900">기술사업화지원단(기사단)</strong>은 기술창업, 기술사업화, 기업가정신 교육, 스케일업, 투자유치 분야의 국내 최고 전문가들이 모여 설립한 과학기술인협동조합입니다.</p>
 
             <div className={`space-y-4 md:block ${introExpanded ? 'block' : 'hidden'}`}>

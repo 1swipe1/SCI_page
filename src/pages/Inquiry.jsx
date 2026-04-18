@@ -1,115 +1,232 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
+import FileDropZone from '../components/FileDropZone';
 
 const Inquiry = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
+    organization: '',
+    phone: '',
     email: '',
     subject: '',
     message: ''
   });
+  const [attachmentFile, setAttachmentFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchProfile = async () => {
+      const { data } = await supabase
+        .from('profiles')
+        .select('full_name, organization')
+        .eq('id', user.id)
+        .single();
+      setFormData((prev) => ({
+        ...prev,
+        email: user.email || '',
+        name: data?.full_name || '',
+        organization: data?.organization || '',
+      }));
+    };
+    fetchProfile();
+  }, [user]);
+
+  const formatPhone = (value) => {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    if (digits.length < 4) return digits;
+    if (digits.length < 8) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  };
+
+  const validateEmail = (value) => {
+    if (!value) return '';
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : '올바른 이메일 형식을 입력해주세요.';
+  };
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhone(e.target.value);
+    setFormData({ ...formData, phone: formatted });
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setFormData({ ...formData, email: value });
+    setErrors({ ...errors, email: validateEmail(value) });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const emailError = validateEmail(formData.email);
+    if (emailError) { setErrors({ email: emailError }); return; }
     setIsSubmitting(true);
-    
-    // 수파베이스 'inquiries' 테이블에 저장 로직 (필요 시)
-    const { error } = await supabase.from('inquiries').insert([formData]);
-    
+
+    let attachment_url = null;
+    let attachment_name = null;
+
+    if (attachmentFile) {
+      const ext = attachmentFile.name.split('.').pop();
+      const path = `${Date.now()}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from('inquiry-attachments')
+        .upload(path, attachmentFile);
+
+      if (uploadError) {
+        alert('파일 업로드에 실패했습니다: ' + uploadError.message);
+        setIsSubmitting(false);
+        return;
+      }
+
+      const { data: urlData } = supabase.storage
+        .from('inquiry-attachments')
+        .getPublicUrl(path);
+
+      attachment_url = urlData.publicUrl;
+      attachment_name = attachmentFile.name;
+    }
+
+    const { error } = await supabase.from('inquiries').insert([{ ...formData, attachment_url, attachment_name }]);
+
     if (!error) {
       alert('문의가 성공적으로 접수되었습니다.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', organization: '', phone: '', email: '', subject: '', message: '' });
+      setAttachmentFile(null);
     } else {
       alert('오류가 발생했습니다. 다시 시도해주세요.');
     }
     setIsSubmitting(false);
   };
 
-  return (
-    <div className="bg-white min-h-screen">
-      {/* === 1. 상단 히어로 섹션 === */}
-      <section className="relative h-[35vh] min-h-72 overflow-hidden flex items-center justify-center bg-black">
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">
-          문의하기
-        </h1>
-      </section>
+  const inputClass = "w-full border-b border-gray-300 py-3 px-0 text-[14px] text-gray-800 placeholder-gray-300 focus:border-gray-800 outline-none transition-colors bg-transparent";
+  const labelClass = "block text-[14px] font-bold text-gray-800 mb-2 tracking-wide";
 
-      {/* === 2. 문의 폼 섹션 === */}
-      <section className="py-24 px-6 max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-black text-gray-950 mb-4 tracking-tighter italic">Get in Touch</h2>
-          <p className="text-gray-500 font-light">궁금하신 점을 남겨주시면 전문가가 직접 답변해 드립니다.</p>
-          <div className="w-12 h-1 bg-[#1a4a9c] mx-auto mt-6"></div>
+  if (!user) {
+    return (
+      <div className="bg-white min-h-screen flex items-center justify-center px-6 pb-24">
+        <div className="text-center">
+          <h1 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">상담 문의</h1>
+          <p className="text-[14px] text-gray-400 font-light mb-10">로그인 후 이용 가능한 서비스입니다.</p>
+          <button
+            onClick={() => navigate('/login')}
+            className="px-10 py-3.5 bg-gray-950 text-white text-[14px] font-bold tracking-widest hover:bg-gray-700 transition-colors"
+          >
+            로그인하기
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white min-h-screen py-24 px-6">
+      <div className="max-w-xl mx-auto">
+
+        {/* 타이틀 */}
+        <div className="text-center mb-14">
+          <h1 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">상담 문의</h1>
+          <p className="text-[14px] text-gray-400 font-light">궁금하신 점을 남겨주시면 전문가가 직접 답변해드립니다.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
+
+          {/* 이름 + 소속 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* 성함 */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-black uppercase tracking-widest text-gray-400">Name</label>
-              <input 
+            <div>
+              <label className={labelClass}>이름</label>
+              <input
                 type="text"
                 required
-                className="w-full border-b-2 border-gray-100 p-4 focus:border-[#1a4a9c] outline-none transition-all font-medium rounded-none bg-gray-50/30"
-                placeholder="성함을 입력하세요"
+                className={inputClass}
+                placeholder="이름을 입력해주세요."
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
             </div>
-            {/* 이메일 */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-black uppercase tracking-widest text-gray-400">Email Address</label>
-              <input 
-                type="email"
-                required
-                className="w-full border-b-2 border-gray-100 p-4 focus:border-[#1a4a9c] outline-none transition-all font-medium rounded-none bg-gray-50/30"
+            <div>
+              <label className={labelClass}>소속</label>
+              <input
+                type="text"
+                className={inputClass}
+                placeholder="소속을 입력해주세요."
+                value={formData.organization}
+                onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+              />
+            </div>
+          </div>
+
+          {/* 연락처 + 이메일 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label className={labelClass}>연락처</label>
+              <input
+                type="tel"
+                className={inputClass}
+                placeholder="010-0000-0000"
+                value={formData.phone}
+                onChange={handlePhoneChange}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>이메일</label>
+              <input
+                type="text"
+                className={`${inputClass} ${errors.email ? 'border-red-400 focus:border-red-400' : ''}`}
                 placeholder="example@email.com"
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={handleEmailChange}
               />
+              {errors.email && <p className="mt-1.5 text-[12px] text-red-400">{errors.email}</p>}
             </div>
           </div>
 
           {/* 제목 */}
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-black uppercase tracking-widest text-gray-400">Subject</label>
-            <input 
+          <div>
+            <label className={labelClass}>제목</label>
+            <input
               type="text"
               required
-              className="w-full border-b-2 border-gray-100 p-4 focus:border-[#1a4a9c] outline-none transition-all font-medium rounded-none bg-gray-50/30"
-              placeholder="문의 제목을 입력하세요"
+              className={inputClass}
+              placeholder="문의 제목을 입력해주세요."
               value={formData.subject}
-              onChange={(e) => setFormData({...formData, subject: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
             />
           </div>
 
-          {/* 내용 */}
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-black uppercase tracking-widest text-gray-400">Message</label>
-            <textarea 
-              rows="6"
+          {/* 문의 내용 */}
+          <div>
+            <label className={labelClass}>문의 내용</label>
+            <textarea
+              rows="7"
               required
-              className="w-full border-b-2 border-gray-100 p-4 focus:border-[#1a4a9c] outline-none transition-all font-medium rounded-none bg-gray-50/30 resize-none"
-              placeholder="상세 내용을 입력해 주세요"
+              className="w-full border border-gray-300 p-4 text-[14px] text-gray-800 placeholder-gray-300 focus:border-gray-800 outline-none transition-colors bg-transparent resize-none"
+              placeholder="문의 내용을 입력해주세요."
               value={formData.message}
-              onChange={(e) => setFormData({...formData, message: e.target.value})}
-            ></textarea>
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            />
           </div>
 
-          {/* 전송 버튼 */}
-          <div className="pt-6">
-            <button 
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-5 bg-gray-950 text-white font-black tracking-[0.3em] uppercase hover:bg-[#1a4a9c] transition-all rounded-none disabled:bg-gray-400"
-            >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
+          {/* 첨부파일 */}
+          <div>
+            <label className={labelClass}>첨부파일 <span className="text-gray-400 font-light text-[12px]">(선택)</span></label>
+            <FileDropZone file={attachmentFile} onFileChange={setAttachmentFile} />
           </div>
+
+          {/* 제출 버튼 */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-4 bg-gray-950 text-white text-[15px] font-bold tracking-widest hover:bg-gray-700 transition-colors disabled:bg-gray-400"
+          >
+            {isSubmitting ? '접수 중...' : '문의하기'}
+          </button>
+
         </form>
-      </section>
-
+      </div>
     </div>
   );
 };

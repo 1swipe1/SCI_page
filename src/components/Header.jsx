@@ -6,7 +6,7 @@ import logo from '../assets/logo3.png';
 import logoW from '../assets/logo_W.png';
 
 const Header = () => {
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -16,7 +16,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMainPage = location.pathname === '/';
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/forgot-password';
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/forgot-password' || location.pathname === '/inquiry';
 
   const menuConfig = [
     {
@@ -36,11 +36,11 @@ const Header = () => {
       ]
     },
     {
-      title: '조합활동',
+      title: '조합 활동',
       path: '/gallery',
       subItems: [
         { name: '사업 분야 소개', path: '/gallery' },
-        { name: '조합의 지난 활동', path: '/gallery#lecture' }
+        { name: '조합 활동', path: '/gallery#lecture' }
       ]
     },
     {
@@ -144,6 +144,12 @@ const Header = () => {
             {isAdmin ? (
               <>
                 <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
+                <Link to="/admin/inquiries" onClick={handleNavClick} className="hover:text-black">문의사항</Link>
+                <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
+              </>
+            ) : user ? (
+              <>
+                <Link to="/mypage" onClick={handleNavClick} className="hover:text-black">MY PAGE</Link>
                 <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
               </>
             ) : (
