@@ -65,10 +65,10 @@ const Main = () => {
 
   /* --- 기획안 §4 실적 숫자 --- */
   const stats = [
-    { number: '11명+', label: '전문가 조합원', desc: '박사학위 또는 국가전문자격 보유' },
-    { number: '10년+', label: '평균 컨설팅 경력', desc: '스타트업/중소기업 컨설팅 분야' },
-    { number: '130개+', label: '기업 BM 진단/컨설팅', desc: '캠퍼스타운·창업중심대학 등' },
-    { number: '3개+', label: '연구용역 수행', desc: '공공기관, 대학교 등' },
+    { number: '11+', label: '전문가 조합원', desc: '박사학위 또는 국가전문자격 보유' },
+    { number: '10+', label: '평균 컨설팅 경력', desc: '스타트업/중소기업 컨설팅 분야' },
+    { number: '130+', label: '기업 BM 진단/컨설팅', desc: '캠퍼스타운·창업중심대학 등' },
+    { number: '3+', label: '연구용역 수행', desc: '공공기관, 대학교 등' },
   ];
 
   /* --- 기획안 §5 최근 활동 프리뷰 --- */
@@ -94,7 +94,7 @@ const Main = () => {
     <div className="bg-white min-h-screen">
 
       {/* === 1. 히어로 슬라이더 === */}
-      <section className="relative h-screen min-h-[700px] overflow-hidden">
+      <section className="relative h-screen min-h-175 overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
@@ -103,21 +103,21 @@ const Main = () => {
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-10">
               <div className="max-w-300 mx-auto w-full">
-              <div className="max-w-2xl md:max-w-none">
+                <div className="max-w-2xl md:max-w-none">
                   <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
                     {slide.title}
                   </h1>
                   <p className="text-sm md:text-lg text-white/75 leading-relaxed font-light break-keep md:whitespace-nowrap">
                     {slide.desc}
                   </p>
-              </div>
+                </div>
               </div>
             </div>
           </div>
         ))}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2.5 h-2.5 rounded-full transition-all ${currentSlide === i ? 'bg-white' : 'bg-white/40'}`}></button>
+            <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2.5 h-2.5 rounded-full transition-all ${currentSlide === i ? 'bg-white' : 'bg-white/40'}`} />
           ))}
         </div>
         <button onClick={prevSlide} className="hidden md:block absolute left-10 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-all z-20">
@@ -128,67 +128,127 @@ const Main = () => {
         </button>
       </section>
 
-      {/* === 2. 핵심 서비스 카드 (기획안 §3) === */}
-      <section className="py-36 px-10 md:px-20 xl:px-[10%] bg-gray-100">
-        <div className="max-w-300 mx-auto w-full">
-          <div className="text-center mb-16">
-            <h2 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">핵심 서비스</h2>
-            <p className="text-gray-400 font-light text-lg">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="bg-white rounded-2xl p-10 hover:shadow-lg transition-all group flex flex-col items-start text-left lg:h-80">
-                <div className="text-gray-400 group-hover:text-gray-900 transition-colors mb-6">
-                  {card.icon}
-                </div>
-                <h3 className="text-[18px] font-bold text-gray-950 mb-3 tracking-wide">{card.title}</h3>
-                <p className="text-[14px] text-gray-500 font-light leading-relaxed tracking-wide whitespace-pre-line text-justify">{card.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* === 2. 최근 활동 — 좌측 텍스트 + 우측 이미지 오버레이 카드 === */}
+      <section className="py-36 px-10 md:px-20 xl:px-[10%] bg-white">
+        <div className="max-w-300 mx-auto w-full flex flex-col md:flex-row gap-10 items-start">
 
-      {/* === 3. 실적 숫자 (기획안 §4) === */}
-      <section className="px-10 md:px-20 xl:px-[10%] bg-gray-950 h-62.5 flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-            {stats.map((stat, i) => (
-              <div key={i}>
-                <p className="text-4xl md:text-5xl font-black text-white mb-2">{stat.number}</p>
-                <p className="text-sm font-bold text-white/80 mb-1">{stat.label}</p>
-                <p className="text-xs text-white/40 font-light">{stat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* === 4. 최근 활동 프리뷰 (기획안 §5) === */}
-      <section className="py-24 px-10 md:px-20 xl:px-[10%] bg-gray-100">
-        <div className="max-w-300 mx-auto w-full">
-          <div className="text-center mb-16">
-            <h2 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">최근 활동</h2>
-            <p className="text-gray-400 font-light text-lg">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-5">
-            {recentActivities.map((item, i) => (
-              <div key={i} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-all flex flex-col w-75 h-80">
-                <span className="inline-block text-xs font-bold text-gray-400 tracking-widest uppercase">{item.tag}</span>
-                <div className="h-1/2 flex items-end pb-4">
-                  <h3 className="text-[18px] font-bold text-gray-950 tracking-wide leading-snug">{item.title}</h3>
-                </div>
-                <div className="h-1/2 flex flex-col justify-start">
-                  <p className="text-[14px] text-gray-500 font-light leading-relaxed break-keep tracking-wide">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-block px-8 py-3.5 text-gray-950 font-bold text-sm uppercase tracking-widest rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
+          {/* 좌측: 타이틀 + 버튼 */}
+          <div className="md:w-52 shrink-0 flex flex-col gap-6">
+            <div>
+              <h2 className="text-[28px] font-bold text-gray-950 tracking-tighter mb-2">최근 활동</h2>
+              <p className="text-[13px] text-gray-400 font-light whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+            </div>
+            <Link
+              to="/gallery#lecture"
+              onClick={() => window.scrollTo(0, 0)}
+              className="self-start px-5 py-2 text-[12px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
+            >
               전체 활동 보기
             </Link>
           </div>
+
+          {/* 우측: 이미지 오버레이 카드 3개 */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-[70%] ml-auto">
+            {recentActivities.map((item, i) => (
+              <Link
+                to="/gallery#lecture"
+                key={i}
+                onClick={() => window.scrollTo(0, 0)}
+                className="group relative rounded-2xl overflow-hidden h-88 flex flex-col justify-between p-5"
+              >
+                {/* 배경 이미지 */}
+                <img
+                  src={slides[i % slides.length].img}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* 어두운 그라데이션 오버레이 */}
+                <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/75" />
+
+                {/* 태그 (상단) */}
+                <div className="relative z-10">
+                  <span className="inline-block px-3 py-1 text-[11px] font-bold text-white bg-black/40 rounded-full tracking-widest">
+                    {item.tag}
+                  </span>
+                </div>
+
+                {/* 제목 + 설명 (하단) */}
+                <div className="relative z-10">
+                  <h3 className="text-[15px] font-bold text-white leading-snug mb-1.5 break-keep">{item.title}</h3>
+                  <p className="text-[12px] text-white/70 font-light leading-relaxed break-keep line-clamp-3">{item.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* === 3. 조합 소개 — 좌측 라벨 + 우측 숫자 === */}
+      <section className="relative pt-14 pb-44 px-10 md:px-20 xl:px-[10%] overflow-hidden">
+        {/* 배경 이미지 + 오버레이 */}
+        <img
+          src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
+          alt="background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="relative z-10 max-w-300 mx-auto w-full flex flex-col md:flex-row items-start gap-10">
+
+          {/* 좌측: 라벨 */}
+          <div className="md:w-56 shrink-0">
+            <h2 className="text-[22px] font-bold text-white tracking-tighter mb-3">조합 소개</h2>
+            <p className="text-[12px] text-white/50 font-light leading-relaxed break-keep">과학기술인협동조합은 a 바탕으로<br/>신뢰성있는 서비스를 제공합니다.</p>
+          </div>
+
+          {/* 우측: 통계 */}
+          <div className="ml-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {stats.map((stat, i) => (
+              <div key={i}>
+                <p className="text-4xl md:text-5xl font-light text-white mb-1">{stat.number}</p>
+                <p className="text-[12px] font-bold text-white/70 mb-0.5">{stat.label}</p>
+                <p className="text-[11px] text-white/35 font-light">{stat.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* === 4. 핵심 서비스 — 좌측 정렬 헤딩 + 카드 그리드 === */}
+      <section className="pt-16 pb-32 px-10 md:px-20 xl:px-[10%] bg-gray-100">
+        <div className="max-w-300 mx-auto w-full">
+
+          {/* 헤딩 */}
+          <div className="mb-20">
+            <h2 className="text-[26px] font-bold text-gray-950 tracking-tighter mb-2">핵심 서비스</h2>
+            <p className="text-[13px] text-gray-400 font-light">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+          </div>
+
+          {/* 카드 그리드 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {serviceCards.map((card, i) => (
+              <Link to="/business" key={i} className="relative bg-white py-8 px-10 min-h-96 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start justify-center">
+                <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">
+                  {card.icon}
+                </div>
+                <h3 className="w-full text-left text-[16px] font-bold text-gray-950 mb-4 tracking-wide">{card.title}</h3>
+                <p className="w-full text-left text-[13px] text-gray-400 font-light leading-relaxed">{card.desc}</p>
+              </Link>
+            ))}
+          </div>
+
+          {/* 하단 버튼 */}
+          <div className="text-center mt-12">
+            <Link
+              to="/inquiry"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-block px-10 py-3.5 bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-full hover:bg-gray-700 transition-all"
+            >
+              상담 문의
+            </Link>
+          </div>
+
         </div>
       </section>
 
