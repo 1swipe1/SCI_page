@@ -101,13 +101,13 @@ const Main = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[10%] pt-10">
-              <div className="max-w-300 mx-auto w-full">
+            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[15.625%] pt-10">
+              <div className="max-w-[1320px] mx-auto w-full">
                 <div className="max-w-2xl md:max-w-none">
-                  <h1 className="text-3xl md:text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
+                  <h1 className="text-3xl md:text-[3.125vw] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
                     {slide.title}
                   </h1>
-                  <p className="text-sm md:text-lg text-white/75 leading-relaxed font-light break-keep md:whitespace-nowrap">
+                  <p className="text-sm md:text-[0.9375vw] text-white/75 leading-relaxed font-light break-keep md:whitespace-nowrap">
                     {slide.desc}
                   </p>
                 </div>
@@ -129,14 +129,14 @@ const Main = () => {
       </section>
 
       {/* === 2. 최근 활동 — 좌측 텍스트 + 우측 이미지 오버레이 카드 === */}
-      <section className="py-36 px-10 md:px-20 xl:px-[10%] bg-white">
-        <div className="max-w-300 mx-auto w-full flex flex-col md:flex-row gap-10 items-start">
+      <section className="py-36 px-10 md:px-20 xl:px-[15.625%] bg-white">
+        <div className="w-full flex flex-col md:flex-row gap-10 items-start">
 
           {/* 좌측: 타이틀 + 버튼 */}
-          <div className="md:w-52 shrink-0 flex flex-col gap-6">
+          <div className="md:w-52 shrink-0 flex flex-col gap-15">
             <div>
-              <h2 className="text-[28px] font-bold text-gray-950 tracking-tighter mb-2">최근 활동</h2>
-              <p className="text-[13px] text-gray-400 font-light whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+              <h2 className="text-[1.667vw] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '1.042vw'}}>최근 활동</h2>
+              <p className="text-[0.625vw] text-gray-400 font-light whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
               to="/gallery#lecture"
@@ -148,13 +148,14 @@ const Main = () => {
           </div>
 
           {/* 우측: 이미지 오버레이 카드 3개 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-[70%] ml-auto">
+          <div className="flex flex-1 justify-end" style={{gap: '0.573%'}}>
             {recentActivities.map((item, i) => (
               <Link
                 to="/gallery#lecture"
                 key={i}
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-2xl overflow-hidden h-88 flex flex-col justify-between p-5"
+                className="group relative rounded-xl overflow-hidden flex flex-col aspect-3/4"
+                style={{width: 'min(300px, calc((100% - 20px) / 3))', flexShrink: 1, paddingLeft: '1.563vw', paddingRight: '1.563vw', paddingTop: '1.563vw', paddingBottom: '1.563vw'}}
               >
                 {/* 배경 이미지 */}
                 <img
@@ -164,19 +165,27 @@ const Main = () => {
                 />
                 {/* 어두운 그라데이션 오버레이 */}
                 <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/75" />
+                {/* 검정 오퍼시티 60% */}
+                <div className="absolute inset-0 bg-black/60" />
 
                 {/* 태그 (상단) */}
                 <div className="relative z-10">
-                  <span className="inline-block px-3 py-1 text-[11px] font-bold text-white bg-black/40 rounded-full tracking-widest">
+                  <span className="text-[0.625vw] font-bold text-white tracking-widest">
                     {item.tag}
                   </span>
                 </div>
 
-                {/* 제목 + 설명 (하단) */}
-                <div className="relative z-10">
-                  <h3 className="text-[15px] font-bold text-white leading-snug mb-1.5 break-keep">{item.title}</h3>
-                  <p className="text-[12px] text-white/70 font-light leading-relaxed break-keep line-clamp-3">{item.desc}</p>
-                </div>
+                {/* 제목 */}
+                <h3 className="absolute z-10 text-[0.9375vw] font-bold text-white leading-snug break-keep"
+                  style={{top: '13.021vw', left: '1.563vw', right: '1.563vw', transform: 'translateY(-50%)'}}>
+                  {item.title}
+                </h3>
+
+                {/* 설명 — 상단에서 정확히 250px(13.021vw) */}
+                <p className="absolute z-10 text-[0.729vw] text-white/70 font-light leading-relaxed break-keep line-clamp-3"
+                  style={{top: '14.583vw', left: '1.563vw', right: '1.563vw'}}>
+                  {item.desc}
+                </p>
               </Link>
             ))}
           </div>
@@ -185,7 +194,7 @@ const Main = () => {
       </section>
 
       {/* === 3. 조합 소개 — 좌측 라벨 + 우측 숫자 === */}
-      <section className="relative pt-14 pb-44 px-10 md:px-20 xl:px-[10%] overflow-hidden">
+      <section className="relative pt-14 pb-44 px-10 md:px-20 xl:px-[15.625%] overflow-hidden">
         {/* 배경 이미지 + 오버레이 */}
         <img
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
@@ -193,21 +202,24 @@ const Main = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 max-w-300 mx-auto w-full flex flex-col md:flex-row items-start gap-10">
+        <div className="relative z-10 max-w-[1320px] mx-auto w-full flex flex-col md:flex-row items-start gap-10">
 
           {/* 좌측: 라벨 */}
           <div className="md:w-56 shrink-0">
-            <h2 className="text-[22px] font-bold text-white tracking-tighter mb-3">조합 소개</h2>
-            <p className="text-[12px] text-white/50 font-light leading-relaxed break-keep">과학기술인협동조합은 a 바탕으로<br/>신뢰성있는 서비스를 제공합니다.</p>
+            <h2 className="text-[1.667vw] font-bold text-white tracking-tighter" style={{marginBottom: '1.042vw'}}>조합 소개</h2>
+            <p className="text-[0.625vw] text-white/50 font-light leading-relaxed break-keep">과학기술인협동조합은 a 바탕으로<br/>신뢰성있는 서비스를 제공합니다.</p>
           </div>
 
           {/* 우측: 통계 */}
           <div className="ml-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, i) => (
               <div key={i}>
-                <p className="text-4xl md:text-5xl font-light text-white mb-1">{stat.number}</p>
-                <p className="text-[12px] font-bold text-white/70 mb-0.5">{stat.label}</p>
-                <p className="text-[11px] text-white/35 font-light">{stat.desc}</p>
+                <p className="font-bold text-white mb-1">
+                  <span style={{fontSize: '3.333vw'}}>{stat.number.replace('+', '')}</span>
+                  <span style={{fontSize: '2.5vw'}}>+</span>
+                </p>
+                <p className="font-bold text-white/70 mb-0.5" style={{fontSize: '0.729vw'}}>{stat.label}</p>
+                <p className="text-white/35 font-light" style={{fontSize: '0.625vw'}}>{stat.desc}</p>
               </div>
             ))}
           </div>
@@ -216,24 +228,24 @@ const Main = () => {
       </section>
 
       {/* === 4. 핵심 서비스 — 좌측 정렬 헤딩 + 카드 그리드 === */}
-      <section className="pt-16 pb-32 px-10 md:px-20 xl:px-[10%] bg-gray-100">
-        <div className="max-w-300 mx-auto w-full">
+      <section className="pt-16 pb-32 px-10 md:px-20 xl:px-[15.625%] bg-gray-100">
+        <div className="max-w-[1320px] mx-auto w-full">
 
           {/* 헤딩 */}
           <div className="mb-20">
-            <h2 className="text-[26px] font-bold text-gray-950 tracking-tighter mb-2">핵심 서비스</h2>
-            <p className="text-[13px] text-gray-400 font-light">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+            <h2 className="text-[1.667vw] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '1.042vw'}}>핵심 서비스</h2>
+            <p className="text-[0.625vw] text-gray-400 font-light">기관과 기업의 수요에 맞춘 <br/>원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
 
           {/* 카드 그리드 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="relative bg-white py-8 px-10 min-h-96 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start justify-center">
+              <Link to="/business" key={i} className="relative bg-white py-8 px-10 min-h-96 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start">
                 <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">
                   {card.icon}
                 </div>
-                <h3 className="w-full text-left text-[16px] font-bold text-gray-950 mb-4 tracking-wide">{card.title}</h3>
-                <p className="w-full text-left text-[13px] text-gray-400 font-light leading-relaxed">{card.desc}</p>
+                <h3 className="absolute text-left text-[0.9375vw] font-bold text-gray-950 tracking-wide left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
+                <p className="absolute text-left text-[0.729vw] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 2vw)'}}>{card.desc}</p>
               </Link>
             ))}
           </div>
@@ -243,9 +255,9 @@ const Main = () => {
             <Link
               to="/inquiry"
               onClick={() => window.scrollTo(0, 0)}
-              className="inline-block px-10 py-3.5 bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-full hover:bg-gray-700 transition-all"
+              className="inline-block px-10 py-3.5 bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
             >
-              상담 문의
+              문의하기
             </Link>
           </div>
 

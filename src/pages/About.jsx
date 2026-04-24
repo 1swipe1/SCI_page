@@ -115,7 +115,7 @@ const About = () => {
       <section
         id="greetings"
         ref={greetingsRef}
-        className="py-16 px-6 md:px-20 xl:px-[8%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="py-16 px-6 md:px-20 xl:px-[15.625%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-4xl mx-auto w-full bg-gray-50 rounded-2xl p-6 md:p-14">
           <h2 className="text-[32px] font-bold text-gray-950 text-center mb-8 tracking-tighter">인사말</h2>
@@ -149,7 +149,7 @@ const About = () => {
       <section
         id="intro"
         ref={introRef}
-        className="py-16 px-6 md:px-24 xl:px-[10%] bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="py-16 px-6 md:px-24 xl:px-[15.625%] bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-4xl mx-auto w-full">
           <h2 className="text-[32px] font-bold text-gray-950 text-center mb-10 tracking-tighter">소개</h2>
@@ -203,7 +203,7 @@ const About = () => {
       <section
         id="organization"
         ref={organizationRef}
-        className="pt-16 pb-20 px-6 md:px-24 xl:px-[10%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
+        className="pt-16 pb-20 px-6 md:px-24 xl:px-[15.625%] bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
           <h2 className="text-[32px] font-bold text-gray-950 mb-14 tracking-tighter">조직도</h2>
@@ -222,7 +222,7 @@ const About = () => {
       <section
         id="cert"
         ref={certRef}
-        className="pt-16 pb-24 px-6 md:px-24 xl:px-[10%] bg-gray-50 scroll-mt-32 md:scroll-mt-26"
+        className="pt-16 pb-24 px-6 md:px-24 xl:px-[15.625%] bg-gray-50 scroll-mt-32 md:scroll-mt-26"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
           <h2 className="text-[32px] font-bold text-gray-950 mb-4 tracking-tighter">인증 현황</h2>

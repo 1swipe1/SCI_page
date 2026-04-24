@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Gallery = () => {
   const { hash } = useLocation();
@@ -138,22 +138,21 @@ const Gallery = () => {
               {projects.map((project) => (
                 <div key={project.id} className="flex flex-col">
                   {/* 이미지 플레이스홀더 */}
-                  <div className="w-full aspect-4/3 bg-gray-200 mb-2" />
-                  {/* 태그 */}
-                  <div className="flex flex-wrap gap-1.5 mb-1.5">
-                    {project.tags.map((tag, i) => (
-                      <span key={i} className="text-[12px] font-light tracking-widest uppercase" style={{ color: '#7C7C7C' }}>{tag}{i < project.tags.length - 1 && ' ·'}</span>
-                    ))}
-                  </div>
-                  {/* 제목 + 구분선 */}
-                  <div className="h-12 flex items-center pb-3 border-b border-gray-300 mb-4">
-                    <h3 className="text-[24px] font-bold leading-snug" style={{ color: '#111111' }}>{project.title}</h3>
-                  </div>
-                  {/* 요약 */}
-                  <p className="text-[16px] font-light leading-relaxed break-keep flex-1 text-justify" style={{ color: '#7C7C7C' }}>{project.summary}</p>
-                  {/* VIEW MORE */}
-                  <div className="mt-6">
-                    <span className="inline-block px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full border" style={{ color: '#111111', borderColor: '#111111' }}>VIEW MORE</span>
+                  <div className="bg-gray-200 mb-2" style={{width: '17.188vw', height: '11.979vw'}} />
+                  {/* 텍스트 영역 */}
+                  <div className="flex flex-col overflow-hidden" style={{width: '17.188vw', height: '15.625vw'}}>
+                    {/* 태그 */}
+                    <div className="flex flex-wrap gap-1.5 mb-1.5">
+                      {project.tags.map((tag, i) => (
+                        <span key={i} className="text-[12px] font-light tracking-widest uppercase" style={{ color: '#7C7C7C' }}>{tag}{i < project.tags.length - 1 && ' ·'}</span>
+                      ))}
+                    </div>
+                    {/* 제목 + 구분선 */}
+                    <div className="h-12 flex items-center pb-3 border-b border-gray-300 mb-4">
+                      <h3 className="text-[34px] font-bold leading-snug" style={{ color: '#111111' }}>{project.title}</h3>
+                    </div>
+                    {/* 요약 */}
+                    <p className="text-[16px] font-light leading-relaxed break-keep flex-1 text-justify overflow-hidden" style={{ color: '#7C7C7C' }}>{project.summary}</p>
                   </div>
                 </div>
               ))}
@@ -184,9 +183,6 @@ const Gallery = () => {
                     </div>
                     <div className="md:w-3/5 flex flex-col justify-center">
                       <p className="text-[14px] text-gray-500 font-light leading-6 mb-10 break-keep">{item.desc}</p>
-                      <Link to="/business" className="inline-block self-start px-4 py-2.5 text-gray-950 text-xs font-bold tracking-widest uppercase rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
-                        VIEW MORE
-                      </Link>
                     </div>
                   </div>
                 </div>
