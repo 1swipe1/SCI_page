@@ -29,9 +29,9 @@ function App() {
             <Route path="members" element={<Members />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="login" element={<Login />} />
-            <Route path="notice" element={<Notice />} />
+            <Route path="notice" element={<ProtectedRoute><Notice /></ProtectedRoute>} />
             <Route path="inquiry" element={<Inquiry />} />
-            <Route path="notice/:id" element={<NoticeDetail />} />
+            <Route path="notice/:id" element={<ProtectedRoute><NoticeDetail /></ProtectedRoute>} />
             <Route path="signup" element={<Signup />} />
             <Route path="business" element={<BusinessDetail />} />
             <Route path="forgot-password" element={<ForgotPassword />} />

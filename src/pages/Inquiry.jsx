@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import FileDropZone from '../components/FileDropZone';
 
 const Inquiry = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     organization: '',
@@ -105,22 +103,6 @@ const Inquiry = () => {
   const inputClass = "w-full border-b border-gray-300 py-3 px-0 text-[14px] text-gray-800 placeholder-gray-300 focus:border-gray-800 outline-none transition-colors bg-transparent";
   const labelClass = "block text-[14px] font-bold text-gray-800 mb-2 tracking-wide";
 
-  if (!user) {
-    return (
-      <div className="bg-white min-h-screen flex items-center justify-center px-6 pb-24">
-        <div className="text-center">
-          <h1 className="text-[32px] font-bold text-gray-950 tracking-tighter mb-3">상담 문의</h1>
-          <p className="text-[14px] text-gray-400 font-light mb-10">로그인 후 이용 가능한 서비스입니다.</p>
-          <button
-            onClick={() => navigate('/login')}
-            className="px-10 py-3.5 bg-gray-950 text-white text-[14px] font-bold tracking-widest hover:bg-gray-700 transition-colors"
-          >
-            로그인하기
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-white min-h-screen py-24 px-6">
