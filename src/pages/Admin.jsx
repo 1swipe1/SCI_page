@@ -50,7 +50,7 @@ const Admin = () => {
       </section>
 
       {/* 작성 폼 */}
-      <section className="py-20 px-[15.625%]">
+      <section className="py-20 site-px">
         <div className="max-w-3xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
 

@@ -8,16 +8,19 @@ const Main = () => {
   const slides = [
     {
       title: "기술에 전략을, 창업에 성장을",
+      mobileTitle: <>기술에 전략을,<br />창업에 성장을</>,
       desc: "기술사업화지원단(기사단)은 기술창업부터 사업화, 스케일업까지 각 단계별 최고의 전문가들이 함께하는 과학기술인협동조합입니다.",
       img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2070"
     },
     {
       title: "전문가가 함께하는 원스톱 컨설팅",
+      mobileTitle: <>전문가가 함께하는<br />원스톱 컨설팅</>,
       desc: "조합원 전원이 박사학위 또는 국가전문자격 보유자. 10년 이상의 현장 경험을 바탕으로 최적의 솔루션을 제공합니다.",
       img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070"
     },
     {
       title: "130개+ 기업과 함께 성장한 파트너",
+      mobileTitle: <>130개+ 기업과 함께<br />성장한 파트너</>,
       desc: "캠퍼스타운, 창업중심대학 등 다양한 프로젝트를 통해 실질적인 성과를 만들어 왔습니다.",
       img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070"
     }
@@ -74,7 +77,7 @@ const Main = () => {
   /* --- 기획안 §5 최근 활동 프리뷰 --- */
   const recentActivities = [
     {
-      title: '캠퍼스타운 입주기업 진단 및 BM 분석',
+      title: <>캠퍼스타운<br/>입주기업 진단 및 BM 분석</>,
       desc: '캠퍼스타운 입주 스타트업 60개 기업을 대상으로 경영 현황 진단과 비즈니스 모델 분석을 수행하여 기업별 성장 전략을 제시했습니다.',
       tag: '컨설팅',
     },
@@ -84,7 +87,7 @@ const Main = () => {
       tag: '교육',
     },
     {
-      title: 'OO대학교 창업보육센터 Startup-Booster Academy',
+      title: <>OO대학교 창업보육센터<br/>Startup-Booster Academy</>,
       desc: 'OO대학교 창업보육센터 Biz-Up 프로그램의 운영사로서 창업기업 대상 멘토링, 교육, 사업화 지원을 수행했습니다.',
       tag: '창업보육',
     },
@@ -109,8 +112,8 @@ const Main = () => {
 
             {/* 모바일 텍스트 */}
             <div className="absolute inset-0 md:hidden flex flex-col justify-end px-8 pb-40">
-              <h1 className="text-[27px] font-bold text-white leading-tight tracking-tight mb-5 break-keep">
-                {slide.title}
+              <h1 className="text-[32px] font-bold text-white leading-tight tracking-tight mb-5">
+                {slide.mobileTitle}
               </h1>
               <Link to="/inquiry" onClick={() => window.scrollTo(0, 0)} className="text-[12px] text-white/80 font-light flex items-center gap-2">
                 상담 문의하기 <span>→</span>
@@ -118,12 +121,12 @@ const Main = () => {
             </div>
 
             {/* 데스크톱 텍스트 */}
-            <div className="absolute inset-0 hidden md:flex items-center px-[15.625%] pt-10">
+            <div className="absolute inset-0 hidden md:flex items-center site-px">
               <div className="max-w-330 mx-auto w-full">
-                <h1 className="text-[3.125vw] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
+                <h1 className="text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
                   {slide.title}
                 </h1>
-                <p className="text-[0.9375vw] text-white/75 leading-relaxed font-light break-keep whitespace-nowrap">
+                <p className="text-[22px] text-white/75 leading-relaxed font-light break-keep whitespace-nowrap">
                   {slide.desc}
                 </p>
               </div>
@@ -144,41 +147,33 @@ const Main = () => {
       </section>
 
       {/* === 2. 최근 활동 — 좌측 텍스트 + 우측 이미지 오버레이 카드 === */}
-      <section className="px-[15.625%] bg-white py-16 md:py-0" style={{height: 'auto', minHeight: '0'}} data-section="recent">
+      <section className="site-px bg-white py-16 md:py-0" style={{height: 'auto', minHeight: '0'}} data-section="recent">
         <style>{`@media (min-width: 768px) { [data-section="recent"] { height: 700px; padding-top: 150px; padding-bottom: 150px; } }`}</style>
         <div className="w-full flex flex-col md:flex-row gap-10 items-start">
 
           {/* 좌측: 타이틀 + 버튼 */}
           <div className="md:w-52 shrink-0 flex flex-col gap-8 md:gap-15">
             <div>
-              <h2 className="text-[24px] md:text-[1.667vw] font-bold text-gray-950 tracking-tighter mb-2 md:mb-0" style={{marginBottom: undefined}}>
-                <span className="hidden md:inline" style={{marginBottom: '1.042vw', display: 'block'}}>최근 활동</span>
-                <span className="md:hidden">최근 활동</span>
-              </h2>
-              <p className="text-[12px] md:text-[0.625vw] text-gray-400 font-light">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+              <h2 className="text-[46px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>최근 활동</h2>
+              <p className="text-[20px] text-gray-400 font-light 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
               to="/gallery#lecture"
               onClick={() => window.scrollTo(0, 0)}
-              className="self-start px-5 py-2 text-[12px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
+              className="hidden md:inline-block self-start px-5 py-2 text-[12px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
             >
               전체 활동 보기
             </Link>
           </div>
 
-          {/* 우측: 이미지 오버레이 카드 3개 */}
-          <div className="flex w-full md:flex-1 md:justify-end overflow-x-auto md:overflow-visible gap-2.75 pb-2 md:pb-0">
+          {/* 카드 3개 */}
+          <div className="w-full flex flex-col md:flex-row md:flex-1 md:justify-end gap-3">
             {recentActivities.map((item, i) => (
               <Link
                 to="/gallery#lecture"
                 key={i}
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-xl overflow-hidden flex flex-col aspect-3/4 shrink-0"
-                style={{
-                  width: 'min(260px, 75vw)',
-                  flexShrink: 0,
-                  paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '20px'
-                }}
+                className="group relative rounded-xl overflow-hidden w-full h-64 md:w-75 md:h-auto md:aspect-5/6 md:shrink-0 px-8 py-5 md:px-5"
               >
                 {/* 배경 이미지 */}
                 <img
@@ -189,31 +184,50 @@ const Main = () => {
                 <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/75" />
                 <div className="absolute inset-0 bg-black/60" />
 
-                {/* 태그 */}
-                <div className="relative z-10">
-                  <span className="text-[11px] font-bold text-white tracking-widest">{item.tag}</span>
+                {/* 태그 — 모바일: absolute 좌상단, 데스크탑: relative */}
+                <div className="md:hidden absolute z-10 top-5 left-8">
+                  <span className="text-[11px] font-bold text-gray-400 tracking-widest">{item.tag}</span>
+                </div>
+                <div className="hidden md:block relative z-10">
+                  <span className="text-[11px] font-bold text-gray-400 tracking-widest">{item.tag}</span>
                 </div>
 
-                {/* 제목 */}
-                <h3 className="absolute z-10 text-[14px] md:text-[0.9375vw] font-bold text-white leading-snug break-keep"
-                  style={{top: '200px', left: '20px', right: '20px'}}>
+                {/* 모바일: 제목 + 설명 묶음 */}
+                <div className="md:hidden absolute z-10 flex flex-col gap-2 left-8 right-8 bottom-10">
+                  <h3 className="text-[18px] font-bold text-white leading-snug break-keep">{item.title}</h3>
+                  <p className="text-[16px] text-white/70 font-light leading-relaxed break-keep line-clamp-2">{item.desc}</p>
+                </div>
+
+                {/* 데스크탑: 제목 */}
+                <h3 className="hidden md:flex items-center absolute z-10 text-[18px] font-bold text-white leading-snug break-keep overflow-hidden"
+                  style={{width: '236px', height: '52px', bottom: 'calc(32px + 113px + 5px)', left: '20px'}}>
                   {item.title}
                 </h3>
 
-                {/* 설명 */}
-                <p className="absolute z-10 text-[12px] md:text-[0.729vw] text-white/70 font-light leading-relaxed break-keep line-clamp-3"
-                  style={{top: '230px', left: '20px', right: '20px'}}>
+                {/* 데스크탑: 설명 */}
+                <p className="hidden md:block absolute z-10 text-[14px] text-white/70 font-light leading-relaxed break-keep overflow-hidden"
+                  style={{width: '236px', height: '113px', bottom: '32px', left: '20px'}}>
                   {item.desc}
                 </p>
               </Link>
             ))}
           </div>
 
+          {/* 모바일 전용: 전체 활동 보기 버튼 */}
+          <Link
+            to="/gallery#lecture"
+            onClick={() => window.scrollTo(0, 0)}
+            className="md:hidden mt-4 mx-auto px-5 py-2 text-[16px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
+          >
+            전체 활동 보기
+          </Link>
+
         </div>
       </section>
 
       {/* === 3. 조합 소개 — 좌측 라벨 + 우측 숫자 === */}
-      <section className="relative px-[15.625%] overflow-hidden" style={{height: '470px', paddingTop: '80px', paddingBottom: '80px'}}>
+      <section className="relative site-px overflow-hidden py-16 md:py-0" style={{height: 'auto'}} data-section="intro">
+        <style>{`@media (min-width: 768px) { [data-section="intro"] { height: 470px; padding-top: 80px; padding-bottom: 80px; } }`}</style>
         {/* 배경 이미지 + 오버레이 */}
         <img
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
@@ -223,22 +237,22 @@ const Main = () => {
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative z-10 max-w-330 mx-auto w-full flex flex-col md:flex-row items-start gap-10">
 
-          {/* 좌측: 라벨 */}
-          <div className="md:w-56 shrink-0">
-            <h2 className="text-[1.667vw] font-bold text-white tracking-tighter" style={{marginBottom: '1.042vw'}}>조합 소개</h2>
-            <p className="text-[0.625vw] text-white/50 font-light leading-relaxed break-keep">과학기술인협동조합은 a 바탕으로<br/>신뢰성있는 서비스를 제공합니다.</p>
+          {/* 라벨 */}
+          <div className="md:w-80 shrink-0">
+            <h2 className="text-[46px] md:text-[32px] font-bold text-white tracking-tighter" style={{marginBottom: '5px'}}>조합 소개</h2>
+            <p className="text-[20px] text-white/50 font-light">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
           </div>
 
-          {/* 우측: 통계 */}
-          <div className="ml-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {/* 통계 — 모바일: 2x2 중앙, 데스크탑: 4열 우측 */}
+          <div className="w-full md:ml-auto md:w-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 md:gap-x-16 text-center px-6 md:px-0">
             {stats.map((stat, i) => (
               <div key={i}>
                 <p className="font-bold text-white mb-1">
-                  <span style={{fontSize: '3.333vw'}}>{stat.number.replace('+', '')}</span>
-                  <span style={{fontSize: '2.5vw'}}>+</span>
+                  <span className="text-[38px] md:text-[64px]">{stat.number.replace('+', '')}</span>
+                  <span className="text-[28px] md:text-[48px]">+</span>
                 </p>
-                <p className="font-bold text-white/70 mb-0.5" style={{fontSize: '0.729vw'}}>{stat.label}</p>
-                <p className="text-white/35 font-light" style={{fontSize: '0.625vw'}}>{stat.desc}</p>
+                <p className="font-bold text-white/70 mb-0.5 text-[11px] md:text-[14px]">{stat.label}</p>
+                <p className="text-white/35 font-light text-[10px] md:text-[12px]">{stat.desc}</p>
               </div>
             ))}
           </div>
@@ -247,35 +261,32 @@ const Main = () => {
       </section>
 
       {/* === 4. 핵심 서비스 — 좌측 정렬 헤딩 + 카드 그리드 === */}
-      <section className="relative px-[15.625%] bg-gray-100" style={{height: '920px', paddingTop: '120px', paddingBottom: '120px'}}>
+      <section className="relative site-px bg-white py-12 md:py-0" style={{height: 'auto'}} data-section="service">
+        <style>{`@media (min-width: 768px) { [data-section="service"] { height: 920px; padding-top: 120px; padding-bottom: 120px; } }`}</style>
         <div className="max-w-330 mx-auto w-full">
 
           {/* 헤딩 */}
-          <div className="mb-20">
-            <h2 className="text-[1.667vw] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '1.042vw'}}>핵심 서비스</h2>
-            <p className="text-[0.625vw] text-gray-400 font-light">기관과 기업의 수요에 맞춘 <br/>원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+          <div className="mb-8 md:mb-20">
+            <h2 className="text-[46px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>핵심 서비스</h2>
+            <p className="text-[20px] text-gray-400 font-light xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
 
           {/* 카드 그리드 */}
-          <div className="flex flex-wrap justify-center gap-8.75">
+          <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap md:justify-center gap-3 md:gap-0" style={{marginBottom: '6.77vw'}} data-service-grid>
+            <style>{`@media (min-width: 768px) { [data-service-grid] { gap: clamp(5px, calc((100% - 1200px) / 3), 35px); } }`}</style>
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start shrink-0" style={{width: '300px', height: '400px'}}>
-                <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">
-                  {card.icon}
-                </div>
-                <h3 className="absolute text-left text-[0.9375vw] font-bold text-gray-950 tracking-wide left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
-                <p className="absolute text-left text-[0.729vw] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 2vw)'}}>{card.desc}</p>
+              <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start w-full aspect-[15/16] md:w-[calc(50%-8px)] md:h-50 md:aspect-auto lg:flex-1 lg:max-w-75 lg:h-auto lg:aspect-3/4">
+                <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">{card.icon}</div>
+                <h3 className="absolute text-left text-[22px] font-bold text-gray-950 tracking-wide left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
+                <p className="absolute text-left text-[16px] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
               </Link>
             ))}
           </div>
 
           {/* 하단 버튼 */}
-          <Link
-            to="/inquiry"
-            onClick={() => window.scrollTo(0, 0)}
-            className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
-            style={{bottom: '80px', width: '250px', height: '50px'}}
-          >
+          <Link to="/inquiry" onClick={() => window.scrollTo(0, 0)}
+            className="mx-auto flex items-center justify-center bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
+            style={{width: '250px', height: '50px'}}>
             문의하기
           </Link>
 

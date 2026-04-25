@@ -101,7 +101,30 @@ create policy "inquiry_attach_delete" on storage.objects
   for delete using (bucket_id = 'inquiry-attachments' and auth.role() = 'authenticated');
 
 -- ----------------------------------------------------------------
--- 3. 공지사항 더미 데이터
+-- 3. 문의 알림 Database Webhook
+-- (Edge Function 배포 후 아래 SQL 실행)
+-- SUPABASE_PROJECT_REF 와 SUPABASE_ANON_KEY 를 실제 값으로 교체하세요.
+-- ----------------------------------------------------------------
+
+-- supabase_functions 스키마 활성화 (이미 있으면 무시됨)
+create schema if not exists supabase_functions;
+
+select supabase_functions.http_request(
+  'https://<SUPABASE_PROJECT_REF>.supabase.co/functions/v1/notify-inquiry',
+  'POST',
+  '{"Content-Type":"application/json","Authorization":"Bearer <SUPABASE_ANON_KEY>"}',
+  '{}',
+  '5000'
+) where false; -- 문법 확인용, 실제 webhook은 대시보드에서 설정
+
+-- ※ 실제 Webhook 설정은 Supabase 대시보드에서:
+--   Database → Webhooks → Create a new hook
+--   Table: inquiries / Event: INSERT
+--   URL: https://<ref>.supabase.co/functions/v1/notify-inquiry
+--   Headers: Authorization: Bearer <anon_key>
+
+-- ----------------------------------------------------------------
+-- 4. 공지사항 더미 데이터
 -- ----------------------------------------------------------------
 
 insert into notices (title, content, important, date, views) values

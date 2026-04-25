@@ -123,7 +123,7 @@ const Gallery = () => {
       </nav>
 
       {/* 콘텐츠 */}
-      <section className="py-20 px-[15.625%]">
+      <section className="py-20 site-px">
         <div className="max-w-5xl mx-auto">
 
         {/* === 탭 1: 주요 수행 실적 === */}
@@ -149,7 +149,7 @@ const Gallery = () => {
                     </div>
                     {/* 제목 + 구분선 */}
                     <div className="h-12 flex items-center pb-3 border-b border-gray-300 mb-4">
-                      <h3 className="text-[34px] font-bold leading-snug" style={{ color: '#111111' }}>{project.title}</h3>
+                      <h3 className="text-[17px] font-bold leading-snug" style={{ color: '#111111' }}>{project.title}</h3>
                     </div>
                     {/* 요약 */}
                     <p className="text-[16px] font-light leading-relaxed break-keep flex-1 text-justify overflow-hidden" style={{ color: '#7C7C7C' }}>{project.summary}</p>

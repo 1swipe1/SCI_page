@@ -122,7 +122,7 @@ const BusinessDetail = () => {
       </section>
 
       {/* 본문 */}
-      <section className="pt-11 pb-36 px-[15.625%]">
+      <section className="pt-11 pb-36 site-px">
         <div className="max-w-5xl mx-auto">
 
           {/* 뒤로가기 */}
