@@ -47,7 +47,7 @@ const MyPage = () => {
         <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">MY PAGE</h1>
       </section>
 
-      <section className="py-16 px-6 md:px-20">
+      <section className="py-16 px-[15.625%]">
         <div className="max-w-4xl mx-auto">
 
           {/* 계정 정보 */}

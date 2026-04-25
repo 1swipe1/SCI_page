@@ -71,7 +71,7 @@ const InquiryAdmin = () => {
         <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">상담 문의 관리</h1>
       </section>
 
-      <section className="py-16 px-10 md:px-20">
+      <section className="py-16 px-[15.625%]">
         <div className="max-w-6xl mx-auto flex gap-8 items-start">
 
           {/* 좌측: 문의 목록 */}

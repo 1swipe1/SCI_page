@@ -133,7 +133,7 @@ const NoticeDetail = () => {
       </section>
 
       {/* 게시글 상세 영역 */}
-      <article className="max-w-4xl mx-auto px-6 mt-12">
+      <article className="px-[15.625%] mt-12">
         {/* 제목 섹션 */}
         <div className="border-t-2 border-gray-900 py-8 px-4 bg-gray-50/50">
           {editMode ? (

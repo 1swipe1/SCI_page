@@ -117,7 +117,7 @@ const Notice = () => {
       </section>
 
       {/* 게시판 본문 섹션 */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
+      <section className="py-16 px-[15.625%]">
         {/* 상단 검색 및 정보 영역 */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <div className="text-sm text-gray-500">

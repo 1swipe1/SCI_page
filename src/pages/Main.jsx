@@ -101,16 +101,31 @@ const Main = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/30 flex items-center px-10 md:px-20 xl:px-[15.625%] pt-10">
-              <div className="max-w-[1320px] mx-auto w-full">
-                <div className="max-w-2xl md:max-w-none">
-                  <h1 className="text-3xl md:text-[3.125vw] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep md:whitespace-nowrap">
-                    {slide.title}
-                  </h1>
-                  <p className="text-sm md:text-[0.9375vw] text-white/75 leading-relaxed font-light break-keep md:whitespace-nowrap">
-                    {slide.desc}
-                  </p>
-                </div>
+
+            {/* 모바일 오버레이 — 하단 그라데이션 */}
+            <div className="absolute inset-0 md:hidden bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+            {/* 데스크톱 오버레이 — 좌측 그라데이션 */}
+            <div className="absolute inset-0 hidden md:block bg-linear-to-r from-black/80 via-black/60 to-black/30" />
+
+            {/* 모바일 텍스트 */}
+            <div className="absolute inset-0 md:hidden flex flex-col justify-end px-8 pb-40">
+              <h1 className="text-[27px] font-bold text-white leading-tight tracking-tight mb-5 break-keep">
+                {slide.title}
+              </h1>
+              <Link to="/inquiry" onClick={() => window.scrollTo(0, 0)} className="text-[12px] text-white/80 font-light flex items-center gap-2">
+                상담 문의하기 <span>→</span>
+              </Link>
+            </div>
+
+            {/* 데스크톱 텍스트 */}
+            <div className="absolute inset-0 hidden md:flex items-center px-[15.625%] pt-10">
+              <div className="max-w-330 mx-auto w-full">
+                <h1 className="text-[3.125vw] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
+                  {slide.title}
+                </h1>
+                <p className="text-[0.9375vw] text-white/75 leading-relaxed font-light break-keep whitespace-nowrap">
+                  {slide.desc}
+                </p>
               </div>
             </div>
           </div>
@@ -129,14 +144,18 @@ const Main = () => {
       </section>
 
       {/* === 2. 최근 활동 — 좌측 텍스트 + 우측 이미지 오버레이 카드 === */}
-      <section className="py-36 px-10 md:px-20 xl:px-[15.625%] bg-white">
+      <section className="px-[15.625%] bg-white py-16 md:py-0" style={{height: 'auto', minHeight: '0'}} data-section="recent">
+        <style>{`@media (min-width: 768px) { [data-section="recent"] { height: 700px; padding-top: 150px; padding-bottom: 150px; } }`}</style>
         <div className="w-full flex flex-col md:flex-row gap-10 items-start">
 
           {/* 좌측: 타이틀 + 버튼 */}
-          <div className="md:w-52 shrink-0 flex flex-col gap-15">
+          <div className="md:w-52 shrink-0 flex flex-col gap-8 md:gap-15">
             <div>
-              <h2 className="text-[1.667vw] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '1.042vw'}}>최근 활동</h2>
-              <p className="text-[0.625vw] text-gray-400 font-light whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+              <h2 className="text-[24px] md:text-[1.667vw] font-bold text-gray-950 tracking-tighter mb-2 md:mb-0" style={{marginBottom: undefined}}>
+                <span className="hidden md:inline" style={{marginBottom: '1.042vw', display: 'block'}}>최근 활동</span>
+                <span className="md:hidden">최근 활동</span>
+              </h2>
+              <p className="text-[12px] md:text-[0.625vw] text-gray-400 font-light">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
               to="/gallery#lecture"
@@ -148,14 +167,18 @@ const Main = () => {
           </div>
 
           {/* 우측: 이미지 오버레이 카드 3개 */}
-          <div className="flex flex-1 justify-end" style={{gap: '0.573%'}}>
+          <div className="flex w-full md:flex-1 md:justify-end overflow-x-auto md:overflow-visible gap-2.75 pb-2 md:pb-0">
             {recentActivities.map((item, i) => (
               <Link
                 to="/gallery#lecture"
                 key={i}
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-xl overflow-hidden flex flex-col aspect-3/4"
-                style={{width: 'min(300px, calc((100% - 20px) / 3))', flexShrink: 1, paddingLeft: '1.563vw', paddingRight: '1.563vw', paddingTop: '1.563vw', paddingBottom: '1.563vw'}}
+                className="group relative rounded-xl overflow-hidden flex flex-col aspect-3/4 shrink-0"
+                style={{
+                  width: 'min(260px, 75vw)',
+                  flexShrink: 0,
+                  paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '20px'
+                }}
               >
                 {/* 배경 이미지 */}
                 <img
@@ -163,27 +186,23 @@ const Main = () => {
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                {/* 어두운 그라데이션 오버레이 */}
                 <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/30 to-black/75" />
-                {/* 검정 오퍼시티 60% */}
                 <div className="absolute inset-0 bg-black/60" />
 
-                {/* 태그 (상단) */}
+                {/* 태그 */}
                 <div className="relative z-10">
-                  <span className="text-[0.625vw] font-bold text-white tracking-widest">
-                    {item.tag}
-                  </span>
+                  <span className="text-[11px] font-bold text-white tracking-widest">{item.tag}</span>
                 </div>
 
                 {/* 제목 */}
-                <h3 className="absolute z-10 text-[0.9375vw] font-bold text-white leading-snug break-keep"
-                  style={{top: '13.021vw', left: '1.563vw', right: '1.563vw', transform: 'translateY(-50%)'}}>
+                <h3 className="absolute z-10 text-[14px] md:text-[0.9375vw] font-bold text-white leading-snug break-keep"
+                  style={{top: '200px', left: '20px', right: '20px'}}>
                   {item.title}
                 </h3>
 
-                {/* 설명 — 상단에서 정확히 250px(13.021vw) */}
-                <p className="absolute z-10 text-[0.729vw] text-white/70 font-light leading-relaxed break-keep line-clamp-3"
-                  style={{top: '14.583vw', left: '1.563vw', right: '1.563vw'}}>
+                {/* 설명 */}
+                <p className="absolute z-10 text-[12px] md:text-[0.729vw] text-white/70 font-light leading-relaxed break-keep line-clamp-3"
+                  style={{top: '230px', left: '20px', right: '20px'}}>
                   {item.desc}
                 </p>
               </Link>
@@ -194,7 +213,7 @@ const Main = () => {
       </section>
 
       {/* === 3. 조합 소개 — 좌측 라벨 + 우측 숫자 === */}
-      <section className="relative pt-14 pb-44 px-10 md:px-20 xl:px-[15.625%] overflow-hidden">
+      <section className="relative px-[15.625%] overflow-hidden" style={{height: '470px', paddingTop: '80px', paddingBottom: '80px'}}>
         {/* 배경 이미지 + 오버레이 */}
         <img
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
@@ -202,7 +221,7 @@ const Main = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 max-w-[1320px] mx-auto w-full flex flex-col md:flex-row items-start gap-10">
+        <div className="relative z-10 max-w-330 mx-auto w-full flex flex-col md:flex-row items-start gap-10">
 
           {/* 좌측: 라벨 */}
           <div className="md:w-56 shrink-0">
@@ -228,8 +247,8 @@ const Main = () => {
       </section>
 
       {/* === 4. 핵심 서비스 — 좌측 정렬 헤딩 + 카드 그리드 === */}
-      <section className="pt-16 pb-32 px-10 md:px-20 xl:px-[15.625%] bg-gray-100">
-        <div className="max-w-[1320px] mx-auto w-full">
+      <section className="relative px-[15.625%] bg-gray-100" style={{height: '920px', paddingTop: '120px', paddingBottom: '120px'}}>
+        <div className="max-w-330 mx-auto w-full">
 
           {/* 헤딩 */}
           <div className="mb-20">
@@ -238,9 +257,9 @@ const Main = () => {
           </div>
 
           {/* 카드 그리드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="flex flex-wrap justify-center gap-8.75">
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="relative bg-white py-8 px-10 min-h-96 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start">
+              <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start shrink-0" style={{width: '300px', height: '400px'}}>
                 <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">
                   {card.icon}
                 </div>
@@ -251,15 +270,14 @@ const Main = () => {
           </div>
 
           {/* 하단 버튼 */}
-          <div className="text-center mt-12">
-            <Link
-              to="/inquiry"
-              onClick={() => window.scrollTo(0, 0)}
-              className="inline-block px-10 py-3.5 bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
-            >
-              문의하기
-            </Link>
-          </div>
+          <Link
+            to="/inquiry"
+            onClick={() => window.scrollTo(0, 0)}
+            className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
+            style={{bottom: '80px', width: '250px', height: '50px'}}
+          >
+            문의하기
+          </Link>
 
         </div>
       </section>

@@ -94,7 +94,7 @@ const Header = () => {
         onMouseEnter={() => window.innerWidth > 1024 && setIsHovered(true)}
         onMouseLeave={() => window.innerWidth > 1024 && setIsHovered(false)}
       >
-        <div className="max-w-[1440px] mx-auto px-10 md:px-20 h-full flex items-center justify-between">
+        <div className="px-4 lg:px-[15.625%] h-full flex items-center justify-between">
 
           {/* 1. 로고 영역 (너비 250px 고정) */}
           <div className="w-auto lg:w-[250px] flex-shrink-0">

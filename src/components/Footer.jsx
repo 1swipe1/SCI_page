@@ -4,7 +4,7 @@ import logoF from '../assets/logo_F.png';
 const Footer = () => {
   return (
     <footer className="bg-[#111] text-white">
-      <div className="max-w-360 mx-auto px-6 md:px-20 xl:px-[15.625%]">
+      <div className="px-4 lg:px-[15.625%]">
 
         {/* 상단 네비게이션 */}
         <div className="flex gap-x-4 md:gap-x-6 pt-8 pb-4 text-[11px] md:text-[13px] font-light text-white/30 tracking-wide md:tracking-widest overflow-x-auto">

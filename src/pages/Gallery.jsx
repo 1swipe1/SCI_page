@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const Gallery = () => {
   const { hash } = useLocation();
@@ -123,15 +123,15 @@ const Gallery = () => {
       </nav>
 
       {/* 콘텐츠 */}
-      <section className="py-20 px-10 md:px-20">
+      <section className="py-20 px-[15.625%]">
         <div className="max-w-5xl mx-auto">
 
         {/* === 탭 1: 주요 수행 실적 === */}
         {activeTab === 'lecture' && (
           <div>
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-black mb-3 tracking-tight" style={{ color: '#111111' }}>조합의 지난 활동</h2>
-              <p className="text-sm font-light" style={{ color: '#7C7C7C' }}>기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
+              <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">조합의 지난 활동</h2>
+              <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
@@ -183,6 +183,9 @@ const Gallery = () => {
                     </div>
                     <div className="md:w-3/5 flex flex-col justify-center">
                       <p className="text-[14px] text-gray-500 font-light leading-6 mb-10 break-keep">{item.desc}</p>
+                      <Link to="/business" className="inline-block self-start px-4 py-2.5 text-gray-950 text-xs font-bold tracking-widest uppercase rounded-full border border-gray-950 hover:bg-gray-950 hover:text-white transition-all">
+                        VIEW MORE
+                      </Link>
                     </div>
                   </div>
                 </div>

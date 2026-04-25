@@ -123,12 +123,12 @@ const Members = () => {
       </section>
 
       {/* 2. 섹션 타이틀 */}
-      <section className="pt-24 pb-10 text-center px-10 md:px-20">
+      <section className="pt-24 pb-10 text-center px-[15.625%]">
         <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">함께하는 분</h2>
-        <p className="text-gray-400 font-light text-lg">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>      </section>
+        <p className="text-gray-400 text-sm font-light">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>      </section>
 
       {/* 3. 멤버 카드 그리드 */}
-      <section className="pb-32 px-10 md:px-20 max-w-300 mx-auto">
+      <section className="pb-32 px-[15.625%]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
           {allMembers.map((member) => (
             <div key={member.id} className="flex flex-col">
