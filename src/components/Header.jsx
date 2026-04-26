@@ -45,10 +45,10 @@ const Header = () => {
     },
     {
       title: '공지&문의',
-      path: '/notice',
+      path: '/inquiry',
       subItems: [
-        { name: '공지사항', path: '/notice' },
-        { name: '문의하기', path: '/inquiry' }
+        { name: '문의하기', path: '/inquiry' },
+        { name: '공지사항', path: '/notice' }
       ]
     }
   ];

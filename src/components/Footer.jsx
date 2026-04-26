@@ -11,7 +11,7 @@ const Footer = () => {
           <Link to="/about"   className="hover:text-white transition-colors">조합소개</Link>
           <Link to="/members" className="hover:text-white transition-colors">조합원소개</Link>
           <Link to="/gallery" className="hover:text-white transition-colors">조합 활동</Link>
-          <Link to="/notice"  className="hover:text-white transition-colors">공지/문의</Link>
+          <Link to="/inquiry" className="hover:text-white transition-colors">문의하기</Link>
           <Link to="/login"   className="hover:text-white transition-colors">로그인</Link>
         </div>
 

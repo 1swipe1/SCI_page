@@ -115,7 +115,7 @@ const BusinessDetail = () => {
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative text-center">
           <p className="text-white/60 text-sm font-light tracking-[0.2em] mb-2">사업 분야 소개</p>
-          <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-[20px] md:text-4xl font-black text-white tracking-tight break-keep">
             {area.subtitle}
           </h1>
         </div>
@@ -153,15 +153,15 @@ const BusinessDetail = () => {
           </div>
 
           {/* 인용문 */}
-          <div className="bg-gray-100 rounded-xl px-10 py-8 mb-10 text-center">
-            <p className="text-gray-700 font-medium leading-relaxed text-base md:text-lg">
+          <div className="py-6 mb-10 text-center md:bg-gray-100 md:rounded-xl md:px-10 md:py-8">
+            <p className="text-gray-700 font-medium leading-relaxed text-base md:text-lg break-keep">
               "{area.quote}"
             </p>
           </div>
 
           {/* 질문 카드 (있을 경우) */}
           {area.questionCard && (
-            <p className="text-gray-600 font-light leading-relaxed text-sm md:text-base italic mb-10 text-center">
+            <p className="text-gray-600 font-light leading-relaxed text-sm md:text-base italic mb-10 text-center break-keep">
               {area.questionCard}
             </p>
           )}

@@ -16,7 +16,6 @@ const About = () => {
   const { hash } = useLocation();
   const [activeSection, setActiveSection] = useState('greetings');
   const [greetingExpanded, setGreetingExpanded] = useState(false);
-  const [introExpanded, setIntroExpanded] = useState(false);
 
   const greetingsRef = useRef(null);
   const introRef = useRef(null);
@@ -117,8 +116,8 @@ const About = () => {
         ref={greetingsRef}
         className="py-16 site-px bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
-        <div className="max-w-4xl mx-auto w-full bg-gray-50 rounded-2xl p-6 md:p-14">
-          <h2 className="text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">인사말</h2>
+        <div className="max-w-4xl mx-auto w-full md:bg-gray-50 md:rounded-2xl md:p-14">
+          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">인사말</h2>
           <div className="text-[14px] text-gray-950 font-normal leading-loose break-keep tracking-wide space-y-4">
             <p>과학기술인협동조합 기술사업화지원단(기사단)은 관련 분야 박사학위 또는 공인 국가전문자격을 보유한 전문가들이 함께하는 과학기술인협동조합입니다. 창업지원 공공기관 경력자, 스타트업 및 중소기업 컨설팅 10년 이상의 경험과 노하우, 그리고 산·학·관에 걸친 폭넓은 네트워크를 바탕으로 고객의 과제에 최적의 솔루션을 제공합니다.<br/>기술사업화지원단은 이러한 축적된 전문성과 현장 실무 경험, 실행력 있는 네트워크를 바탕으로 창업기업 및 중소기업의 실질적인 경영성과 도출을 지원하기 위해 다양한 분야의 컨설팅과 교육 서비스를 제공합니다.</p>
 
@@ -152,7 +151,7 @@ const About = () => {
         className="py-16 site-px bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-4xl mx-auto w-full">
-          <h2 className="text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">소개</h2>          <img
+          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">소개</h2>          <img
             src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070"
             alt="Intro"
             className="w-full h-40 object-cover mb-10"
@@ -160,24 +159,14 @@ const About = () => {
           <div className="text-[14px] text-gray-950 font-normal leading-snug break-keep tracking-wide space-y-4">
             <p>기술사업화지원단(기사단)은 기술창업, 기술사업화, 기업가정신 교육, 스케일업, 투자유치 분야의 국내 최고 전문가들이 모여 설립한 과학기술인협동조합입니다.</p>
 
-            <div className={`space-y-4 md:block ${introExpanded ? 'block' : 'hidden'}`}>
+            <div className="space-y-4">
               <p>조합원 전원이 관련 분야 박사학위 또는 공인 국가전문자격 보유자이며, 창업지원 공공기관 경력자, 스타트업 및 중소기업 컨설팅 10년 이상의 경험을 바탕으로 고객의 과제에 최적의 솔루션을 제공합니다.</p>
               <p>기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
             </div>
-
-            <button
-              onClick={() => setIntroExpanded(!introExpanded)}
-              className="md:hidden mt-2 text-[13px] font-bold text-gray-400 hover:text-gray-900 transition-colors flex items-center gap-1"
-            >
-              {introExpanded ? '접기' : '더보기'}
-              <svg className={`w-3.5 h-3.5 transition-transform ${introExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
           </div>
 
           {/* 연혁 타임라인 */}
-          <div className={`mt-14 md:block ${introExpanded ? 'block' : 'hidden'}`}>
+          <div className="mt-14">
             <h3 className="text-[18px] font-bold text-gray-950 mb-6 tracking-wide">연혁</h3>
             <div className="space-y-4">
               {[
@@ -205,7 +194,7 @@ const About = () => {
         className="pt-16 pb-20 site-px bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
-          <h2 className="text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">조직도</h2>          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
+          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">조직도</h2>          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
             <DeptCard label="조합이사장" />
             <DeptCard label="컨설팅단" />
             <DeptCard label="교육지원단" />
@@ -223,9 +212,9 @@ const About = () => {
         className="pt-16 pb-24 site-px bg-gray-50 scroll-mt-32 md:scroll-mt-26"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
-          <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter text-center">인증 현황</h2>
-          <p className="text-gray-400 text-sm font-light mb-12 text-center">기술사업화지원단이 보유한 공인 인증 현황입니다.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-1 tracking-tighter text-center">인증 현황</h2>
+          <p className="text-[14px] md:text-[16px] text-gray-400 font-light mb-12 text-center">기술사업화지원단이 보유한 공인 인증 현황입니다.</p>
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-hide md:grid md:grid-cols-3 md:gap-8 md:overflow-visible">
             {[
               {
                 title: '과학기술인 협동조합',
@@ -249,7 +238,7 @@ const About = () => {
                 image: 'images/certs/확인서_중소기업.png',
               },
             ].map((cert, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-200 text-center">
+              <div key={i} className="snap-center shrink-0 w-[75vw] md:w-auto bg-white rounded-2xl p-6 border border-gray-200 text-center">
                 <div className="w-full aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden mb-5">
                   <img
                     src={`${import.meta.env.BASE_URL}${cert.image}`}

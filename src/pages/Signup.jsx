@@ -100,7 +100,7 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-3xl font-black text-gray-950 text-center tracking-tight mb-16">회원가입</h2>
+        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-16">회원가입</h2>
 
         <form onSubmit={handleSignup} className="space-y-8">
 
@@ -186,7 +186,7 @@ const Signup = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black hover:bg-gray-800 text-white font-black text-sm tracking-widest py-4 transition-colors disabled:bg-gray-400"
+            className="w-full bg-black hover:bg-white hover:text-black border border-black text-white font-black text-sm tracking-widest py-4 transition-colors disabled:bg-gray-400"
           >
             {loading ? '처리 중...' : '가입하기'}
           </button>

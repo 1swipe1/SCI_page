@@ -34,7 +34,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-3xl font-black text-gray-950 text-center tracking-tight mb-16">로그인</h2>
+        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-16">로그인</h2>
 
         <form onSubmit={handleLogin} className="space-y-8">
           {/* 아이디 */}
@@ -95,7 +95,7 @@ const Login = () => {
           {/* 로그인 버튼 */}
           <button
             type="submit"
-            className="w-full bg-black hover:bg-gray-800 text-white font-black text-sm tracking-widest py-4 transition-colors"
+            className="w-full bg-black hover:bg-white hover:text-black border border-black text-white font-black text-sm tracking-widest py-4 transition-colors"
           >
             로그인
           </button>

@@ -68,7 +68,7 @@ const Main = () => {
 
   /* --- 기획안 §4 실적 숫자 --- */
   const stats = [
-    { number: '11+', label: '전문가 조합원', desc: '박사학위 또는 국가전문자격 보유' },
+    { number: '11+', label: '전문가 조합원', desc: '박사학위 or 국가전문자격 보유' },
     { number: '10+', label: '평균 컨설팅 경력', desc: '스타트업/중소기업 컨설팅 분야' },
     { number: '130+', label: '기업 BM 진단/컨설팅', desc: '캠퍼스타운·창업중심대학 등' },
     { number: '3+', label: '연구용역 수행', desc: '공공기관, 대학교 등' },
@@ -111,13 +111,10 @@ const Main = () => {
             <div className="absolute inset-0 hidden md:block bg-linear-to-r from-black/60 via-black/40 to-black/15" />
 
             {/* 모바일 텍스트 */}
-            <div className="absolute inset-0 md:hidden flex flex-col justify-end px-8 pb-40">
+            <div className="absolute md:hidden flex flex-col px-8" style={{top: '60%'}}>
               <h1 className="text-[32px] font-bold text-white leading-tight tracking-tight mb-5">
                 {slide.mobileTitle}
               </h1>
-              <Link to="/inquiry" onClick={() => window.scrollTo(0, 0)} className="text-[12px] text-white/80 font-light flex items-center gap-2">
-                상담 문의하기 <span>→</span>
-              </Link>
             </div>
 
             {/* 데스크톱 텍스트 */}
@@ -154,8 +151,8 @@ const Main = () => {
           {/* 좌측: 타이틀 + 버튼 */}
           <div className="md:w-52 shrink-0 flex flex-col gap-8 md:gap-15">
             <div>
-              <h2 className="text-[44px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>최근 활동</h2>
-              <p className="text-[16px] text-gray-400 font-normal leading-6 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>최근 활동</h2>
+              <p className="text-[14px] md:text-[16px] text-gray-400 font-normal leading-5 md:leading-6 break-keep 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
               to="/gallery#lecture"
@@ -186,27 +183,27 @@ const Main = () => {
 
                 {/* 태그 — 모바일: absolute 좌상단, 데스크탑: relative */}
                 <div className="md:hidden absolute z-10 top-5 left-8">
-                  <span className="text-[11px] font-bold text-gray-400 tracking-widest">{item.tag}</span>
+                  <span className="text-[11px] font-bold text-white  tracking-widest">{item.tag}</span>
                 </div>
                 <div className="hidden md:block relative z-10">
-                  <span className="text-[11px] font-bold text-gray-400 tracking-widest">{item.tag}</span>
+                  <span className="text-[11px] font-bold text-white  tracking-widest">{item.tag}</span>
                 </div>
 
                 {/* 모바일: 제목 + 설명 묶음 */}
                 <div className="md:hidden absolute z-10 flex flex-col gap-2 left-8 right-8 bottom-10">
-                  <h3 className="text-[18px] font-bold text-white leading-snug break-keep">{item.title}</h3>
-                  <p className="text-[16px] text-white/70 font-light leading-relaxed break-keep line-clamp-2">{item.desc}</p>
+                  <h3 className="text-[18px] font-bold text-white leading-snug break-keep" style={{letterSpacing: '-1px'}}>{item.title}</h3>
+                  <p className="text-[16px] text-white/70 font-light leading-relaxed break-all line-clamp-2 text-justify" style={{letterSpacing: '-1px'}}>{item.desc}</p>
                 </div>
 
                 {/* 데스크탑: 제목 */}
                 <h3 className="hidden md:flex items-center absolute z-10 text-[18px] font-bold text-white leading-6.5 break-keep overflow-hidden"
-                  style={{width: '236px', height: '52px', bottom: 'calc(32px + 113px + 5px)', left: '20px'}}>
+                  style={{width: '236px', height: '52px', bottom: 'calc(32px + 113px + 5px)', left: '20px', letterSpacing: '-1px'}}>
                   {item.title}
                 </h3>
 
                 {/* 데스크탑: 설명 */}
-                <p className="hidden md:block absolute z-10 text-[14px] text-white/70 font-normal leading-6 break-keep overflow-hidden"
-                  style={{width: '236px', height: '113px', bottom: '32px', left: '20px'}}>
+                <p className="hidden md:block absolute z-10 text-[14px] text-white/70 font-normal leading-6 break-all overflow-hidden text-justify"
+                  style={{width: '236px', height: '113px', bottom: '32px', left: '20px', letterSpacing: '-1px'}}>
                   {item.desc}
                 </p>
               </Link>
@@ -217,7 +214,7 @@ const Main = () => {
           <Link
             to="/gallery#lecture"
             onClick={() => window.scrollTo(0, 0)}
-            className="md:hidden mt-4 mx-auto px-5 py-2 text-[16px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
+            className="md:hidden mt-4 mx-auto px-5 py-2 text-[13px] font-bold text-gray-950 tracking-widest border border-gray-400 rounded-full hover:bg-gray-950 hover:text-white hover:border-gray-950 transition-all"
           >
             전체 활동 보기
           </Link>
@@ -239,8 +236,8 @@ const Main = () => {
 
           {/* 라벨 */}
           <div className="md:w-80 shrink-0">
-            <h2 className="text-[44px] md:text-[32px] font-semibold text-white md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>조합 소개</h2>
-            <p className="text-[16px] text-white/50 font-normal leading-6">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
+            <h2 className="text-[24px] md:text-[32px] font-semibold text-white md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>조합 소개</h2>
+            <p className="text-[14px] md:text-[16px] text-white/50 font-normal leading-5 md:leading-6 break-keep">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/> 신뢰성있는 서비스를 제공합니다.</p>
           </div>
 
           {/* 통계 — 모바일: 2x2 중앙, 데스크탑: 4열 우측 */}
@@ -267,26 +264,26 @@ const Main = () => {
 
           {/* 헤딩 */}
           <div className="mb-8 md:mb-20">
-            <h2 className="text-[44px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>핵심 서비스</h2>
-            <p className="text-[16px] text-gray-400 font-normal leading-6 xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+            <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>핵심 서비스</h2>
+            <p className="text-[14px] md:text-[16px] text-gray-400 font-normal leading-5 md:leading-6 break-keep xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
 
           {/* 카드 그리드 */}
           <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap md:justify-center gap-3 md:gap-0" style={{marginBottom: '6.77vw'}} data-service-grid>
             <style>{`@media (min-width: 768px) { [data-service-grid] { gap: clamp(5px, calc((100% - 1200px) / 3), 35px); } }`}</style>
             {serviceCards.map((card, i) => (
-              <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start w-full aspect-[15/16] md:w-[calc(50%-8px)] md:h-50 md:aspect-auto lg:flex-1 lg:max-w-75 lg:h-auto lg:aspect-3/4">
+              <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start w-full h-64 md:h-auto md:w-[calc(50%-8px)] md:aspect-auto lg:flex-1 lg:max-w-75 lg:aspect-3/4">
                 <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">{card.icon}</div>
-                <h3 className="absolute text-left text-[18px] font-bold text-gray-950 leading-6.5 left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
-                <p className="absolute text-left text-[14px] text-gray-400 font-normal leading-6 left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
+                <h3 className="absolute text-left text-[18px] font-bold text-gray-950 leading-6.5 left-10 right-10 top-22.5 md:top-[45%] md:-translate-y-1/2">{card.title}</h3>
+                <p className="absolute text-left text-[14px] text-gray-400 font-normal leading-5.5 left-10 right-10 top-31.5 md:top-[calc(45%+26px)]">{card.desc}</p>
               </Link>
             ))}
           </div>
 
           {/* 하단 버튼 */}
           <Link to="/inquiry" onClick={() => window.scrollTo(0, 0)}
-            className="mx-auto flex items-center justify-center bg-gray-950 text-white font-bold text-[13px] tracking-widest uppercase rounded-lg hover:bg-gray-700 transition-all"
-            style={{width: '250px', height: '50px'}}>
+            className="mx-auto flex items-center justify-center bg-gray-950 hover:bg-white hover:text-black border border-black text-white font-bold text-[13px] tracking-widest uppercase rounded-lg transition-all"
+            style={{width: '250px', height: '50px', marginTop: '40px'}}>
             문의하기
           </Link>
 

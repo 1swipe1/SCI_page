@@ -25,8 +25,8 @@ const ForgotPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-3xl font-black text-gray-950 text-center tracking-tight mb-4">비밀번호 찾기</h2>
-        <p className="text-sm text-gray-400 text-center font-light mb-16">
+        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-4">비밀번호 찾기</h2>
+        <p className="text-[14px] md:text-[16px] text-gray-400 text-center font-light mb-16">
           가입한 이메일을 입력하면 재설정 링크를 보내드립니다.
         </p>
 
@@ -44,7 +44,7 @@ const ForgotPassword = () => {
             </p>
             <Link
               to="/login"
-              className="block w-full bg-black hover:bg-gray-800 text-white font-black text-sm tracking-widest py-4 transition-colors text-center"
+              className="block w-full bg-black hover:bg-white hover:text-black border border-black text-white font-black text-sm tracking-widest py-4 transition-colors text-center"
             >
               로그인으로 돌아가기
             </Link>
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black hover:bg-gray-800 disabled:bg-gray-300 text-white font-black text-sm tracking-widest py-4 transition-colors"
+              className="w-full bg-black hover:bg-white hover:text-black border border-black text-white font-black text-sm tracking-widest py-4 transition-colors disabled:bg-gray-300 disabled:border-gray-300 disabled:hover:text-white"
             >
               {loading ? '전송 중...' : '재설정 링크 받기'}
             </button>

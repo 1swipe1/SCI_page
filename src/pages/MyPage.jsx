@@ -44,7 +44,7 @@ const MyPage = () => {
 
       {/* 헤더 */}
       <section className="h-[35vh] min-h-72 bg-black flex items-center justify-center">
-        <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">MY PAGE</h1>
+        <h1 className="text-[24px] md:text-4xl font-black text-white tracking-[0.15em]">MY PAGE</h1>
       </section>
 
       <section className="py-16 site-px">
