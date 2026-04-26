@@ -106,9 +106,9 @@ const Main = () => {
             <img src={slide.img} alt="hero" className="w-full h-full object-cover" />
 
             {/* 모바일 오버레이 — 하단 그라데이션 */}
-            <div className="absolute inset-0 md:hidden bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+            <div className="absolute inset-0 md:hidden bg-linear-to-t from-black/60 via-black/25 to-black/5" />
             {/* 데스크톱 오버레이 — 좌측 그라데이션 */}
-            <div className="absolute inset-0 hidden md:block bg-linear-to-r from-black/80 via-black/60 to-black/30" />
+            <div className="absolute inset-0 hidden md:block bg-linear-to-r from-black/60 via-black/40 to-black/15" />
 
             {/* 모바일 텍스트 */}
             <div className="absolute inset-0 md:hidden flex flex-col justify-end px-8 pb-40">
@@ -123,10 +123,10 @@ const Main = () => {
             {/* 데스크톱 텍스트 */}
             <div className="absolute inset-0 hidden md:flex items-center site-px">
               <div className="max-w-330 mx-auto w-full -translate-y-3">
-                <h1 className="text-[60px] font-black text-white mb-1 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
+                <h1 className="text-[48px] font-extrabold text-white mb-1 drop-shadow-lg break-keep whitespace-nowrap leading-13.5" style={{letterSpacing: '-1px'}}>
                   {slide.title}
                 </h1>
-                <p className="text-[22px] text-white/75 leading-relaxed font-light break-keep whitespace-nowrap">
+                <p className="text-[18px] text-white/75 font-normal break-keep whitespace-nowrap leading-7.5">
                   {slide.desc}
                 </p>
               </div>
@@ -154,8 +154,8 @@ const Main = () => {
           {/* 좌측: 타이틀 + 버튼 */}
           <div className="md:w-52 shrink-0 flex flex-col gap-8 md:gap-15">
             <div>
-              <h2 className="text-[44px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>최근 활동</h2>
-              <p className="text-[20px] text-gray-400 font-light 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
+              <h2 className="text-[44px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>최근 활동</h2>
+              <p className="text-[16px] text-gray-400 font-normal leading-6 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
               to="/gallery#lecture"
@@ -167,13 +167,13 @@ const Main = () => {
           </div>
 
           {/* 카드 3개 */}
-          <div className="w-full flex flex-col md:flex-row md:flex-1 md:justify-end gap-3">
+          <div className="w-full flex flex-col md:flex-row md:flex-1 md:justify-end gap-3 md:gap-2.5">
             {recentActivities.map((item, i) => (
               <Link
                 to="/gallery#lecture"
                 key={i}
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-xl overflow-hidden w-full h-64 md:w-75 md:h-auto md:aspect-5/6 md:shrink-0 px-8 py-5 md:px-5"
+                className="group relative rounded-xl overflow-hidden w-full h-64 md:w-75 md:h-100 md:shrink-0 px-8 py-5 md:px-5"
               >
                 {/* 배경 이미지 */}
                 <img
@@ -199,13 +199,13 @@ const Main = () => {
                 </div>
 
                 {/* 데스크탑: 제목 */}
-                <h3 className="hidden md:flex items-center absolute z-10 text-[18px] font-bold text-white leading-snug break-keep overflow-hidden"
+                <h3 className="hidden md:flex items-center absolute z-10 text-[18px] font-bold text-white leading-6.5 break-keep overflow-hidden"
                   style={{width: '236px', height: '52px', bottom: 'calc(32px + 113px + 5px)', left: '20px'}}>
                   {item.title}
                 </h3>
 
                 {/* 데스크탑: 설명 */}
-                <p className="hidden md:block absolute z-10 text-[14px] text-white/70 font-light leading-relaxed break-keep overflow-hidden"
+                <p className="hidden md:block absolute z-10 text-[14px] text-white/70 font-normal leading-6 break-keep overflow-hidden"
                   style={{width: '236px', height: '113px', bottom: '32px', left: '20px'}}>
                   {item.desc}
                 </p>
@@ -239,19 +239,19 @@ const Main = () => {
 
           {/* 라벨 */}
           <div className="md:w-80 shrink-0">
-            <h2 className="text-[44px] md:text-[32px] font-bold text-white tracking-tighter" style={{marginBottom: '5px'}}>조합 소개</h2>
-            <p className="text-[18px] text-white/50 font-light">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
+            <h2 className="text-[44px] md:text-[32px] font-semibold text-white md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>조합 소개</h2>
+            <p className="text-[16px] text-white/50 font-normal leading-6">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
           </div>
 
           {/* 통계 — 모바일: 2x2 중앙, 데스크탑: 4열 우측 */}
           <div className="w-full md:ml-auto md:w-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 md:gap-x-4 text-center px-6 md:px-0">
             {stats.map((stat, i) => (
               <div key={i}>
-                <p className="font-bold text-white mb-1 leading-none">
-                  <span className="text-[38px] md:text-[64px]">{stat.number.replace('+', '')}</span>
-                  <span className="text-[28px] md:text-[48px]">+</span>
+                <p className="font-black text-white mb-1 leading-none">
+                  <span className="text-[28px] md:text-[42px]">{stat.number.replace('+', '')}</span>
+                  <span className="text-[22px] md:text-[32px]">+</span>
                 </p>
-                <p className="font-bold text-white/80 mb-0.5 text-[11px] md:text-[14px]">{stat.label}</p>
+                <p className="font-medium text-white/80 mb-0.5 text-[11px] md:text-[14px] md:leading-5">{stat.label}</p>
                 <p className="text-white/60 font-light text-[10px] md:text-[12px]">{stat.desc}</p>
               </div>
             ))}
@@ -261,14 +261,14 @@ const Main = () => {
       </section>
 
       {/* === 4. 핵심 서비스 — 좌측 정렬 헤딩 + 카드 그리드 === */}
-      <section className="relative site-px bg-white py-12 md:py-0" style={{height: 'auto'}} data-section="service">
+      <section className="relative site-px bg-white py-12 md:py-0" data-section="service">
         <style>{`@media (min-width: 768px) { [data-section="service"] { height: 920px; padding-top: 120px; padding-bottom: 120px; } }`}</style>
         <div className="max-w-330 mx-auto w-full">
 
           {/* 헤딩 */}
           <div className="mb-8 md:mb-20">
-            <h2 className="text-[44px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>핵심 서비스</h2>
-            <p className="text-[18px] text-gray-400 font-light xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+            <h2 className="text-[44px] md:text-[32px] font-semibold text-gray-950 md:leading-10" style={{marginBottom: '5px', letterSpacing: '-1px'}}>핵심 서비스</h2>
+            <p className="text-[16px] text-gray-400 font-normal leading-6 xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
 
           {/* 카드 그리드 */}
@@ -277,8 +277,8 @@ const Main = () => {
             {serviceCards.map((card, i) => (
               <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start w-full aspect-[15/16] md:w-[calc(50%-8px)] md:h-50 md:aspect-auto lg:flex-1 lg:max-w-75 lg:h-auto lg:aspect-3/4">
                 <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">{card.icon}</div>
-                <h3 className="absolute text-left text-[22px] font-bold text-gray-950 tracking-wide left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
-                <p className="absolute text-left text-[14px] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
+                <h3 className="absolute text-left text-[18px] font-bold text-gray-950 leading-6.5 left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
+                <p className="absolute text-left text-[14px] text-gray-400 font-normal leading-6 left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
               </Link>
             ))}
           </div>

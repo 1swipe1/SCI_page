@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+* {
+  font-family: 'Gothic A1', sans-serif;
+}
+
 .site-px {
   padding-left: clamp(26px, calc(-180px + 25vw), 300px);
   padding-right: clamp(26px, calc(-180px + 25vw), 300px);

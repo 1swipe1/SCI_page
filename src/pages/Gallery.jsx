@@ -123,26 +123,25 @@ const Gallery = () => {
       </nav>
 
       {/* 콘텐츠 */}
-      <section className="py-20 site-px">
-        <div className="max-w-5xl mx-auto">
+      {activeTab === 'lecture' ? (
+        <section data-section="gallery-lecture" className="py-16 px-6">
+          <style>{`@media (min-width: 768px) { [data-section="gallery-lecture"] { height: 1540px; padding-top: 125px; padding-bottom: 125px; padding-left: 420px; padding-right: 420px; } }`}</style>
 
-        {/* === 탭 1: 주요 수행 실적 === */}
-        {activeTab === 'lecture' && (
-          <div>
-            <div className="text-center mb-16">
-              <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">조합의 지난 활동</h2>
-              <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">조합의 지난 활동</h2>
+            <p className="text-gray-400 text-sm font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트입니다.</p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-              {projects.map((project) => (
+          {[projects.slice(0, 3), projects.slice(3)].map((row, rowIdx) => (
+            <div key={rowIdx} className="flex flex-col md:flex-row justify-center" style={{gap: '15px', marginBottom: rowIdx === 0 ? '40px' : '0'}}>
+              {row.map((project) => (
                 <div key={project.id} className="flex flex-col">
                   {/* 이미지 플레이스홀더 */}
-                  <div className="bg-gray-200 mb-2" style={{width: '17.188vw', height: '11.979vw'}} />
+                  <div className="bg-gray-200 w-full md:w-87.5" style={{height: '230px', marginBottom: '10px'}} />
                   {/* 텍스트 영역 */}
-                  <div className="flex flex-col overflow-hidden" style={{width: '17.188vw', height: '15.625vw'}}>
+                  <div className="flex flex-col w-full md:w-82.5" style={{height: '300px', overflow: 'hidden', paddingTop: '10px', paddingBottom: '10px'}}>
                     {/* 태그 */}
-                    <div className="flex flex-wrap gap-1.5 mb-1.5">
+                    <div className="flex flex-wrap gap-1.5 mb-3.75">
                       {project.tags.map((tag, i) => (
                         <span key={i} className="text-[12px] font-light tracking-widest uppercase" style={{ color: '#7C7C7C' }}>{tag}{i < project.tags.length - 1 && ' ·'}</span>
                       ))}
@@ -157,12 +156,11 @@ const Gallery = () => {
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* === 탭 2: 조합 활동 === */}
-        {activeTab === 'business' && (
-          <div>
+          ))}
+        </section>
+      ) : (
+        <section className="py-20 site-px">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">사업 분야 소개</h2>
               <p className="text-gray-400 text-sm font-light">어떤 일을 하는지, 간략하게 요약하는 페이지</p>
@@ -171,12 +169,10 @@ const Gallery = () => {
             <div className="space-y-8">
               {lectureItems.map((item, index) => (
                 <div key={item.id} style={index % 2 !== 0 ? { backgroundColor: '#F3F4F6' } : {}} className="rounded-2xl border border-gray-200 overflow-hidden p-10 md:p-12">
-                  {/* 상단: 카테고리 + 구분선 */}
                   <div className="flex items-center gap-6 mb-8">
                     <p className="text-xs text-gray-400 font-light tracking-widest shrink-0">{item.category}</p>
                     <hr className="border-gray-300 flex-1" />
                   </div>
-                  {/* 하단: 제목 + 본문 */}
                   <div className="flex flex-col md:flex-row gap-10 md:gap-16">
                     <div className="md:w-2/5 shrink-0">
                       <h3 className="text-xl md:text-2xl font-black text-gray-950 leading-snug whitespace-pre-line">{item.title}</h3>
@@ -192,10 +188,8 @@ const Gallery = () => {
               ))}
             </div>
           </div>
-        )}
-
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };
