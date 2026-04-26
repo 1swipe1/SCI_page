@@ -122,8 +122,8 @@ const Main = () => {
 
             {/* 데스크톱 텍스트 */}
             <div className="absolute inset-0 hidden md:flex items-center site-px">
-              <div className="max-w-330 mx-auto w-full">
-                <h1 className="text-[60px] font-black text-white mb-4 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
+              <div className="max-w-330 mx-auto w-full -translate-y-3">
+                <h1 className="text-[60px] font-black text-white mb-1 tracking-tighter drop-shadow-lg break-keep whitespace-nowrap">
                   {slide.title}
                 </h1>
                 <p className="text-[22px] text-white/75 leading-relaxed font-light break-keep whitespace-nowrap">
@@ -154,7 +154,7 @@ const Main = () => {
           {/* 좌측: 타이틀 + 버튼 */}
           <div className="md:w-52 shrink-0 flex flex-col gap-8 md:gap-15">
             <div>
-              <h2 className="text-[46px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>최근 활동</h2>
+              <h2 className="text-[44px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>최근 활동</h2>
               <p className="text-[20px] text-gray-400 font-light 2xl:whitespace-nowrap">기사단이 수행한 주요 프로젝트를 소개합니다.</p>
             </div>
             <Link
@@ -226,8 +226,8 @@ const Main = () => {
       </section>
 
       {/* === 3. 조합 소개 — 좌측 라벨 + 우측 숫자 === */}
-      <section className="relative site-px overflow-hidden py-16 md:py-0" style={{height: 'auto'}} data-section="intro">
-        <style>{`@media (min-width: 768px) { [data-section="intro"] { height: 470px; padding-top: 80px; padding-bottom: 80px; } }`}</style>
+      <section className="relative site-px overflow-hidden py-16 md:py-0" data-section="intro">
+        <style>{`@media (min-width: 768px) { [data-section="intro"] { height: 470px; padding-top: 72px; padding-bottom: 72px; } }`}</style>
         {/* 배경 이미지 + 오버레이 */}
         <img
           src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070"
@@ -239,20 +239,20 @@ const Main = () => {
 
           {/* 라벨 */}
           <div className="md:w-80 shrink-0">
-            <h2 className="text-[46px] md:text-[32px] font-bold text-white tracking-tighter" style={{marginBottom: '5px'}}>조합 소개</h2>
-            <p className="text-[20px] text-white/50 font-light">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
+            <h2 className="text-[44px] md:text-[32px] font-bold text-white tracking-tighter" style={{marginBottom: '5px'}}>조합 소개</h2>
+            <p className="text-[18px] text-white/50 font-light">과학기술인협동조합은 전문가들을 바탕으로<br className="md:hidden"/>신뢰성있는 서비스를 제공합니다.</p>
           </div>
 
           {/* 통계 — 모바일: 2x2 중앙, 데스크탑: 4열 우측 */}
-          <div className="w-full md:ml-auto md:w-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 md:gap-x-16 text-center px-6 md:px-0">
+          <div className="w-full md:ml-auto md:w-auto grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-4 md:gap-x-4 text-center px-6 md:px-0">
             {stats.map((stat, i) => (
               <div key={i}>
-                <p className="font-bold text-white mb-1">
+                <p className="font-bold text-white mb-1 leading-none">
                   <span className="text-[38px] md:text-[64px]">{stat.number.replace('+', '')}</span>
                   <span className="text-[28px] md:text-[48px]">+</span>
                 </p>
-                <p className="font-bold text-white/70 mb-0.5 text-[11px] md:text-[14px]">{stat.label}</p>
-                <p className="text-white/35 font-light text-[10px] md:text-[12px]">{stat.desc}</p>
+                <p className="font-bold text-white/80 mb-0.5 text-[11px] md:text-[14px]">{stat.label}</p>
+                <p className="text-white/60 font-light text-[10px] md:text-[12px]">{stat.desc}</p>
               </div>
             ))}
           </div>
@@ -267,8 +267,8 @@ const Main = () => {
 
           {/* 헤딩 */}
           <div className="mb-8 md:mb-20">
-            <h2 className="text-[46px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>핵심 서비스</h2>
-            <p className="text-[20px] text-gray-400 font-light xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
+            <h2 className="text-[44px] md:text-[32px] font-bold text-gray-950 tracking-tighter" style={{marginBottom: '5px'}}>핵심 서비스</h2>
+            <p className="text-[18px] text-gray-400 font-light xl:whitespace-nowrap">기관과 기업의 수요에 맞춘 원스톱 맞춤형 교육과 컨설팅을 제공합니다.</p>
           </div>
 
           {/* 카드 그리드 */}
@@ -278,7 +278,7 @@ const Main = () => {
               <Link to="/business" key={i} className="relative bg-white py-8 px-10 rounded-2xl border border-gray-950 hover:shadow-lg transition-all group flex flex-col items-start w-full aspect-[15/16] md:w-[calc(50%-8px)] md:h-50 md:aspect-auto lg:flex-1 lg:max-w-75 lg:h-auto lg:aspect-3/4">
                 <div className="absolute top-8 left-10 text-gray-300 group-hover:text-gray-900 transition-colors">{card.icon}</div>
                 <h3 className="absolute text-left text-[22px] font-bold text-gray-950 tracking-wide left-10 right-10" style={{top: '50%', transform: 'translateY(-50%)'}}>{card.title}</h3>
-                <p className="absolute text-left text-[16px] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
+                <p className="absolute text-left text-[14px] text-gray-400 font-light leading-relaxed left-10 right-10" style={{top: 'calc(50% + 26px)'}}>{card.desc}</p>
               </Link>
             ))}
           </div>
