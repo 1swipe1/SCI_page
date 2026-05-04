@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-4">비밀번호 찾기</h2>
+        <h2 className="text-[24px] md:text-3xl font-semibold text-gray-950 text-center tracking-tight mb-4">비밀번호 찾기</h2>
         <p className="text-[14px] md:text-[16px] text-gray-400 text-center font-light mb-16">
           가입한 이메일을 입력하면 재설정 링크를 보내드립니다.
         </p>

@@ -15,26 +15,42 @@ const Login = () => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       alert(error.message);
-    } else {
-      if (remember) {
-        localStorage.setItem('rememberMe', 'true');
-        sessionStorage.removeItem('activeSession');
-      } else {
-        localStorage.setItem('rememberMe', 'false');
-        sessionStorage.setItem('activeSession', '1');
-      }
-      if (data.user?.user_metadata?.role === 'admin') {
-        alert('관리자로 로그인했습니다.');
-      }
-      navigate("/");
+      return;
     }
+
+    // 관리자는 승인 체크 생략
+    if (data.user?.user_metadata?.role !== 'admin') {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('approved')
+        .eq('id', data.user.id)
+        .maybeSingle();
+
+      if (!profile?.approved) {
+        await supabase.auth.signOut();
+        alert('관리자 승인 대기 중입니다. 승인 후 로그인이 가능합니다.');
+        return;
+      }
+    }
+
+    if (remember) {
+      localStorage.setItem('rememberMe', 'true');
+      sessionStorage.removeItem('activeSession');
+    } else {
+      localStorage.setItem('rememberMe', 'false');
+      sessionStorage.setItem('activeSession', '1');
+    }
+    if (data.user?.user_metadata?.role === 'admin') {
+      alert('관리자로 로그인했습니다.');
+    }
+    navigate("/");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-16">로그인</h2>
+        <h2 className="text-[24px] md:text-3xl font-semibold text-gray-950 text-center tracking-tight mb-16">로그인</h2>
 
         <form onSubmit={handleLogin} className="space-y-8">
           {/* 아이디 */}

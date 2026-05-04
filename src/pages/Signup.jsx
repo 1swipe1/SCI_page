@@ -33,38 +33,22 @@ const Signup = () => {
 
     setLoading(true);
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: window.location.origin }
-    });
+    try {
+      const { data, error } = await supabase.functions.invoke('signup-user', {
+        body: { email, password, full_name: name, organization: org },
+      });
 
-    if (signUpError) {
-      if (signUpError.message.toLowerCase().includes('rate limit')) {
-        setError("잠시 후 다시 시도해주세요. (이메일 발송 한도 초과)");
-      } else {
-        setError(signUpError.message);
+      if (error || data?.error) {
+        setError(data?.error || "오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        return;
       }
+
+      setEmailSent(true);
+    } catch (e) {
+      setError("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
       setLoading(false);
-      return;
     }
-
-    // 이메일 중복: Supabase는 이미 가입된 이메일에 identities: [] 반환
-    if (data.user?.identities?.length === 0) {
-      setError("이미 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.");
-      setLoading(false);
-      return;
-    }
-
-    // 프로필 저장
-    if (data.user) {
-      await supabase.from("profiles").insert([
-        { id: data.user.id, full_name: name, organization: org }
-      ]);
-    }
-
-    setLoading(false);
-    setEmailSent(true);
   };
 
   // 인증 메일 발송 완료 화면
@@ -77,13 +61,12 @@ const Signup = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-black text-gray-950 tracking-tight mb-3">이메일을 확인해주세요</h2>
+          <h2 className="text-2xl font-semibold text-gray-950 tracking-tight mb-3">가입 신청이 완료되었습니다</h2>
           <p className="text-[14px] text-gray-400 font-light leading-relaxed mb-2">
-            <span className="text-gray-700 font-medium">{email}</span> 으로<br/>
-            인증 링크를 발송했습니다.
+            관리자 승인 후 로그인이 가능합니다.
           </p>
           <p className="text-[13px] text-gray-400 font-light mb-10">
-            링크를 클릭하면 회원가입이 완료됩니다.
+            승인이 완료되면 로그인하실 수 있습니다.
           </p>
           <Link
             to="/login"
@@ -100,7 +83,7 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6 pb-24 md:pb-0">
       <div className="w-full max-w-sm">
 
-        <h2 className="text-[24px] md:text-3xl font-black text-gray-950 text-center tracking-tight mb-16">회원가입</h2>
+        <h2 className="text-[24px] md:text-3xl font-semibold text-gray-950 text-center tracking-tight mb-16">회원가입</h2>
 
         <form onSubmit={handleSignup} className="space-y-8">
 

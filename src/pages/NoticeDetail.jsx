@@ -129,7 +129,7 @@ const NoticeDetail = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">공지사항</h1>
+        <h1 className="relative text-3xl md:text-4xl font-extrabold text-white tracking-[0.15em]">공지사항</h1>
       </section>
 
       {/* 게시글 상세 영역 */}
@@ -155,7 +155,7 @@ const NoticeDetail = () => {
               </label>
             </div>
           ) : (
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-tight">
               {notice.title}
               {notice.important && (
                 <span className="ml-3 text-sm font-black bg-[#1a4a9c]/10 text-[#1a4a9c] px-3 py-1 rounded-md align-middle">

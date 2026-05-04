@@ -111,7 +111,7 @@ const Notice = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">
+        <h1 className="relative text-3xl md:text-4xl font-extrabold text-white tracking-[0.15em]">
           공지사항
         </h1>
       </section>
@@ -237,7 +237,7 @@ const Notice = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
-              <h2 className="text-xl font-black text-gray-900">공지사항 작성</h2>
+              <h2 className="text-xl font-semibold text-gray-900">공지사항 작성</h2>
               <button
                 onClick={() => setShowWriteModal(false)}
                 className="text-gray-400 hover:text-gray-700 text-2xl leading-none"

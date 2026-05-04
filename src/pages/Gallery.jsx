@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+
+const chunkArray = (arr, size) => {
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+  return chunks;
+};
 
 const Gallery = () => {
   const { hash } = useLocation();
   const [activeTab, setActiveTab] = useState('business');
+  const [activities, setActivities] = useState([]);
+  const [activitiesLoading, setActivitiesLoading] = useState(true);
 
   useEffect(() => {
     if (hash === '#lecture') {
@@ -14,38 +23,19 @@ const Gallery = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [hash]);
 
-  const projects = [
-    {
-      id: 1,
-      title: <>캠퍼스타운 입주기업<br/>진단 및 BM 분석</>,
-      tags: ['컨설팅', 'BM분석', '스타트업'],
-      summary: '캠퍼스타운 입주 스타트업 60개 기업을 대상으로 경영 현황 진단과 비즈니스 모델 분석을 수행하였습니다. 기업별 강점/약점을 도출하고 맞춤형 성장 전략을 제시하였습니다.',
-    },
-    {
-      id: 2,
-      title: '소상공인 성장지원 온라인 교육',
-      tags: ['교육', '소상공인', '온라인'],
-      summary: '소상공인을 대상으로 한 성장지원 온라인 교육 프로그램을 기획하고 운영하였습니다. 현장 중심의 실무 교육으로 소상공인의 경영역량 강화를 지원하였습니다.',
-    },
-    {
-      id: 3,
-      title: <>OO대학교 창업보육센터<br/> Startup-Booster Academy 운영</>,
-      tags: ['교육', '창업보육', '대학'],
-      summary: 'OO대학교 창업보육센터 Biz-Up 프로그램의 운영사로서 창업기업 대상 전문 멘토링, 교육, 사업화 지원을 수행하였습니다.',
-    },
-    {
-      id: 4,
-      title: <>중소벤처기업 대상<br/>공공연수의 적정 비용 기준 연구</>,
-      tags: ['연구용역', '정책연구', '원가분석'],
-      summary: '중소벤처기업 재직자 대상 공공연수 사업의 적정 비용 기준을 수립하기 위한 연구용역을 수행하였습니다. 연수사업 현황 분석, 유관기관 사례 비교, 원가모형 구축 및 단가 산정, 정책 활용 전략 도출까지 전 과정을 수행하였습니다.',
-    },
-    {
-      id: 5,
-      title: <>OO대학교 창업중심대학<br/>창업기업 성과점검 및 컨설팅 용역</>,
-      tags: ['컨설팅', '창업기업진단', '대학'],
-      summary: 'OO대학교 창업중심대학 선정 창업기업 70개사를 대상으로 전문가 1:1 심층 진단 및 컨설팅을 총괄 운영하였습니다. 기업별 성과 달성도 점검, 비즈니스모델 변화 진단, 차년도 성장전략 수립을 지원하고 종합 결과보고서를 작성하였습니다.',
-    },
-  ];
+  useEffect(() => {
+    const fetchActivities = async () => {
+      setActivitiesLoading(true);
+      const { data } = await supabase
+        .from('activities')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .order('created_at', { ascending: true });
+      setActivities(data || []);
+      setActivitiesLoading(false);
+    };
+    fetchActivities();
+  }, []);
 
   const lectureItems = [
     {
@@ -97,7 +87,7 @@ const Gallery = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">조합 활동</h1>
+        <h1 className="relative text-3xl md:text-4xl font-extrabold text-white tracking-[0.15em]">{activeTab === 'business' ? '사업 분야 소개' : '조합 활동'}</h1>
       </section>
 
       {/* 탭 네비게이션 */}
@@ -125,45 +115,57 @@ const Gallery = () => {
       {/* 콘텐츠 */}
       {activeTab === 'lecture' ? (
         <section data-section="gallery-lecture" className="py-16 px-6">
-          <style>{`@media (min-width: 768px) { [data-section="gallery-lecture"] { height: 1540px; padding-top: 125px; padding-bottom: 125px; padding-left: 420px; padding-right: 420px; } }`}</style>
+          <style>{`@media (min-width: 768px) { [data-section="gallery-lecture"] { padding-top: 125px; padding-bottom: 125px; padding-left: 420px; padding-right: 420px; } }`}</style>
 
           <div className="text-center mb-16">
-            <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">조합의 지난 활동</h2>
+            <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-1 tracking-tighter">조합의 지난 활동</h2>
             <p className="text-[14px] md:text-[16px] text-gray-400 font-light">기사단이 수행한 컨설팅·강의·연구용역 프로젝트</p>
           </div>
 
-          {[projects.slice(0, 3), projects.slice(3)].map((row, rowIdx) => (
-            <div key={rowIdx} className="flex flex-col md:flex-row justify-center" style={{gap: '15px', marginBottom: rowIdx === 0 ? '40px' : '0'}}>
-              {row.map((project) => (
-                <div key={project.id} className="flex flex-col">
-                  {/* 이미지 플레이스홀더 */}
-                  <div className="bg-gray-200 w-full md:w-87.5" style={{height: '230px', marginBottom: '10px'}} />
-                  {/* 텍스트 영역 */}
-                  <div className="flex flex-col w-full md:w-82.5" style={{height: '300px', overflow: 'hidden', paddingTop: '10px', paddingBottom: '10px'}}>
-                    {/* 태그 */}
-                    <div className="flex flex-wrap gap-1.5 mb-3.75">
-                      {project.tags.map((tag, i) => (
-                        <span key={i} className="text-[12px] font-light tracking-widest uppercase" style={{ color: '#7C7C7C' }}>{tag}{i < project.tags.length - 1 && ' ·'}</span>
-                      ))}
+          {activitiesLoading ? (
+            <p className="text-sm text-gray-400 font-light py-10 text-center">불러오는 중...</p>
+          ) : activities.length === 0 ? (
+            <p className="text-sm text-gray-300 font-light py-10 text-center">등록된 활동이 없습니다.</p>
+          ) : (
+            chunkArray(activities, 3).map((row, rowIdx) => (
+              <div key={rowIdx} className="flex flex-col md:flex-row justify-center" style={{gap: '15px', marginBottom: rowIdx < chunkArray(activities, 3).length - 1 ? '40px' : '0'}}>
+                {row.map((project) => (
+                  <div key={project.id} className="flex flex-col">
+                    {/* 이미지 */}
+                    {project.image_url ? (
+                      <img src={project.image_url} alt={project.title} className="w-full md:w-87.5 object-cover" style={{height: '230px', marginBottom: '10px'}} />
+                    ) : (
+                      <div className="bg-gray-200 w-full md:w-87.5" style={{height: '230px', marginBottom: '10px'}} />
+                    )}
+                    {/* 텍스트 영역 */}
+                    <div className="flex flex-col w-full md:w-82.5" style={{height: '300px', overflow: 'hidden', paddingTop: '10px', paddingBottom: '10px'}}>
+                      {/* 태그 */}
+                      <div className="flex flex-wrap gap-1.5 mb-3.75">
+                        {project.tags?.map((tag, i) => (
+                          <span key={i} className="text-[12px] font-light tracking-widest uppercase" style={{ color: '#7C7C7C' }}>{tag}{i < project.tags.length - 1 && ' ·'}</span>
+                        ))}
+                      </div>
+                      {/* 제목 + 구분선 */}
+                      <div className="border-b border-gray-300 mb-4" style={{paddingBottom: '15px'}}>
+                        <div className="flex items-center" style={{height: '47px'}}>
+                          <h3 className="text-[17px] font-bold leading-snug whitespace-pre-line" style={{ color: '#111111' }}>{project.title}</h3>
+                        </div>
+                      </div>
+                      {/* 요약 */}
+                      <p className="text-[16px] font-light leading-relaxed break-all flex-1 text-justify overflow-hidden" style={{ color: '#7C7C7C' }}>{project.summary}</p>
                     </div>
-                    {/* 제목 + 구분선 */}
-                    <div className="flex items-center border-b border-gray-300 mb-4" style={{paddingBottom: '15px'}}>
-                      <h3 className="text-[17px] font-bold leading-snug" style={{ color: '#111111' }}>{project.title}</h3>
-                    </div>
-                    {/* 요약 */}
-                    <p className="text-[16px] font-light leading-relaxed break-all flex-1 text-justify overflow-hidden" style={{ color: '#7C7C7C' }}>{project.summary}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))
+          )}
         </section>
       ) : (
         <section className="site-px py-16 md:py-0" data-section="gallery-business">
           <style>{`@media (min-width: 768px) { [data-section="gallery-business"] { padding-top: 125px; padding-bottom: 125px; } }`}</style>
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">사업 분야 소개</h2>
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-1 tracking-tighter">사업 분야 소개</h2>
               <p className="text-[14px] md:text-[16px] text-gray-400 font-light">어떤 일을 하는지, 간략하게 요약하는 페이지</p>
             </div>
 

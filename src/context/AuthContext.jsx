@@ -32,9 +32,8 @@ export const AuthProvider = ({ children }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Supabase 대시보드 > Authentication > Users > 해당 유저 > user_metadata 에
-  // {"role": "admin"} 으로 설정된 유저만 어드민으로 인정
-  const isAdmin = user?.user_metadata?.role === 'admin';
+  // app_metadata는 서비스 롤(서버)만 수정 가능 — 클라이언트에서 위변조 불가
+  const isAdmin = user?.app_metadata?.role === 'admin';
 
   return (
     <AuthContext.Provider value={{ user, isAdmin, loading }}>

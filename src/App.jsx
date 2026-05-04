@@ -13,6 +13,8 @@ import NoticeDetail from './pages/NoticeDetail';
 import BusinessDetail from './pages/BusinessDetail';
 import Admin from './pages/Admin';
 import InquiryAdmin from './pages/InquiryAdmin';
+import AdminUsers from './pages/AdminUsers';
+import AdminActivities from './pages/AdminActivities';
 import MyPage from './pages/MyPage';
 import ForgotPassword from './pages/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
@@ -37,6 +39,8 @@ function App() {
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
             <Route path="admin/inquiries" element={<ProtectedRoute adminOnly><InquiryAdmin /></ProtectedRoute>} />
+            <Route path="admin/users" element={<ProtectedRoute adminOnly><AdminUsers /></ProtectedRoute>} />
+            <Route path="admin/activities" element={<ProtectedRoute adminOnly><AdminActivities /></ProtectedRoute>} />
             <Route path="mypage" element={<ProtectedRoute><MyPage /></ProtectedRoute>} />
           </Route>
         </Routes>

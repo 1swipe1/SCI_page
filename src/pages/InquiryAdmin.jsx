@@ -1,5 +1,111 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+
+/* 이메일 미리보기 모달 */
+const EmailPreviewModal = ({ selected, reply, onConfirm, onCancel, saving }) => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+    <div className="bg-white w-full max-w-xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl">
+
+      {/* 모달 헤더 */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
+        <p className="text-[13px] font-bold text-gray-950 tracking-tight">이메일 미리보기</p>
+        <button onClick={onCancel} className="text-gray-400 hover:text-gray-900 transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      {/* 이메일 미리보기 */}
+      <div className="overflow-y-auto flex-1 bg-gray-100 p-4">
+        <div className="bg-white max-w-[520px] mx-auto overflow-hidden text-left" style={{fontFamily:"'Apple SD Gothic Neo','Malgun Gothic',Arial,sans-serif"}}>
+
+          {/* 이메일 헤더 */}
+          <div style={{backgroundColor:'#111111', padding:'24px 32px'}}>
+            <p style={{margin:0, color:'#ffffff', fontSize:'11px', fontWeight:700, letterSpacing:'0.2em'}}>
+              과학기술인협동조합 기술사업화지원단
+            </p>
+          </div>
+
+          {/* 인사말 */}
+          <div style={{padding:'32px 32px 0'}}>
+            <p style={{margin:'0 0 4px', fontSize:'20px', fontWeight:700, color:'#111111', letterSpacing:'-0.5px'}}>
+              문의하신 내용에 답변드립니다
+            </p>
+            <p style={{margin:'10px 0 0', fontSize:'13px', color:'#888888', lineHeight:1.7}}>
+              안녕하세요, <strong style={{color:'#333333'}}>{selected.name || '고객'}</strong>님.<br/>
+              기사단에 문의해 주셔서 감사합니다. 아래와 같이 답변 드립니다.
+            </p>
+          </div>
+
+          <div style={{padding:'24px 32px 0'}}>
+            <hr style={{border:'none', borderTop:'1px solid #eeeeee', margin:0}}/>
+          </div>
+
+          {/* 원본 문의 */}
+          <div style={{padding:'24px 32px 0'}}>
+            <p style={{margin:'0 0 8px', fontSize:'11px', fontWeight:700, color:'#aaaaaa', letterSpacing:'0.15em'}}>문의 내용</p>
+            <p style={{margin:'0 0 6px', fontSize:'14px', fontWeight:700, color:'#222222'}}>{selected.subject || '(제목 없음)'}</p>
+            <p style={{margin:0, fontSize:'13px', color:'#888888', lineHeight:1.8, whiteSpace:'pre-wrap'}}>{selected.message || '-'}</p>
+          </div>
+
+          <div style={{padding:'24px 32px 0'}}>
+            <hr style={{border:'none', borderTop:'1px solid #eeeeee', margin:0}}/>
+          </div>
+
+          {/* 답변 */}
+          <div style={{padding:'24px 32px 0'}}>
+            <p style={{margin:'0 0 12px', fontSize:'11px', fontWeight:700, color:'#aaaaaa', letterSpacing:'0.15em'}}>답변</p>
+            <div style={{backgroundColor:'#f8f8f8', borderLeft:'3px solid #111111', padding:'16px 20px'}}>
+              <p style={{margin:0, fontSize:'14px', color:'#222222', lineHeight:1.9, whiteSpace:'pre-wrap'}}>{reply}</p>
+            </div>
+          </div>
+
+          {/* 추가 문의 */}
+          <div style={{padding:'24px 32px'}}>
+            <p style={{margin:0, fontSize:'13px', color:'#888888', lineHeight:1.8}}>
+              추가로 궁금하신 점이 있으시면 언제든지 문의해 주세요.<br/>
+              <span style={{color:'#111111', fontWeight:700}}>kisadan01@naver.com</span>
+            </p>
+          </div>
+
+          {/* 푸터 */}
+          <div style={{backgroundColor:'#f8f8f8', padding:'16px 32px', borderTop:'1px solid #eeeeee'}}>
+            <p style={{margin:0, fontSize:'11px', color:'#bbbbbb', lineHeight:1.8}}>
+              본 메일은 발신 전용입니다. 직접 회신하지 마시고 위 이메일 주소로 연락주세요.<br/>
+              경기도 용인시 기흥구 강남로 12, 805호 &nbsp;|&nbsp; Tel. 031-322-2357
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 수신자 + 버튼 */}
+      <div className="px-6 py-4 border-t border-gray-100 shrink-0">
+        <p className="text-[12px] text-gray-400 font-light mb-3">
+          수신: <span className="text-gray-700 font-medium">{selected.email}</span>
+        </p>
+        <div className="flex gap-3">
+          <button
+            onClick={onCancel}
+            className="flex-1 py-3 border border-gray-200 text-gray-500 text-[13px] font-bold tracking-widest rounded-xl hover:border-gray-400 transition-colors"
+          >
+            취소
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={saving}
+            className="flex-1 py-3 bg-gray-950 text-white text-[13px] font-bold tracking-widest rounded-xl hover:bg-gray-700 transition-colors disabled:bg-gray-300"
+          >
+            {saving ? '발송 중...' : '저장 및 발송'}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+);
 
 const InquiryAdmin = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -7,6 +113,7 @@ const InquiryAdmin = () => {
   const [reply, setReply] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     fetchInquiries();
@@ -26,10 +133,10 @@ const InquiryAdmin = () => {
   const openInquiry = (item) => {
     setSelected(item);
     setReply(item.reply || '');
+    setShowPreview(false);
   };
 
   const handleReply = async () => {
-    if (!reply.trim()) return;
     setSaving(true);
     const { error } = await supabase
       .from('inquiries')
@@ -40,7 +147,21 @@ const InquiryAdmin = () => {
       const updated = { ...selected, reply, replied_at: new Date().toISOString() };
       setSelected(updated);
       setInquiries((prev) => prev.map((i) => (i.id === updated.id ? updated : i)));
-      alert('답변이 저장되었습니다.');
+
+      if (selected.email) {
+        await supabase.functions.invoke('reply-inquiry', {
+          body: {
+            name: selected.name,
+            email: selected.email,
+            subject: selected.subject,
+            message: selected.message,
+            reply,
+          },
+        });
+      }
+
+      setShowPreview(false);
+      alert('답변이 저장되고 이메일이 발송되었습니다.');
     } else {
       alert('저장 실패: ' + error.message);
     }
@@ -66,9 +187,24 @@ const InquiryAdmin = () => {
   return (
     <div className="bg-white min-h-screen">
 
+      {showPreview && selected && (
+        <EmailPreviewModal
+          selected={selected}
+          reply={reply}
+          onConfirm={handleReply}
+          onCancel={() => setShowPreview(false)}
+          saving={saving}
+        />
+      )}
+
       {/* 헤더 */}
-      <section className="h-[35vh] min-h-72 bg-black flex items-center justify-center">
-        <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">상담 문의 관리</h1>
+      <section className="h-[35vh] min-h-72 bg-black flex flex-col items-center justify-center gap-6">
+        <h1 className="text-[24px] md:text-4xl font-extrabold text-white tracking-[0.15em]">상담 문의 관리</h1>
+        <div className="flex gap-4 flex-wrap justify-center">
+          <Link to="/admin" className="px-6 py-2.5 border border-white/30 text-white/70 text-[13px] font-bold tracking-widest uppercase hover:border-white hover:text-white transition-all rounded-full">공지 작성</Link>
+          <Link to="/admin/activities" className="px-6 py-2.5 border border-white/30 text-white/70 text-[13px] font-bold tracking-widest uppercase hover:border-white hover:text-white transition-all rounded-full">조합 활동</Link>
+          <Link to="/admin/users" className="px-6 py-2.5 border border-white/30 text-white/70 text-[13px] font-bold tracking-widest uppercase hover:border-white hover:text-white transition-all rounded-full">회원 관리</Link>
+        </div>
       </section>
 
       <section className="py-16 site-px">
@@ -77,7 +213,7 @@ const InquiryAdmin = () => {
           {/* 좌측: 문의 목록 */}
           <div className="w-full md:w-2/5 shrink-0">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-[18px] font-bold text-gray-950 tracking-tight">문의 목록</h2>
+              <h2 className="text-[18px] font-semibold text-gray-950 tracking-tight">문의 목록</h2>
               <span className="text-xs text-gray-400 font-light">총 {inquiries.length}건</span>
             </div>
 
@@ -188,11 +324,11 @@ const InquiryAdmin = () => {
                     onChange={(e) => setReply(e.target.value)}
                   />
                   <button
-                    onClick={handleReply}
-                    disabled={saving || !reply.trim()}
+                    onClick={() => setShowPreview(true)}
+                    disabled={!reply.trim()}
                     className="mt-4 px-8 py-3 bg-gray-950 text-white text-[13px] font-bold tracking-widest uppercase rounded-xl hover:bg-gray-700 transition-colors disabled:bg-gray-300"
                   >
-                    {saving ? '저장 중...' : selected.reply ? '답변 수정' : '답변 저장'}
+                    {selected.reply ? '답변 수정 · 미리보기' : '답변 미리보기'}
                   </button>
                 </div>
 

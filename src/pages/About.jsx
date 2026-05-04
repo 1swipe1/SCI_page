@@ -81,7 +81,7 @@ const About = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative text-3xl md:text-4xl font-black text-white tracking-[0.15em]">
+        <h1 className="relative text-3xl md:text-4xl font-extrabold text-white tracking-[0.15em]">
           조합 소개
         </h1>
       </section>
@@ -117,7 +117,7 @@ const About = () => {
         className="py-16 site-px bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-4xl mx-auto w-full md:bg-gray-50 md:rounded-2xl md:p-14">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">인사말</h2>
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-14 tracking-tighter text-center">인사말</h2>
           <div className="text-[14px] text-gray-950 font-normal leading-loose break-keep tracking-wide space-y-4">
             <p>과학기술인협동조합 기술사업화지원단(기사단)은 관련 분야 박사학위 또는 공인 국가전문자격을 보유한 전문가들이 함께하는 과학기술인협동조합입니다. 창업지원 공공기관 경력자, 스타트업 및 중소기업 컨설팅 10년 이상의 경험과 노하우, 그리고 산·학·관에 걸친 폭넓은 네트워크를 바탕으로 고객의 과제에 최적의 솔루션을 제공합니다.<br/>기술사업화지원단은 이러한 축적된 전문성과 현장 실무 경험, 실행력 있는 네트워크를 바탕으로 창업기업 및 중소기업의 실질적인 경영성과 도출을 지원하기 위해 다양한 분야의 컨설팅과 교육 서비스를 제공합니다.</p>
 
@@ -151,7 +151,7 @@ const About = () => {
         className="py-16 site-px bg-gray-50 scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-4xl mx-auto w-full">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">소개</h2>          <img
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-14 tracking-tighter text-center">소개</h2>          <img
             src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070"
             alt="Intro"
             className="w-full h-40 object-cover mb-10"
@@ -194,7 +194,7 @@ const About = () => {
         className="pt-16 pb-20 site-px bg-white scroll-mt-32 md:scroll-mt-26 flex items-center"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-14 tracking-tighter text-center">조직도</h2>          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-14 tracking-tighter text-center">조직도</h2>          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
             <DeptCard label="조합이사장" />
             <DeptCard label="컨설팅단" />
             <DeptCard label="교육지원단" />
@@ -212,7 +212,7 @@ const About = () => {
         className="pt-16 pb-24 site-px bg-gray-50 scroll-mt-32 md:scroll-mt-26"
       >
         <div className="max-w-5xl mx-auto w-full text-center">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-1 tracking-tighter text-center">인증 현황</h2>
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-1 tracking-tighter text-center">인증 현황</h2>
           <p className="text-[14px] md:text-[16px] text-gray-400 font-light mb-12 text-center">기술사업화지원단이 보유한 공인 인증 현황입니다.</p>
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-hide md:grid md:grid-cols-3 md:gap-8 md:overflow-visible">
             {[

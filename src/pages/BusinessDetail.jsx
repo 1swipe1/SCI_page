@@ -115,7 +115,7 @@ const BusinessDetail = () => {
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative text-center">
           <p className="text-white/60 text-sm font-light tracking-[0.2em] mb-2">사업 분야 소개</p>
-          <h1 className="text-[20px] md:text-4xl font-black text-white tracking-tight break-keep">
+          <h1 className="text-[20px] md:text-4xl font-extrabold text-white tracking-tight break-keep">
             {area.subtitle}
           </h1>
         </div>

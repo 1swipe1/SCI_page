@@ -145,6 +145,8 @@ const Header = () => {
               <>
                 <Link to="/admin" onClick={handleNavClick} className="hover:text-black">ADMIN</Link>
                 <Link to="/admin/inquiries" onClick={handleNavClick} className="hover:text-black">문의사항</Link>
+                <Link to="/admin/activities" onClick={handleNavClick} className="hover:text-black">조합활동</Link>
+                <Link to="/admin/users" onClick={handleNavClick} className="hover:text-black">회원관리</Link>
                 <button onClick={handleLogout} className="hover:text-red-500">LOGOUT</button>
               </>
             ) : user ? (

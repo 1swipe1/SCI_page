@@ -25,6 +25,7 @@ const Members = () => {
       name: "백종일",
       role: "컨설팅지원 단장",
       image: "images/members/백종일.jpg",
+      objectPosition: "center 30%",
       career: [
         "경영컨설팅학 박사",
         "아주대 창업벤처 전담교수",
@@ -118,43 +119,53 @@ const Members = () => {
         />
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative text-center">
-          <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.15em]">조합원 소개</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-[0.15em]">조합원 소개</h1>
         </div>
       </section>
 
       {/* 2. 섹션 타이틀 */}
-      <section className="pt-24 pb-10 text-center site-px">
-        <h2 className="text-[24px] md:text-[32px] font-bold text-gray-950 mb-1 tracking-tighter">함께하는 분</h2>
-        <p className="text-[14px] md:text-[16px] text-gray-400 font-light">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>      </section>
+      <section className="text-center site-px" style={{paddingTop:'clamp(48px,8vw,96px)', paddingBottom:'clamp(20px,4vw,40px)'}}>
+        <h2 className="text-[24px] md:text-[32px] font-semibold text-gray-950 mb-1 tracking-tighter">함께하는 분</h2>
+        <p className="text-[14px] md:text-[16px] text-gray-400 font-light">기술사업화의 각 단계별 최고의 전문가들이 한 팀으로.</p>
+      </section>
 
       {/* 3. 멤버 카드 그리드 */}
-      <section className="pb-32 site-px">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
+      <section className="site-px" style={{paddingBottom:'clamp(64px,10vw,128px)'}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{columnGap:'clamp(16px,3vw,40px)', rowGap:'clamp(40px,6vw,80px)'}}>
           {allMembers.map((member) => (
             <div key={member.id} className="flex flex-col">
 
               {/* 프로필 이미지 */}
-              <div className="w-full aspect-3/4 bg-gray-300 overflow-hidden">
+              <div className="w-full bg-gray-300 overflow-hidden relative select-none" style={{height:'clamp(340px,40vw,520px)'}}>
                 {member.image && (
                   <img
                     src={`${BASE}${member.image}`}
                     alt={member.name}
                     className="w-full h-full object-cover grayscale"
+                    style={{objectPosition: member.objectPosition || 'top center'}}
+                    draggable="false"
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 )}
+                {/* 이미지 복사/드래그 방지 오버레이 */}
+                <div
+                  className="absolute inset-0"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                />
               </div>
 
               {/* 이름 | 직책 + 구분선 */}
-              <div className="mt-6 pb-4 border-b border-gray-300">
-                <h3 className="text-[18px] font-bold text-gray-950 tracking-wide">
+              <div className="mt-[3.5%] pb-[3%] border-b border-gray-300">
+                <h3 className="font-bold text-gray-950 tracking-wide" style={{fontSize:'clamp(13px,1.7vw,18px)'}}>
                   {member.name} &nbsp;｜&nbsp; {member.role}
                 </h3>
               </div>
 
               {/* 경력 */}
-              <ul className="mt-5 space-y-0.5">
+              <ul className="mt-[4%] space-y-0.5">
                 {member.career.map((line, i) => (
-                  <li key={i} className="text-[14px] text-gray-500 font-light tracking-wide flex items-start gap-1.5">
+                  <li key={i} className="text-gray-500 font-light tracking-wide flex items-start gap-1.5" style={{fontSize:'clamp(11px,1.25vw,14px)'}}>
                     <span className="mt-0.75 shrink-0">·</span>
                     <span>{line}</span>
                   </li>
@@ -162,11 +173,13 @@ const Members = () => {
               </ul>
 
               {/* 전문분야 */}
-              <div className="mt-6">
-                <p className="text-[14px] font-bold text-gray-950 tracking-wide mb-2">[전문분야]</p>
+              <div className="mt-[5%]">
+                <p className="font-bold text-gray-950 tracking-wide mb-2" style={{fontSize:'clamp(11px,1.25vw,14px)'}}>
+                  [전문분야]
+                </p>
                 <ul className="space-y-0.5">
                   {member.specialty.map((s, i) => (
-                    <li key={i} className="text-[14px] text-gray-500 font-light tracking-wide flex items-start gap-1.5">
+                    <li key={i} className="text-gray-500 font-light tracking-wide flex items-start gap-1.5" style={{fontSize:'clamp(11px,1.25vw,14px)'}}>
                       <span className="mt-0.75 shrink-0">·</span>
                       <span>{s}</span>
                     </li>

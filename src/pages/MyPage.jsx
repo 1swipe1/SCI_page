@@ -44,7 +44,7 @@ const MyPage = () => {
 
       {/* 헤더 */}
       <section className="h-[35vh] min-h-72 bg-black flex items-center justify-center">
-        <h1 className="text-[24px] md:text-4xl font-black text-white tracking-[0.15em]">MY PAGE</h1>
+        <h1 className="text-[24px] md:text-4xl font-extrabold text-white tracking-[0.15em]">MY PAGE</h1>
       </section>
 
       <section className="py-16 site-px">
@@ -67,7 +67,7 @@ const MyPage = () => {
 
           {/* 문의 내역 */}
           <div>
-            <h2 className="text-[18px] font-bold text-gray-950 tracking-tight mb-5">나의 문의 내역</h2>
+            <h2 className="text-[18px] font-semibold text-gray-950 tracking-tight mb-5">나의 문의 내역</h2>
 
             {loading ? (
               <p className="text-sm text-gray-400 font-light py-10 text-center">불러오는 중...</p>

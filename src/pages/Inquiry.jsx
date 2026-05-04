@@ -24,7 +24,7 @@ const Inquiry = () => {
         .from('profiles')
         .select('full_name, organization')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
       setFormData((prev) => ({
         ...prev,
         email: user.email || '',
