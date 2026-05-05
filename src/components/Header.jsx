@@ -126,7 +126,7 @@ const Header = () => {
                         key={sIdx}
                         to={sub.path}
                         onClick={closeAllMenus}
-                        className="text-gray-500 hover:text-black text-[12px] font-medium transition-colors whitespace-nowrap"
+                        className="text-gray-500 hover:text-black hover:underline hover:font-bold text-[13px] font-medium transition-colors whitespace-nowrap"
                       >
                         {sub.name}
                       </Link>
@@ -228,7 +228,7 @@ const Header = () => {
                       key={sIdx}
                       to={sub.path}
                       onClick={closeAllMenus}
-                      className="block py-1.5 text-[13px] text-gray-400 hover:text-gray-900 transition-colors"
+                      className="block py-1.5 text-[14px] text-gray-400 hover:text-gray-900 hover:underline hover:font-bold transition-colors"
                     >
                       {sub.name}
                     </Link>

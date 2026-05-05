@@ -91,6 +91,7 @@ const Inquiry = () => {
     const { error } = await supabase.from('inquiries').insert([{ ...formData, attachment_url, attachment_name }]);
 
     if (!error) {
+      supabase.functions.invoke('notify-inquiry', { body: formData });
       alert('문의가 성공적으로 접수되었습니다.');
       setFormData({ name: '', organization: '', phone: '', email: '', subject: '', message: '' });
       setAttachmentFile(null);

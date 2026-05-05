@@ -38,7 +38,7 @@ serve(async (req) => {
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
-      email_confirm: false, // 이메일 확인 링크 없이 계정 생성
+      email_confirm: true,
       user_metadata: { full_name, organization },
     });
 
