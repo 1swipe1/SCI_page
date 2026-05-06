@@ -203,7 +203,7 @@ const Inquiry = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 bg-gray-950 text-white text-[15px] font-bold tracking-widest hover:bg-gray-700 transition-colors disabled:bg-gray-400"
+            className="w-full py-4 bg-gray-950 text-white text-[15px] font-bold tracking-widest border border-gray-950 hover:bg-white hover:text-black transition-colors disabled:bg-gray-400 disabled:border-gray-400"
           >
             {isSubmitting ? '접수 중...' : '문의하기'}
           </button>
